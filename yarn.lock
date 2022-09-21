@@ -1432,6 +1432,11 @@
     magic-string "^0.25.0"
     string.prototype.matchall "^4.0.6"
 
+"@tabler/icons@^1.96.0":
+  version "1.96.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-1.96.0.tgz#ff3cb1a5ddc38b96f54a54b9c0b5e1ed88c24da7"
+  integrity sha512-ZAQ64CHi5sOFQE7COoBmZbhIBtTX+4XNuiVZsr8kcqJX1bmrw6dFU0W9ONJamt/2TO997uVfSqxr2o0WZqZr/g==
+
 "@testing-library/dom@^8.5.0":
   version "8.18.1"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-8.18.1.tgz#80f91be02bc171fe5a3a7003f88207be31ac2cf3"
