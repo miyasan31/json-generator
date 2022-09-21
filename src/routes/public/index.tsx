@@ -1,5 +1,6 @@
 import { CommonLayout } from "~/components/layout/CommonLayout";
 import { RootPage } from "~/components/page/public";
+import { commonRoutes } from "~/routes/common";
 
 export const publicRoutes = [
   {
@@ -12,4 +13,5 @@ export const publicRoutes = [
       },
     ],
   },
+  ...commonRoutes,
 ];
