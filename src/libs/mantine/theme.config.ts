@@ -20,7 +20,7 @@ export const customTheme: MantineThemeOverride = {
   primaryColor: "blue",
   breakpoints: breakpointsTheme,
   other: otherTheme,
-  activeStyles: { transform: "scale(1)" },
+  activeStyles: { transform: "scale(0.98)" },
   components: {
     Text: {
       styles: (theme, params: ButtonStylesParams) => {
