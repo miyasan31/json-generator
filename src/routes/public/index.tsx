@@ -1,15 +1,10 @@
-import { PublicLayout } from "~/components/layout/PublicLayout";
+import { CommonLayout } from "~/components/layout/CommonLayout";
 import { RootPage } from "~/components/page/public";
-import { FetchProvider } from "~/components/provider/Fetch";
 
 export const publicRoutes = [
   {
     path: "",
-    element: (
-      <PublicLayout>
-        <FetchProvider />
-      </PublicLayout>
-    ),
+    element: <CommonLayout />,
     children: [
       {
         path: "/",
