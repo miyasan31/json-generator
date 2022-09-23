@@ -10,6 +10,7 @@ import { NumberFormField } from "~/components/feature/form/field/NumberFormField
 import { ObjectFormField } from "~/components/feature/form/field/ObjectFormField";
 import { StringFormField } from "~/components/feature/form/field/StringFormField";
 import { FormTypeWatch } from "~/components/feature/form/watcher/FormTypeWatch";
+import { Divider } from "~/components/shared/Divider";
 
 type Props = {
   control: any;
@@ -34,59 +35,63 @@ export const FormFields: FC<Props> = ({ control, register }) => {
     >
       {fields.map((item, index) => {
         return (
-          <Stack spacing="xs" key={item.id}>
-            <Group spacing="xs" align="end">
-              <ActionIcon mb={1}>
-                <IconX size={16} onClick={() => onRemove(index)} />
-              </ActionIcon>
+          <>
+            <Stack spacing="xs" key={item.id}>
+              <Group spacing="xs" align="end">
+                <ActionIcon mb={1} component="button" onClick={() => onRemove(index)}>
+                  <IconX size={16} />
+                </ActionIcon>
 
-              <TextInput size="xs" label="key" {...register(`object.${index}.keyName`)} />
+                <TextInput size="xs" label="key" {...register(`object.${index}.keyName`)} />
 
-              <Controller
-                control={control}
-                name={`object.${index}.valueType`}
-                render={({ field: { onChange, value } }) => {
-                  return (
-                    <Select
-                      size="xs"
-                      label="value"
-                      value={value}
-                      onChange={onChange}
-                      data={[
-                        { value: "string", label: "string" },
-                        { value: "number", label: "number" },
-                        { value: "boolean", label: "boolean" },
-                        { value: "array", label: "array" },
-                        { value: "object", label: "object" },
-                      ]}
-                    />
-                  );
+                <Controller
+                  control={control}
+                  name={`object.${index}.valueType`}
+                  render={({ field: { onChange, value } }) => {
+                    return (
+                      <Select
+                        size="xs"
+                        label="value"
+                        value={value}
+                        onChange={onChange}
+                        data={[
+                          { value: "string", label: "string" },
+                          { value: "number", label: "number" },
+                          { value: "boolean", label: "boolean" },
+                          { value: "array", label: "array" },
+                          { value: "object", label: "object" },
+                        ]}
+                      />
+                    );
+                  }}
+                />
+              </Group>
+
+              <FormTypeWatch name={`object.${index}.valueType`} control={control}>
+                {(value) => {
+                  if (value === "string") {
+                    return <StringFormField name={`object.${index}`} />;
+                  }
+                  if (value === "number") {
+                    return <NumberFormField name={`object.${index}`} />;
+                  }
+                  if (value === "boolean") {
+                    return <BooleanFormField name={`object.${index}`} />;
+                  }
+                  if (value === "object") {
+                    return (
+                      <ObjectFormField register={register} control={control} name={`object.${index}.options.object`} />
+                    );
+                  }
+                  if (value === "array") {
+                    return <ArrayFormField name={`object.${index}`} />;
+                  }
                 }}
-              />
-            </Group>
+              </FormTypeWatch>
+            </Stack>
 
-            <FormTypeWatch name={`object.${index}.valueType`} control={control}>
-              {(value) => {
-                if (value === "string") {
-                  return <StringFormField name={`object.${index}`} />;
-                }
-                if (value === "number") {
-                  return <NumberFormField name={`object.${index}`} />;
-                }
-                if (value === "boolean") {
-                  return <BooleanFormField name={`object.${index}`} />;
-                }
-                if (value === "object") {
-                  return (
-                    <ObjectFormField register={register} control={control} name={`object.${index}.options.object`} />
-                  );
-                }
-                if (value === "array") {
-                  return <ArrayFormField name={`object.${index}`} />;
-                }
-              }}
-            </FormTypeWatch>
-          </Stack>
+            <Divider />
+          </>
         );
       })}
 
