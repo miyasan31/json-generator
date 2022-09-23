@@ -1,5 +1,7 @@
 export type ValueType = "string" | "number" | "boolean" | "object" | "array";
 
+export type ArrayValueType = "string" | "number" | "boolean" | "object" | "array";
+
 export type StringDummyType = "name" | "email" | "password" | "dateTime" | "date" | "time" | "image";
 
 interface StringValue {
@@ -12,7 +14,17 @@ interface StringValue {
   };
 }
 
+export interface StringDummyTypeOption {
+  value: StringDummyType;
+  label: string;
+}
+
 export type NumberDummyType = "autoincrement" | "age" | "height" | "weight" | "price" | "random";
+
+export interface NumberDummyTypeOption {
+  value: NumberDummyType;
+  label: string;
+}
 
 interface NumberValue {
   keyName: string;
@@ -32,6 +44,11 @@ interface BooleanValue {
   };
 }
 
+export interface BooleanDummyTypeOption {
+  value: BooleanDummyType;
+  label: string;
+}
+
 type ObjectPropertyType = StringValue | NumberValue | BooleanValue;
 
 interface ObjectValue {
@@ -40,6 +57,11 @@ interface ObjectValue {
   options: {
     object: ObjectPropertyType[];
   };
+}
+
+export interface ObjectValueTypeOption {
+  value: ValueType;
+  label: string;
 }
 
 export type ArrayItemType = StringValue | NumberValue | BooleanValue | ObjectValue;
@@ -51,6 +73,11 @@ interface ArrayValue {
     length: number;
     item: ArrayItemType;
   };
+}
+
+export interface ArrayValueTypeOption {
+  value: ArrayValueType;
+  label: string;
 }
 
 export type JsonValue = StringValue | NumberValue | BooleanValue | ObjectValue | ArrayValue;

@@ -8,6 +8,7 @@ import { NumberFormField } from "~/components/feature/form/field/NumberFormField
 import { ObjectFormField } from "~/components/feature/form/field/ObjectFormField";
 import { StringFormField } from "~/components/feature/form/field/StringFormField";
 import { FormTypeWatch } from "~/components/feature/form/watcher/FormTypeWatch";
+import { arrayValueTypeOption } from "~/constants/form/selectOption";
 
 type Props = {
   name: string;
@@ -40,20 +41,7 @@ export const ArrayFormField: FC<Props> = ({ name }) => {
           control={control}
           name={`${name}.options.item.valueType`}
           render={({ field: { onChange, value } }) => {
-            return (
-              <Select
-                size="xs"
-                label="value"
-                value={value}
-                onChange={onChange}
-                data={[
-                  { value: "string", label: "string" },
-                  { value: "number", label: "number" },
-                  { value: "boolean", label: "boolean" },
-                  { value: "object", label: "object" },
-                ]}
-              />
-            );
+            return <Select size="xs" label="value" value={value} onChange={onChange} data={arrayValueTypeOption} />;
           }}
         />
       </Group>

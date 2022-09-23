@@ -3,6 +3,8 @@ import type { FC } from "react";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
+import { numberDummyTypeOption } from "~/constants/form/selectOption";
+
 type Props = {
   name: string;
   leftSpace?: boolean;
@@ -17,22 +19,7 @@ export const NumberFormField: FC<Props> = ({ name, leftSpace = true }) => {
         control={control}
         name={`${name}.options.dummyType`}
         render={({ field: { onChange, value } }) => {
-          return (
-            <Select
-              size="xs"
-              label="dummy type"
-              value={value}
-              onChange={onChange}
-              data={[
-                { value: "autoincrement", label: "Autoincrement" },
-                { value: "age", label: "Age" },
-                { value: "height", label: "Height" },
-                { value: "width", label: "Width" },
-                { value: "price", label: "Price" },
-                { value: "random", label: "Random" },
-              ]}
-            />
-          );
+          return <Select size="xs" label="dummy type" value={value} onChange={onChange} data={numberDummyTypeOption} />;
         }}
       />
     </Group>

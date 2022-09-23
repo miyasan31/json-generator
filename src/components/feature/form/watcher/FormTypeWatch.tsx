@@ -1,7 +1,7 @@
 import type { FC, ReactNode } from "react";
 import { useWatch } from "react-hook-form";
 
-import type { ValueType } from "~/components/feature/form/From.interface";
+import type { ValueType } from "~/interfaces/model/From.interface";
 
 type FromTypeWatchProps = {
   name: any;

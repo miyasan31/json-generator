@@ -4,8 +4,13 @@ import type {
   JsonValue,
   NumberDummyType,
   StringDummyType,
-} from "~/components/feature/form/From.interface";
-import type { ArrayValue, ObjectValue } from "~/components/feature/form/Generator.interface";
+} from "~/interfaces/model/From.interface";
+
+type ArrayValueType = string[] | number[] | boolean[] | ObjectValue[];
+type ArrayValue = ArrayValueType;
+
+type ObjectValueType = string | number | boolean | ArrayValue;
+type ObjectValue = Record<string, ObjectValueType>;
 
 const StringGenerator = (options: { dummyType: StringDummyType; prefix: string; suffix: string }): string => {
   const { dummyType, prefix, suffix } = options;

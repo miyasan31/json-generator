@@ -1,7 +1,7 @@
 import { ActionIcon, Button, Group, Select, Stack, TextInput } from "@mantine/core";
 import { IconX } from "@tabler/icons";
 import type { FC } from "react";
-import React, { useCallback } from "react";
+import React, { Fragment, useCallback } from "react";
 import { Controller, useFieldArray } from "react-hook-form";
 
 import { ArrayFormField } from "~/components/feature/form/field/ArrayFormField";
@@ -10,6 +10,7 @@ import { NumberFormField } from "~/components/feature/form/field/NumberFormField
 import { StringFormField } from "~/components/feature/form/field/StringFormField";
 import { FormTypeWatch } from "~/components/feature/form/watcher/FormTypeWatch";
 import { Divider } from "~/components/shared/Divider";
+import { objectValueTypeOption } from "~/constants/form/selectOption";
 
 type Props = {
   control: any;
@@ -40,8 +41,8 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, leftSpace 
     >
       {fields.map((item, index) => {
         return (
-          <>
-            <Stack spacing="xs" key={item.id}>
+          <Fragment key={item.id}>
+            <Stack spacing="xs">
               <Group spacing="xs" align="end">
                 <ActionIcon mb={1} component="button" onClick={() => onRemove(index)}>
                   <IconX size={16} />
@@ -54,19 +55,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, leftSpace 
                   name={`${name}.${index}.valueType`}
                   render={({ field: { onChange, value } }) => {
                     return (
-                      <Select
-                        size="xs"
-                        label="value"
-                        value={value}
-                        onChange={onChange}
-                        data={[
-                          { value: "string", label: "string" },
-                          { value: "number", label: "number" },
-                          { value: "boolean", label: "boolean" },
-                          { value: "array", label: "array" },
-                          { value: "object", label: "object" },
-                        ]}
-                      />
+                      <Select size="xs" label="value" value={value} onChange={onChange} data={objectValueTypeOption} />
                     );
                   }}
                 />
@@ -96,7 +85,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, leftSpace 
             </Stack>
 
             <Divider />
-          </>
+          </Fragment>
         );
       })}
 

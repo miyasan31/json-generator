@@ -3,6 +3,8 @@ import type { FC } from "react";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
+import { booleanDummyTypeOption } from "~/constants/form/selectOption";
+
 type Props = {
   name: string;
   leftSpace?: boolean;
@@ -18,17 +20,7 @@ export const BooleanFormField: FC<Props> = ({ name, leftSpace = true }) => {
         name={`${name}.options.dummyType`}
         render={({ field: { onChange, value } }) => {
           return (
-            <Select
-              size="xs"
-              label="dummy type"
-              value={value}
-              onChange={onChange}
-              data={[
-                { value: "true", label: "true" },
-                { value: "false", label: "false" },
-                { value: "random", label: "Random" },
-              ]}
-            />
+            <Select size="xs" label="dummy type" value={value} onChange={onChange} data={booleanDummyTypeOption} />
           );
         }}
       />

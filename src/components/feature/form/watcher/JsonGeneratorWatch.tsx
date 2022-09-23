@@ -2,7 +2,7 @@ import type { FC, ReactNode } from "react";
 import type { Control } from "react-hook-form";
 import { useWatch } from "react-hook-form";
 
-import type { JsonCreateForm } from "~/components/feature/form/From.interface";
+import type { JsonCreateForm } from "~/interfaces/model/From.interface";
 import { jsonGenerator } from "~/utils/jsonGenerator";
 
 type JsonGeneratorWatchProps = {
