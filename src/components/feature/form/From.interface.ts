@@ -1,8 +1,8 @@
 export type ValueType = "string" | "number" | "boolean" | "object" | "array";
 
-type StringDummyType = "name" | "email" | "password" | "dateTime" | "date" | "time" | "image";
+export type StringDummyType = "name" | "email" | "password" | "dateTime" | "date" | "time" | "image";
 
-export interface StringValue {
+interface StringValue {
   keyName: string;
   valueType: "string";
   options: {
@@ -12,9 +12,9 @@ export interface StringValue {
   };
 }
 
-type NumberDummyType = "autoincrement" | "age" | "height" | "weight" | "price" | "random";
+export type NumberDummyType = "autoincrement" | "age" | "height" | "weight" | "price" | "random";
 
-export interface NumberValue {
+interface NumberValue {
   keyName: string;
   valueType: "number";
   options: {
@@ -22,9 +22,9 @@ export interface NumberValue {
   };
 }
 
-type BooleanDummyType = "true" | "false" | "random";
+export type BooleanDummyType = "true" | "false" | "random";
 
-export interface BooleanValue {
+interface BooleanValue {
   keyName: string;
   valueType: "boolean";
   options: {
@@ -32,9 +32,9 @@ export interface BooleanValue {
   };
 }
 
-export type ObjectPropertyType = StringValue | NumberValue | BooleanValue;
+type ObjectPropertyType = StringValue | NumberValue | BooleanValue;
 
-export interface ObjectValue {
+interface ObjectValue {
   keyName: string;
   valueType: "object";
   options: {
@@ -42,9 +42,9 @@ export interface ObjectValue {
   };
 }
 
-type ArrayItemType = StringValue | NumberValue | BooleanValue | ObjectValue;
+export type ArrayItemType = StringValue | NumberValue | BooleanValue | ObjectValue;
 
-export interface ArrayValue {
+interface ArrayValue {
   keyName: string;
   valueType: "array";
   options: {
@@ -53,8 +53,8 @@ export interface ArrayValue {
   };
 }
 
-export type FormValue = StringValue | NumberValue | BooleanValue | ObjectValue | ArrayValue;
+export type JsonValue = StringValue | NumberValue | BooleanValue | ObjectValue | ArrayValue;
 
 export interface JsonCreateForm {
-  object: FormValue[];
+  object: JsonValue[];
 }
