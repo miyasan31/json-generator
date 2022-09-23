@@ -1,7 +1,5 @@
+import { JsonForm } from "~/components/feature/form/JsonForm";
+
 export const Root = () => {
-  return (
-    <div>
-      <h1>Root Page</h1>
-    </div>
-  );
+  return <JsonForm />;
 };
