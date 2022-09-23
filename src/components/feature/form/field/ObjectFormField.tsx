@@ -4,11 +4,11 @@ import type { FC } from "react";
 import React, { useCallback } from "react";
 import { Controller, useFieldArray } from "react-hook-form";
 
-import { ArrayFormField } from "~/components/feature/form/fields/ArrayFormField";
-import { BooleanFormField } from "~/components/feature/form/fields/BooleanFormField";
-import { FormTypeWatch } from "~/components/feature/form/fields/FormTypeWatch";
-import { NumberFormField } from "~/components/feature/form/fields/NumberFormField";
-import { StringFormField } from "~/components/feature/form/fields/StringFormField";
+import { ArrayFormField } from "~/components/feature/form/field/ArrayFormField";
+import { BooleanFormField } from "~/components/feature/form/field/BooleanFormField";
+import { NumberFormField } from "~/components/feature/form/field/NumberFormField";
+import { StringFormField } from "~/components/feature/form/field/StringFormField";
+import { FormTypeWatch } from "~/components/feature/form/watcher/FormTypeWatch";
 
 type Props = {
   control: any;

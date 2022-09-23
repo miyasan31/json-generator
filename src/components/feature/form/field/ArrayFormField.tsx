@@ -3,11 +3,11 @@ import type { FC } from "react";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { BooleanFormField } from "~/components/feature/form/fields/BooleanFormField";
-import { FormTypeWatch } from "~/components/feature/form/fields/FormTypeWatch";
-import { NumberFormField } from "~/components/feature/form/fields/NumberFormField";
-import { ObjectFormField } from "~/components/feature/form/fields/ObjectFormField";
-import { StringFormField } from "~/components/feature/form/fields/StringFormField";
+import { BooleanFormField } from "~/components/feature/form/field/BooleanFormField";
+import { NumberFormField } from "~/components/feature/form/field/NumberFormField";
+import { ObjectFormField } from "~/components/feature/form/field/ObjectFormField";
+import { StringFormField } from "~/components/feature/form/field/StringFormField";
+import { FormTypeWatch } from "~/components/feature/form/watcher/FormTypeWatch";
 
 type Props = {
   name: string;
