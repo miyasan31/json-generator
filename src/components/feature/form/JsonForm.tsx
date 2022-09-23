@@ -1,4 +1,4 @@
-import { Button, Group, Stack } from "@mantine/core";
+import { Button, Group, JsonInput, ScrollArea, Stack } from "@mantine/core";
 import { useCallback } from "react";
 import { FormProvider } from "react-hook-form";
 
@@ -79,17 +79,46 @@ export const JsonForm = () => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={onSubmit(onCreateJson)}>
-        <Stack spacing="sm">
-          <Group spacing="sm" position="right">
-            <Button type="button" variant="default" onClick={onReset}>
-              Reset
-            </Button>
+        <Group spacing="sm" align="start" grow sx={{ height: "calc(100vh - 100px)" }}>
+          <Stack spacing="sm" sx={{ height: "100%" }}>
+            <Group spacing="sm" position="right">
+              <Button type="button" variant="default" onClick={onReset}>
+                Reset
+              </Button>
 
-            <Button type="submit">Generate</Button>
-          </Group>
+              <Button type="submit">Generate</Button>
+            </Group>
 
-          <FormFields {...{ control, register }} />
-        </Stack>
+            <ScrollArea
+              style={{ flex: 1 }}
+              sx={(theme) => ({
+                borderRadius: theme.radius.sm,
+                backgroundColor: theme.colorScheme === "light" ? theme.colors.gray[0] : theme.colors.dark[7],
+                border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[4] : theme.colors.dark[4]}`,
+              })}
+            >
+              <FormFields {...{ control, register }} />
+            </ScrollArea>
+          </Stack>
+
+          <Stack spacing="sm" sx={{ height: "100%" }}>
+            <Group spacing="sm" position="right">
+              <Button type="button">Save</Button>
+              <Button type="button">Copy</Button>
+            </Group>
+
+            <JsonInput
+              value={JSON.stringify(defaultValues, null, 2)}
+              formatOnBlur
+              autosize={false}
+              styles={{
+                root: { flex: 1 },
+                wrapper: { height: "100%" },
+                input: { height: "100%" },
+              }}
+            />
+          </Stack>
+        </Group>
       </form>
     </FormProvider>
   );

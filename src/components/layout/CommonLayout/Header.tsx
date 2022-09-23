@@ -5,6 +5,7 @@ export const Header = () => {
     <Box
       component="header"
       sx={(theme) => ({
+        height: "56px",
         padding: theme.spacing.sm,
         backgroundColor: theme.colorScheme === "light" ? theme.colors.gray[0] : theme.colors.dark[6],
         borderBottom: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[4]}`,

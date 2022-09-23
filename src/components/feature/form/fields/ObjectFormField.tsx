@@ -14,9 +14,10 @@ type Props = {
   control: any;
   register: any;
   name: string;
+  leftSpace?: boolean;
 };
 
-export const ObjectFormField: FC<Props> = ({ name, control, register }) => {
+export const ObjectFormField: FC<Props> = ({ name, control, register, leftSpace = true }) => {
   const { fields, remove, append } = useFieldArray({
     control,
     name: `${name}`,
@@ -28,12 +29,12 @@ export const ObjectFormField: FC<Props> = ({ name, control, register }) => {
   return (
     <Stack
       spacing="xs"
-      ml="2.375rem"
+      ml={leftSpace ? "2.375rem" : 0}
       sx={(theme) => ({
         borderRadius: theme.radius.sm,
         padding: theme.spacing.sm,
-        backgroundColor: theme.colorScheme === "light" ? theme.colors.gray[0] : theme.colors.dark[6],
-        border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[4]}`,
+        backgroundColor: theme.colorScheme === "light" ? theme.colors.gray[0] : theme.colors.dark[7],
+        border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[5]}`,
       })}
     >
       {fields.map((item, index) => {

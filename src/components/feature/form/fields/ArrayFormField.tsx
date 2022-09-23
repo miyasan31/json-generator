@@ -23,8 +23,8 @@ export const ArrayFormField: FC<Props> = ({ name }) => {
       sx={(theme) => ({
         borderRadius: theme.radius.sm,
         padding: theme.spacing.sm,
-        backgroundColor: theme.colorScheme === "light" ? theme.colors.gray[0] : theme.colors.dark[6],
-        border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[4]}`,
+        backgroundColor: theme.colorScheme === "light" ? theme.colors.gray[0] : theme.colors.dark[7],
+        border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[5]}`,
       })}
     >
       <Group spacing="xs" align="end">
@@ -61,17 +61,22 @@ export const ArrayFormField: FC<Props> = ({ name }) => {
       <FormTypeWatch name={`${name}.options.item.valueType`} control={control}>
         {(value) => {
           if (value === "string") {
-            return <StringFormField name={`${name}.options.item`} />;
+            return <StringFormField leftSpace={false} name={`${name}.options.item`} />;
           }
           if (value === "number") {
-            return <NumberFormField name={`${name}.options.item`} />;
+            return <NumberFormField leftSpace={false} name={`${name}.options.item`} />;
           }
           if (value === "boolean") {
-            return <BooleanFormField name={`${name}.options.item`} />;
+            return <BooleanFormField leftSpace={false} name={`${name}.options.item`} />;
           }
           if (value === "object") {
             return (
-              <ObjectFormField register={register} control={control} name={`${name}.options.item.options.object`} />
+              <ObjectFormField
+                leftSpace={false}
+                register={register}
+                control={control}
+                name={`${name}.options.item.options.object`}
+              />
             );
           }
         }}

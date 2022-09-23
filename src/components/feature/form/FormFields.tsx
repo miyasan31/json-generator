@@ -29,10 +29,7 @@ export const FormFields: FC<Props> = ({ control, register }) => {
     <Stack
       spacing="xs"
       sx={(theme) => ({
-        borderRadius: theme.radius.sm,
-        padding: theme.spacing.sm,
-        backgroundColor: theme.colorScheme === "light" ? theme.colors.gray[0] : theme.colors.dark[6],
-        border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[4]}`,
+        padding: theme.spacing.md,
       })}
     >
       {fields.map((item, index) => {

@@ -5,13 +5,14 @@ import { Controller, useFormContext } from "react-hook-form";
 
 type Props = {
   name: string;
+  leftSpace?: boolean;
 };
 
-export const StringFormField: FC<Props> = ({ name }) => {
+export const StringFormField: FC<Props> = ({ name, leftSpace = true }) => {
   const { register, control } = useFormContext();
 
   return (
-    <Group spacing="xs" align="end" ml="2.375rem">
+    <Group spacing="xs" align="end" ml={leftSpace ? "2.375rem" : 0}>
       <Controller
         control={control}
         name={`${name}.options.dummyType`}
