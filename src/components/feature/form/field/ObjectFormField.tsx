@@ -1,4 +1,4 @@
-import { ActionIcon, Button, Group, Select, Stack, TextInput } from "@mantine/core";
+import { ActionIcon, Button, Group, Select, Stack, TextInput, Tooltip } from "@mantine/core";
 import { IconX } from "@tabler/icons";
 import type { FC } from "react";
 import React, { Fragment, useCallback } from "react";
@@ -44,9 +44,11 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, leftSpace 
           <Fragment key={item.id}>
             <Stack spacing="xs">
               <Group spacing="xs" align="end">
-                <ActionIcon mb={1} component="button" onClick={() => onRemove(index)}>
-                  <IconX size={16} />
-                </ActionIcon>
+                <Tooltip label="delete" position="top-start">
+                  <ActionIcon mb={1} component="button" onClick={() => onRemove(index)}>
+                    <IconX size={16} color="red" />
+                  </ActionIcon>
+                </Tooltip>
 
                 <TextInput size="xs" label="key" {...register(`${name}.${index}.keyName`)} />
 
