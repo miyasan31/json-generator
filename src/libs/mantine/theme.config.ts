@@ -17,7 +17,7 @@ export const otherTheme = {
 export const customTheme: MantineThemeOverride = {
   colorScheme: "dark",
   loader: "oval",
-  primaryColor: "blue",
+  primaryColor: "gray",
   breakpoints: breakpointsTheme,
   other: otherTheme,
   activeStyles: { transform: "scale(0.98)" },

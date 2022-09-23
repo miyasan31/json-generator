@@ -20,13 +20,21 @@ export const CommonLayout = () => {
           width: isXLargeScreen
             ? "70%"
             : isLargeScreen
-            ? "70%"
-            : isMediumScreen
-            ? "75%"
-            : isSmallScreen
             ? "80%"
-            : "90%",
-          margin: "0 auto",
+            : isMediumScreen
+            ? "85%"
+            : isSmallScreen
+            ? "90%"
+            : "95%",
+          margin: isXLargeScreen
+            ? "2rem auto 4rem"
+            : isLargeScreen
+            ? "2rem auto 4rem"
+            : isMediumScreen
+            ? "1rem auto 4rem"
+            : isSmallScreen
+            ? "1rem auto 4rem"
+            : "1rem auto 4rem",
         }}
       >
         <Suspense>
