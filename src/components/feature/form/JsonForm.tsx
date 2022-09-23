@@ -1,7 +1,7 @@
-import { Button, CopyButton, Group, JsonInput, ScrollArea, Stack } from "@mantine/core";
+import { Button, CopyButton, Group, JsonInput, ScrollArea, Select, Stack } from "@mantine/core";
 import { IconCheck } from "@tabler/icons";
-import { useCallback } from "react";
-import { FormProvider } from "react-hook-form";
+import React, { useCallback } from "react";
+import { Controller, FormProvider } from "react-hook-form";
 
 import { FormFields } from "~/components/feature/form/FormFields";
 import type { JsonCreateForm } from "~/components/feature/form/From.interface";
@@ -9,6 +9,7 @@ import { JsonGeneratorWatch } from "~/components/feature/form/watcher/JsonGenera
 import { useRHForm } from "~/components/lib/react-hook-form/useRHForm";
 
 const defaultValues: JsonCreateForm = {
+  length: 5,
   object: [
     {
       keyName: "id",
@@ -79,7 +80,7 @@ export const JsonForm = () => {
   }, []);
 
   const onClear = useCallback(() => {
-    reset({ object: [] });
+    reset({ length: 0, object: [] });
   }, []);
 
   return (
@@ -87,7 +88,7 @@ export const JsonForm = () => {
       <form onSubmit={onSubmit(onCreateJson)}>
         <Group spacing="sm" align="start" grow sx={{ height: "calc(100vh - 100px)" }}>
           <Stack spacing="sm" sx={{ height: "100%" }}>
-            <Group spacing="sm" position="left">
+            <Group spacing="sm" position="left" align="end">
               <Button type="button" variant="default" onClick={onClear}>
                 Clear
               </Button>
@@ -108,10 +109,36 @@ export const JsonForm = () => {
             </ScrollArea>
           </Stack>
 
-          <JsonGeneratorWatch type="array" length={3} control={control}>
+          <JsonGeneratorWatch control={control}>
             {(json: string) => (
               <Stack spacing="sm" sx={{ height: "100%" }}>
                 <Group spacing="sm" position="right">
+                  <Controller
+                    control={control}
+                    name="length"
+                    render={({ field: { onChange, value } }) => {
+                      return (
+                        <Select
+                          label="Length"
+                          value={String(value)}
+                          onChange={onChange}
+                          data={[
+                            { value: "1", label: "1" },
+                            { value: "5", label: "5" },
+                            { value: "10", label: "10" },
+                            { value: "20", label: "20" },
+                            { value: "50", label: "50" },
+                            { value: "100", label: "100" },
+                          ]}
+                          styles={{
+                            root: { display: "flex", alignItems: "center", width: "fit-content", gap: "0.5rem" },
+                            label: { flex: "auto", minWidth: "fit-content" },
+                            input: { flex: "auto", width: "80px", textAlign: "right" },
+                          }}
+                        />
+                      );
+                    }}
+                  />
                   <CopyButton value={json}>
                     {({ copied, copy: onCopy }) => (
                       <Button leftIcon={copied && <IconCheck size={16} />} onClick={onCopy}>

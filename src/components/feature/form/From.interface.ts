@@ -56,5 +56,6 @@ interface ArrayValue {
 export type JsonValue = StringValue | NumberValue | BooleanValue | ObjectValue | ArrayValue;
 
 export interface JsonCreateForm {
+  length: number;
   object: JsonValue[];
 }
