@@ -8,7 +8,9 @@ import { NumberFormField } from "~/components/feature/form/field/NumberFormField
 import { ObjectFormField } from "~/components/feature/form/field/ObjectFormField";
 import { StringFormField } from "~/components/feature/form/field/StringFormField";
 import { FormTypeWatch } from "~/components/feature/form/watcher/FormTypeWatch";
+import { appendValue } from "~/constants/form/appendValue";
 import { arrayValueTypeOption } from "~/constants/form/selectOption";
+import type { ValueType } from "~/interfaces/model/From.interface";
 
 type Props = {
   name: string;
@@ -33,15 +35,34 @@ export const ArrayFormField: FC<Props> = ({ name }) => {
           control={control}
           name={`${name}.options.length`}
           render={({ field: { onChange, value } }) => {
-            return <NumberInput defaultValue={5} size="xs" label="length" value={value} onChange={onChange} />;
+            return (
+              <NumberInput
+                defaultValue={5}
+                min={1}
+                max={100}
+                size="xs"
+                label="length"
+                value={value}
+                onChange={onChange}
+              />
+            );
           }}
         />
 
         <Controller
           control={control}
-          name={`${name}.options.item.valueType`}
+          name={`${name}.options.item`}
           render={({ field: { onChange, value } }) => {
-            return <Select size="xs" label="value" value={value} onChange={onChange} data={arrayValueTypeOption} />;
+            const onChangeValue = (value: ValueType) => onChange({ valueType: value, options: appendValue[value] });
+            return (
+              <Select
+                size="xs"
+                label="value"
+                value={value.valueType}
+                onChange={onChangeValue}
+                data={arrayValueTypeOption}
+              />
+            );
           }}
         />
       </Group>

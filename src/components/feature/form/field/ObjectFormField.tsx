@@ -10,7 +10,9 @@ import { NumberFormField } from "~/components/feature/form/field/NumberFormField
 import { StringFormField } from "~/components/feature/form/field/StringFormField";
 import { FormTypeWatch } from "~/components/feature/form/watcher/FormTypeWatch";
 import { Divider } from "~/components/shared/Divider";
+import { appendValue } from "~/constants/form/appendValue";
 import { objectValueTypeOption } from "~/constants/form/selectOption";
+import type { ValueType } from "~/interfaces/model/From.interface";
 
 type Props = {
   control: any;
@@ -26,7 +28,19 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, leftSpace 
   });
 
   const onRemove = useCallback((index: number) => remove(index), [remove]);
-  const onAppend = useCallback(() => append({ keyName: "", valueType: "", options: {} }), [append]);
+  const onAppend = useCallback(
+    () =>
+      append({
+        keyName: "",
+        valueType: "string",
+        options: {
+          dummyType: "name",
+          prefix: "",
+          suffix: "",
+        },
+      }),
+    [append],
+  );
 
   return (
     <Stack
@@ -54,10 +68,18 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, leftSpace 
 
                 <Controller
                   control={control}
-                  name={`${name}.${index}.valueType`}
+                  name={`${name}.${index}`}
                   render={({ field: { onChange, value } }) => {
+                    const onChangeValue = (value: ValueType) =>
+                      onChange({ valueType: value, options: appendValue[value] });
                     return (
-                      <Select size="xs" label="value" value={value} onChange={onChange} data={objectValueTypeOption} />
+                      <Select
+                        size="xs"
+                        label="value"
+                        value={value.valueType}
+                        onChange={onChangeValue}
+                        data={objectValueTypeOption}
+                      />
                     );
                   }}
                 />

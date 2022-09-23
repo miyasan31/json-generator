@@ -1,6 +1,6 @@
 export type ValueType = "string" | "number" | "boolean" | "object" | "array";
 
-export type ArrayValueType = "string" | "number" | "boolean" | "object" | "array";
+export type ArrayValueType = "string" | "number" | "boolean" | "object";
 
 export type StringDummyType = "name" | "email" | "password" | "dateTime" | "date" | "time" | "image";
 
