@@ -3,11 +3,11 @@ import type { FC } from "react";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { BooleanFormField } from "~/components/feature/form/field/BooleanFormField";
-import { NumberFormField } from "~/components/feature/form/field/NumberFormField";
-import { ObjectFormField } from "~/components/feature/form/field/ObjectFormField";
-import { StringFormField } from "~/components/feature/form/field/StringFormField";
-import { FormTypeWatch } from "~/components/feature/form/watcher/FormTypeWatch";
+import { BooleanFormField } from "~/components/feature/form/BooleanFormField";
+import { NumberFormField } from "~/components/feature/form/NumberFormField";
+import { ObjectFormField } from "~/components/feature/form/ObjectFormField";
+import { StringFormField } from "~/components/feature/form/StringFormField";
+import { ArrayTypeWatch } from "~/components/feature/form/watcher/ArrayTypeWatch";
 import { appendValue } from "~/constants/form/appendValue";
 import { arrayValueTypeOption } from "~/constants/form/selectOption";
 import type { ValueType } from "~/interfaces/model/From.interface";
@@ -67,7 +67,7 @@ export const ArrayFormField: FC<Props> = ({ name }) => {
         />
       </Group>
 
-      <FormTypeWatch name={`${name}.options.item.valueType`} control={control}>
+      <ArrayTypeWatch name={`${name}.options.item.valueType`} control={control}>
         {(value) => {
           if (value === "string") {
             return <StringFormField leftSpace={false} name={`${name}.options.item`} />;
@@ -89,7 +89,7 @@ export const ArrayFormField: FC<Props> = ({ name }) => {
             );
           }
         }}
-      </FormTypeWatch>
+      </ArrayTypeWatch>
     </Stack>
   );
 };

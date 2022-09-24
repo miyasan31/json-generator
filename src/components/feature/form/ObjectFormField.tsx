@@ -2,31 +2,31 @@ import { ActionIcon, Button, Group, Select, Stack, TextInput, Tooltip } from "@m
 import { IconX } from "@tabler/icons";
 import type { FC } from "react";
 import React, { Fragment, useCallback } from "react";
-import { Controller, useFieldArray, useFormContext } from "react-hook-form";
+import type { useFormContext } from "react-hook-form";
+import { Controller, useFieldArray } from "react-hook-form";
 
-import { ArrayFormField } from "~/components/feature/form/field/ArrayFormField";
-import { BooleanFormField } from "~/components/feature/form/field/BooleanFormField";
-import { NumberFormField } from "~/components/feature/form/field/NumberFormField";
-import { ObjectFormField } from "~/components/feature/form/field/ObjectFormField";
-import { StringFormField } from "~/components/feature/form/field/StringFormField";
+import { ArrayFormField } from "~/components/feature/form/ArrayFormField";
+import { BooleanFormField } from "~/components/feature/form/BooleanFormField";
+import { NumberFormField } from "~/components/feature/form/NumberFormField";
+import { StringFormField } from "~/components/feature/form/StringFormField";
 import { FormTypeWatch } from "~/components/feature/form/watcher/FormTypeWatch";
 import { Divider } from "~/components/shared/Divider";
 import { appendValue } from "~/constants/form/appendValue";
 import { objectValueTypeOption } from "~/constants/form/selectOption";
-import type { JsonCreateForm, ValueType } from "~/interfaces/model/From.interface";
+import type { ValueType } from "~/interfaces/model/From.interface";
 
 type Props = {
-  control: any;
-  register: any;
+  control: ReturnType<typeof useFormContext>["control"];
+  register: ReturnType<typeof useFormContext>["register"];
+  name: string;
+  leftSpace?: boolean;
+  border?: boolean;
 };
 
-export const FormFields: FC<Props> = ({ control, register }) => {
-  const {
-    // formState: { errors },
-  } = useFormContext<JsonCreateForm>();
+export const ObjectFormField: FC<Props> = ({ name, control, register, leftSpace = true, border = true }) => {
   const { fields, remove, append } = useFieldArray({
     control,
-    name: "object",
+    name: `${name}`,
   });
 
   const onRemove = useCallback((index: number) => remove(index), [remove]);
@@ -47,9 +47,16 @@ export const FormFields: FC<Props> = ({ control, register }) => {
   return (
     <Stack
       spacing="xs"
-      sx={(theme) => ({
-        padding: theme.spacing.md,
-      })}
+      ml={leftSpace ? "2.375rem" : 0}
+      sx={(theme) => {
+        return border
+          ? {
+              borderRadius: theme.radius.sm,
+              padding: theme.spacing.sm,
+              border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[5]}`,
+            }
+          : {};
+      }}
     >
       {fields.map((item, index) => {
         return (
@@ -62,11 +69,11 @@ export const FormFields: FC<Props> = ({ control, register }) => {
                   </ActionIcon>
                 </Tooltip>
 
-                <TextInput size="xs" label="key" {...register(`object.${index}.keyName`, { required: true })} />
+                <TextInput size="xs" label="key" {...register(`${name}.${index}.keyName`)} />
 
                 <Controller
                   control={control}
-                  name={`object.${index}`}
+                  name={`${name}.${index}`}
                   render={({ field: { onChange, value } }) => {
                     const onChangeValue = (value: ValueType) =>
                       onChange({ valueType: value, options: appendValue[value] });
@@ -83,24 +90,24 @@ export const FormFields: FC<Props> = ({ control, register }) => {
                 />
               </Group>
 
-              <FormTypeWatch name={`object.${index}.valueType`} control={control}>
+              <FormTypeWatch name={`${name}.${index}.valueType`} control={control}>
                 {(value) => {
                   if (value === "string") {
-                    return <StringFormField name={`object.${index}`} />;
+                    return <StringFormField name={`${name}.${index}`} />;
                   }
                   if (value === "number") {
-                    return <NumberFormField name={`object.${index}`} />;
+                    return <NumberFormField name={`${name}.${index}`} />;
                   }
                   if (value === "boolean") {
-                    return <BooleanFormField name={`object.${index}`} />;
+                    return <BooleanFormField name={`${name}.${index}`} />;
                   }
                   if (value === "object") {
                     return (
-                      <ObjectFormField register={register} control={control} name={`object.${index}.options.object`} />
+                      <ObjectFormField register={register} control={control} name={`${name}.${index}.options.object`} />
                     );
                   }
                   if (value === "array") {
-                    return <ArrayFormField name={`object.${index}`} />;
+                    return <ArrayFormField name={`${name}.${index}`} />;
                   }
                 }}
               </FormTypeWatch>

@@ -2,12 +2,11 @@ import { Button, Group, ScrollArea, Stack } from "@mantine/core";
 import React, { useCallback } from "react";
 import { useFormContext } from "react-hook-form";
 
-import { FormFields } from "~/components/feature/form/FormFields";
+import { ObjectFormField } from "~/components/feature/form/ObjectFormField";
 import { defaultValues } from "~/constants/form/defaultValue";
-import type { JsonCreateForm } from "~/interfaces/model/From.interface";
 
 export const InputLayout = () => {
-  const { control, reset, register } = useFormContext<JsonCreateForm>();
+  const { control, reset, register } = useFormContext();
 
   const onReset = useCallback(() => {
     reset(defaultValues);
@@ -36,7 +35,8 @@ export const InputLayout = () => {
           border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[4] : theme.colors.dark[4]}`,
         })}
       >
-        <FormFields {...{ control, register }} />
+        {/*<FormFields {...{ control, register }} />*/}
+        <ObjectFormField name="object" border={false} {...{ control, register }} />
       </ScrollArea>
     </Stack>
   );

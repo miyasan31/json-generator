@@ -2,15 +2,15 @@ import type { FC, ReactNode } from "react";
 import type { useFormContext } from "react-hook-form";
 import { useWatch } from "react-hook-form";
 
-import type { ValueType } from "~/interfaces/model/From.interface";
+import type { ArrayValueType } from "~/interfaces/model/From.interface";
 
-type FromTypeWatchProps = {
+type ArrayTypeWatchProps = {
   name: string;
   control: ReturnType<typeof useFormContext>["control"];
-  children: (value: ValueType) => ReactNode;
+  children: (value: ArrayValueType) => ReactNode;
 };
 
-export const FormTypeWatch: FC<FromTypeWatchProps> = ({ name, control, children }) => {
+export const ArrayTypeWatch: FC<ArrayTypeWatchProps> = ({ name, control, children }) => {
   const value = useWatch({ name, control });
   return <>{children(value)}</>;
 };

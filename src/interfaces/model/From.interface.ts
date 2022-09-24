@@ -4,7 +4,7 @@ export type ArrayValueType = "string" | "number" | "boolean" | "object";
 
 export type StringDummyType = "name" | "email" | "password" | "dateTime" | "date" | "time" | "image";
 
-interface StringValue {
+export interface StringValue {
   keyName: string;
   valueType: "string";
   options: {
@@ -26,7 +26,7 @@ export interface NumberDummyTypeOption {
   label: string;
 }
 
-interface NumberValue {
+export interface NumberValue {
   keyName: string;
   valueType: "number";
   options: {
@@ -36,7 +36,7 @@ interface NumberValue {
 
 export type BooleanDummyType = "true" | "false" | "random";
 
-interface BooleanValue {
+export interface BooleanValue {
   keyName: string;
   valueType: "boolean";
   options: {
@@ -49,9 +49,9 @@ export interface BooleanDummyTypeOption {
   label: string;
 }
 
-type ObjectPropertyType = StringValue | NumberValue | BooleanValue;
+type ObjectPropertyType = StringValue | NumberValue | BooleanValue | ObjectValue | ArrayValue;
 
-interface ObjectValue {
+export interface ObjectValue {
   keyName: string;
   valueType: "object";
   options: {
@@ -66,7 +66,7 @@ export interface ObjectValueTypeOption {
 
 export type ArrayItemType = StringValue | NumberValue | BooleanValue | ObjectValue;
 
-interface ArrayValue {
+export interface ArrayValue {
   keyName: string;
   valueType: "array";
   options: {
