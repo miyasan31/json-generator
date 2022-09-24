@@ -47,16 +47,14 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, leftSpace 
   return (
     <Stack
       spacing="xs"
-      ml={leftSpace ? "2.375rem" : 0}
-      sx={(theme) => {
-        return border
-          ? {
-              borderRadius: theme.radius.sm,
-              padding: theme.spacing.sm,
-              border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[5]}`,
-            }
-          : {};
-      }}
+      ml={border && leftSpace ? "2.375rem" : 0}
+      sx={(theme) => ({
+        borderRadius: theme.radius.sm,
+        padding: theme.spacing.sm,
+        border: border
+          ? `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[5]}`
+          : "",
+      })}
     >
       {fields.map((item, index) => {
         return (
@@ -69,7 +67,17 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, leftSpace 
                   </ActionIcon>
                 </Tooltip>
 
-                <TextInput size="xs" label="key" {...register(`${name}.${index}.keyName`)} />
+                <TextInput
+                  required
+                  size="xs"
+                  label="key"
+                  {...register(`${name}.${index}.keyName`, {
+                    required: {
+                      value: true,
+                      message: "key is required",
+                    },
+                  })}
+                />
 
                 <Controller
                   control={control}

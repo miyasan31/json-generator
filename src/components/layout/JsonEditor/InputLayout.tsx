@@ -1,30 +1,37 @@
-import { Button, Group, ScrollArea, Stack } from "@mantine/core";
-import React, { useCallback } from "react";
-import { useFormContext } from "react-hook-form";
+import { Button, Group, ScrollArea, Select, Stack } from "@mantine/core";
+import React from "react";
+import { Controller, useFormContext } from "react-hook-form";
 
 import { ObjectFormField } from "~/components/feature/form/ObjectFormField";
-import { defaultValues } from "~/constants/form/defaultValue";
+import { jsonLengthOption } from "~/constants/form/selectOption";
 
 export const InputLayout = () => {
-  const { control, reset, register } = useFormContext();
-
-  const onReset = useCallback(() => {
-    reset(defaultValues);
-  }, []);
-
-  const onClear = useCallback(() => {
-    reset({ length: 1, object: [] });
-  }, []);
+  const { control, register } = useFormContext();
 
   return (
     <Stack spacing="sm" sx={{ height: "100%" }}>
       <Group spacing="sm" position="left" align="end">
-        <Button type="button" variant="default" onClick={onClear}>
-          Clear
-        </Button>
-        <Button type="button" variant="default" onClick={onReset}>
-          Reset
-        </Button>
+        <Controller
+          control={control}
+          name="length"
+          render={({ field: { onChange, value } }) => {
+            return (
+              <Select
+                label="Length"
+                value={String(value)}
+                onChange={onChange}
+                data={jsonLengthOption}
+                styles={{
+                  root: { display: "flex", alignItems: "center", width: "fit-content", gap: "0.5rem" },
+                  label: { flex: "auto", minWidth: "fit-content" },
+                  input: { flex: "auto", width: "80px", textAlign: "right" },
+                }}
+              />
+            );
+          }}
+        />
+
+        <Button type="submit">Generate</Button>
       </Group>
 
       <ScrollArea
