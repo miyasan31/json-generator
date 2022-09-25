@@ -16,19 +16,19 @@ const StringGenerator = (options: { dummyType: StringDummyType; prefix: string; 
   const { dummyType, prefix, suffix } = options;
   switch (dummyType) {
     case "name":
-      return `${prefix}name${suffix}`;
+      return `${prefix}{name}${suffix}`;
     case "email":
-      return `${prefix}email${suffix}`;
+      return `${prefix}{email}${suffix}`;
     case "date":
-      return `${prefix}date${suffix}`;
+      return `${prefix}{date}${suffix}`;
     case "time":
-      return `${prefix}time${suffix}`;
+      return `${prefix}{time}${suffix}`;
     case "dateTime":
-      return `${prefix}datetime${suffix}`;
+      return `${prefix}{datetime}${suffix}`;
     case "password":
-      return `${prefix}password${suffix}`;
+      return `${prefix}{password}${suffix}`;
     case "image":
-      return `${prefix}image${suffix}`;
+      return `${prefix}{image}${suffix}`;
     default:
       return `${prefix}${suffix}`;
   }
@@ -88,18 +88,18 @@ export const jsonGenerator = (object: JsonValue[], index: number): ObjectValue =
   return object.reduce((json, property) => {
     switch (property.valueType) {
       case "string":
-        return { ...json, [property.keyName]: StringGenerator(property.options) };
+        return { ...json, [property.keyName || "key"]: StringGenerator(property.options) };
       case "number":
-        return { ...json, [property.keyName]: NumberGenerator(property.options, index) };
+        return { ...json, [property.keyName || "key"]: NumberGenerator(property.options, index) };
       case "boolean":
-        return { ...json, [property.keyName]: BooleanGenerator(property.options) };
+        return { ...json, [property.keyName || "key"]: BooleanGenerator(property.options) };
       case "object":
         return {
           ...json,
-          [property.keyName]: property.options.object ? jsonGenerator(property.options.object, index) : {},
+          [property.keyName || "key"]: property.options.object ? jsonGenerator(property.options.object, index) : {},
         };
       case "array":
-        return { ...json, [property.keyName]: arrayGenerator(property.options) };
+        return { ...json, [property.keyName || "key"]: arrayGenerator(property.options) };
     }
   }, {});
 };
