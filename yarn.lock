@@ -1223,6 +1223,14 @@
   resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-5.4.0.tgz#4e74318b6ddc621b37756d5fdec6c3c01c632010"
   integrity sha512-3Rw4UKNd57+J0q8aLJKCPNNqhtcQ01yGAt/JUaDOuwrJBm+htgE+bTTR6RHhx+F8CDqdKJHCNYgrJJuENkuHow==
 
+"@mantine/prism@^5.4.1":
+  version "5.4.1"
+  resolved "https://registry.yarnpkg.com/@mantine/prism/-/prism-5.4.1.tgz#4f1a5fcf3976b543a899702f3ff99d548cd4c658"
+  integrity sha512-IyKQew7oKkUbp8Pa+rDjrlS8gTG7PqM0HKf/XMIYPdP2dqV6HAIia+kj74CUpa6zfMO3peoeLSgHse7RTmLngA==
+  dependencies:
+    "@mantine/utils" "5.4.1"
+    prism-react-renderer "^1.2.1"
+
 "@mantine/styles@5.4.0":
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/@mantine/styles/-/styles-5.4.0.tgz#ba7fd2fd4db15906775a1c2eb4175cb98d6fa3c8"
@@ -1235,6 +1243,11 @@
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/@mantine/utils/-/utils-5.4.0.tgz#af60d6034833c26ac3c1e92e57c844bd468a8760"
   integrity sha512-XZE168OhQxrNz9wrFYFOdGDVxDH3wP0uZ5apBezHvf0D74qyUZjGzndkfXbvAq+/mVnMZA/fKju9ydo/IXMftg==
+
+"@mantine/utils@5.4.1":
+  version "5.4.1"
+  resolved "https://registry.yarnpkg.com/@mantine/utils/-/utils-5.4.1.tgz#06242925933faeca619b28e74d58a63ce94567c8"
+  integrity sha512-yaZ7gv9dkr98L65EjaAniZmJpVEPzHbe5aDDljIePLgcU5hVCdUls2v31YXslTf1/CJ5yZp/L7LPYLN86EXlEA==
 
 "@next/eslint-plugin-next@12.3.1":
   version "12.3.1"
@@ -4444,6 +4457,11 @@ pretty-format@^29.0.0, pretty-format@^29.0.3:
     "@jest/schemas" "^29.0.0"
     ansi-styles "^5.0.0"
     react-is "^18.0.0"
+
+prism-react-renderer@^1.2.1:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/prism-react-renderer/-/prism-react-renderer-1.3.5.tgz#786bb69aa6f73c32ba1ee813fbe17a0115435085"
+  integrity sha512-IJ+MSwBWKG+SM3b2SUfdrhC+gu01QkV2KmRQgREThBfSQRoufqRfxfHUxpG1WcaFjP+kojcFyO9Qqtpgt3qLCg==
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
