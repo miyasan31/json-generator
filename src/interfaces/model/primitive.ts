@@ -1,5 +1,27 @@
 /** string */
-export type StringDummyType = "name" | "email" | "password" | "dateTime" | "date" | "time" | "image";
+export type StringDummyType =
+  | "autoIncrement"
+  | "fullName"
+  | "firstName"
+  | "lastName"
+  | "email"
+  | "password"
+  | "dateTime"
+  | "date"
+  | "time"
+  | "image"
+  | "uuid"
+  | "cuid"
+  | "local"
+  | "country"
+  | "address"
+  | "zipCode"
+  | "prefecture"
+  | "profile"
+  | "article"
+  | "tweet"
+  | "pokemon"
+  | "animal";
 
 export interface StringValue {
   keyName: string;
@@ -17,7 +39,7 @@ export interface StringDummyTypeOption {
 }
 
 /** number */
-export type NumberDummyType = "autoincrement" | "age" | "height" | "weight" | "price" | "random";
+export type NumberDummyType = "autoIncrement" | "age" | "height" | "weight" | "price" | "zipCode" | "random";
 
 export interface NumberDummyTypeOption {
   value: NumberDummyType;

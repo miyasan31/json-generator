@@ -6,51 +6,56 @@ export const defaultValues: JsonCreateForm = {
     {
       keyName: "id",
       valueType: "number",
-      options: { numberDummyType: "autoincrement" },
+      options: { numberDummyType: "autoIncrement" },
     },
     {
-      keyName: "tweet",
+      keyName: "name",
       valueType: "string",
-      options: { stringDummyType: "name", prefix: "", suffix: "" },
+      options: { stringDummyType: "autoIncrement", prefix: "", suffix: "" },
     },
     {
-      keyName: "admin",
+      keyName: "isAdmin",
       valueType: "boolean",
       options: { booleanDummyType: "random" },
     },
     {
-      keyName: "idList",
+      keyName: "tweets",
       valueType: "array",
       options: {
-        length: 5,
+        length: 3,
         item: {
           keyName: "id",
-          valueType: "number",
-          options: { numberDummyType: "autoincrement" },
+          valueType: "object",
+          options: {
+            object: [
+              {
+                keyName: "id",
+                valueType: "number",
+                options: {
+                  numberDummyType: "autoIncrement",
+                },
+              },
+              {
+                keyName: "body",
+                valueType: "string",
+                options: {
+                  stringDummyType: "tweet",
+                  prefix: "",
+                  suffix: "",
+                },
+              },
+              {
+                keyName: "createdAt",
+                valueType: "string",
+                options: {
+                  stringDummyType: "dateTime",
+                  prefix: "",
+                  suffix: "",
+                },
+              },
+            ],
+          },
         },
-      },
-    },
-    {
-      keyName: "user",
-      valueType: "object",
-      options: {
-        object: [
-          {
-            keyName: "id",
-            valueType: "number",
-            options: { numberDummyType: "autoincrement" },
-          },
-          {
-            keyName: "name",
-            valueType: "string",
-            options: { stringDummyType: "name", prefix: "", suffix: "" },
-          },
-          {
-            keyName: "avatar",
-            valueType: "string",
-            options: { stringDummyType: "name", prefix: "", suffix: "" },
-          },
-        ],
       },
     },
   ],

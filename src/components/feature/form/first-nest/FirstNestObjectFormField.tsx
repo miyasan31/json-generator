@@ -36,7 +36,7 @@ export const FirstNestObjectFormField: FC<Props> = ({ name, control, register, b
         keyName: "",
         valueType: "string",
         options: {
-          stringDummyType: "name",
+          stringDummyType: "autoIncrement",
           prefix: "",
           suffix: "",
         },

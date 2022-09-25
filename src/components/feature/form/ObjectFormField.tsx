@@ -38,7 +38,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
         keyName: "",
         valueType: "string",
         options: {
-          stringDummyType: "name",
+          stringDummyType: "autoIncrement",
           prefix: "",
           suffix: "",
         },

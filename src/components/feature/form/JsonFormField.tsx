@@ -37,7 +37,7 @@ export const JsonFormField: FC<Props> = ({ control, register, border = true }) =
         keyName: "",
         valueType: "string",
         options: {
-          stringDummyType: "name",
+          stringDummyType: "autoIncrement",
           prefix: "",
           suffix: "",
         },

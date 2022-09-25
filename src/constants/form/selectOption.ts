@@ -15,28 +15,44 @@ export const jsonLengthOption = [
 ];
 
 export const stringDummyTypeOption: StringDummyTypeOption[] = [
-  { value: "name", label: "Name" },
-  { value: "email", label: "Email" },
-  { value: "password", label: "Password" },
-  { value: "dateTime", label: "Date-Time" },
-  { value: "date", label: "Date" },
-  { value: "time", label: "Time" },
-  { value: "image", label: "Image" },
+  { value: "autoIncrement", label: "autoIncrement" },
+  { value: "fullName", label: "full name" },
+  { value: "firstName", label: "first name" },
+  { value: "lastName", label: "last name" },
+  { value: "email", label: "email" },
+  { value: "password", label: "password" },
+  { value: "dateTime", label: "date time" },
+  { value: "date", label: "date" },
+  { value: "time", label: "time" },
+  { value: "image", label: "image" },
+  { value: "uuid", label: "uuid" },
+  { value: "cuid", label: "cuid" },
+  { value: "local", label: "local" },
+  { value: "country", label: "country" },
+  { value: "prefecture", label: "prefecture" },
+  { value: "address", label: "address" },
+  { value: "zipCode", label: "zip code" },
+  { value: "profile", label: "profile" },
+  { value: "article", label: "article" },
+  { value: "tweet", label: "tweet" },
+  { value: "pokemon", label: "pokemon" },
+  { value: "animal", label: "animal" },
 ];
 
 export const numberDummyTypeOption: NumberDummyTypeOption[] = [
-  { value: "autoincrement", label: "Autoincrement" },
-  { value: "age", label: "Age" },
-  { value: "height", label: "Height" },
-  { value: "weight", label: "Width" },
-  { value: "price", label: "Price" },
-  { value: "random", label: "Random" },
+  { value: "autoIncrement", label: "autoIncrement" },
+  { value: "age", label: "age" },
+  { value: "height", label: "height" },
+  { value: "weight", label: "weight" },
+  { value: "price", label: "price" },
+  { value: "random", label: "random" },
+  { value: "zipCode", label: "zip code" },
 ];
 
 export const booleanDummyTypeOption: BooleanDummyTypeOption[] = [
   { value: "true", label: "true" },
   { value: "false", label: "false" },
-  { value: "random", label: "Random" },
+  { value: "random", label: "random" },
 ];
 
 export const arrayValueTypeOption: ArrayValueTypeOption[] = [
