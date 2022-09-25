@@ -1,17 +1,18 @@
 import type { FC, ReactNode } from "react";
-import type { useFormContext } from "react-hook-form";
+import type { Control } from "react-hook-form";
 import { useWatch } from "react-hook-form";
 
+import type { JsonCreateForm } from "~/interfaces/model/form";
 import { jsonGenerator } from "~/utils/jsonGenerator";
 
 type JsonGeneratorWatchProps = {
-  control: ReturnType<typeof useFormContext>["control"];
+  control: Control<JsonCreateForm>;
   children: (json: string) => ReactNode;
 };
 
 export const JsonGeneratorWatch: FC<JsonGeneratorWatchProps> = ({ control, children }) => {
   const length = useWatch({ name: "length", control });
-  const value = useWatch({ name: "object", control });
+  const value = useWatch({ name: "json", control });
   const object =
     Number(length) > 1
       ? [...new Array(Number(length))].map((_, i) => jsonGenerator(value, i))

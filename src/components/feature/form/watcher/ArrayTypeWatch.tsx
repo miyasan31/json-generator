@@ -1,12 +1,19 @@
 import type { FC, ReactNode } from "react";
-import type { useFormContext } from "react-hook-form";
+import type { Control, FieldPath } from "react-hook-form";
 import { useWatch } from "react-hook-form";
 
-import type { ArrayValueType } from "~/interfaces/model/Form.interface";
+import type { JsonCreateForm } from "~/interfaces/model/form";
+import type { ArrayValueType } from "~/interfaces/model/object";
+
+type FilterFieldPath<FieldPaths, FilterString extends string> = FieldPaths extends `${infer T}.${FilterString}`
+  ? `${T}.${FilterString}`
+  : never;
+
+type FieldNames = FieldPath<JsonCreateForm>;
 
 type ArrayTypeWatchProps = {
-  name: string;
-  control: ReturnType<typeof useFormContext>["control"];
+  name: FilterFieldPath<FieldNames, "item.valueType">;
+  control: Control<JsonCreateForm>;
   children: (value: ArrayValueType) => ReactNode;
 };
 

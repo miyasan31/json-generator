@@ -4,7 +4,7 @@ import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 export const useColorScheme = () => {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: "mantine-color-scheme",
-    defaultValue: "light",
+    defaultValue: "dark",
     getInitialValueInEffect: true,
   });
 
@@ -12,7 +12,7 @@ export const useColorScheme = () => {
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
   };
 
-  useHotkeys([["mod+shift+L", () => toggleColorScheme()]]);
+  useHotkeys([["mod+J", () => toggleColorScheme()]]);
 
   return {
     colorScheme,

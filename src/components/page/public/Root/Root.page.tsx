@@ -6,7 +6,7 @@ import { InputLayout } from "~/components/layout/JsonEditor/InputLayout";
 import { OutputLayout } from "~/components/layout/JsonEditor/OutputLayout";
 import { useRHForm } from "~/components/lib/react-hook-form/useRHForm";
 import { defaultValues } from "~/constants/form/defaultValue";
-import type { JsonCreateForm } from "~/interfaces/model/Form.interface";
+import type { JsonCreateForm } from "~/interfaces/model/form";
 import { onEnterKeySubmitBlock } from "~/utils/onEnterKeySubmitBlock";
 
 export const Root = () => {

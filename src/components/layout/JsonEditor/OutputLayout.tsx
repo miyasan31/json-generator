@@ -4,9 +4,10 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 
 import { JsonGeneratorWatch } from "~/components/feature/form/watcher/JsonGeneratorWatch";
+import type { JsonCreateForm } from "~/interfaces/model/form";
 
 export const OutputLayout = () => {
-  const { control } = useFormContext();
+  const { control } = useFormContext<JsonCreateForm>();
 
   return (
     <JsonGeneratorWatch control={control}>

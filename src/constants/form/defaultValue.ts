@@ -1,56 +1,61 @@
-import type { JsonCreateForm } from "~/interfaces/model/Form.interface";
+import type { JsonCreateForm } from "~/interfaces/model/form";
 
 export const defaultValues: JsonCreateForm = {
-  length: 5,
-  object: [
+  length: 1,
+  json: [
     {
       keyName: "id",
       valueType: "number",
-      options: { dummyType: "autoincrement" },
+      options: { numberDummyType: "autoIncrement" },
     },
     {
-      keyName: "tweet",
+      keyName: "name",
       valueType: "string",
-      options: { dummyType: "name", prefix: "", suffix: "" },
+      options: { stringDummyType: "autoIncrement", prefix: "", suffix: "" },
     },
     {
-      keyName: "admin",
+      keyName: "isAdmin",
       valueType: "boolean",
-      options: { dummyType: "random" },
+      options: { booleanDummyType: "random" },
     },
     {
-      keyName: "idList",
+      keyName: "tweets",
       valueType: "array",
       options: {
-        length: 5,
+        length: 3,
         item: {
           keyName: "id",
-          valueType: "number",
-          options: { dummyType: "autoincrement" },
+          valueType: "object",
+          options: {
+            object: [
+              {
+                keyName: "id",
+                valueType: "number",
+                options: {
+                  numberDummyType: "autoIncrement",
+                },
+              },
+              {
+                keyName: "body",
+                valueType: "string",
+                options: {
+                  stringDummyType: "tweet",
+                  prefix: "",
+                  suffix: "",
+                },
+              },
+              {
+                keyName: "createdAt",
+                valueType: "string",
+                options: {
+                  stringDummyType: "dateTime",
+                  prefix: "",
+                  suffix: "",
+                },
+              },
+            ],
+          },
         },
-      },
-    },
-    {
-      keyName: "user",
-      valueType: "object",
-      options: {
-        object: [
-          {
-            keyName: "id",
-            valueType: "number",
-            options: { dummyType: "autoincrement" },
-          },
-          {
-            keyName: "name",
-            valueType: "string",
-            options: { dummyType: "name", prefix: "", suffix: "" },
-          },
-          {
-            keyName: "avatar",
-            valueType: "string",
-            options: { dummyType: "name", prefix: "", suffix: "" },
-          },
-        ],
       },
     },
   ],

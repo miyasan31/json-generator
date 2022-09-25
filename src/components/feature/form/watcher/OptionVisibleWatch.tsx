@@ -1,14 +1,13 @@
 import type { FC, ReactNode } from "react";
-import type { useFormContext } from "react-hook-form";
-import { useWatch } from "react-hook-form";
+import { useCallback } from "react";
+import { useState } from "react";
 
-type OptionVisibleWatchProps = {
-  name: string;
-  control: ReturnType<typeof useFormContext>["control"];
-  children: (value: boolean) => ReactNode;
+type ArrayTypeWatchProps = {
+  children: (isVisible: boolean, onToggle: () => void) => ReactNode;
 };
 
-export const OptionVisibleWatch: FC<OptionVisibleWatchProps> = ({ name, control, children }) => {
-  const value = useWatch({ name, control });
-  return <>{children(value)}</>;
+export const OptionVisibleWatch: FC<ArrayTypeWatchProps> = ({ children }) => {
+  const [isVisible, setIsVisible] = useState(true);
+  const onToggle = useCallback(() => setIsVisible((prev) => !prev), []);
+  return <>{children(isVisible, onToggle)}</>;
 };
