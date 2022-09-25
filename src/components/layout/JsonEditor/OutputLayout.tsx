@@ -11,7 +11,7 @@ export const OutputLayout = () => {
   return (
     <JsonGeneratorWatch control={control}>
       {(json: string) => (
-        <Stack spacing="sm" sx={{ height: "100%" }}>
+        <Stack spacing="sm" sx={{ flex: 2, height: "100%" }}>
           <Group spacing="sm" position="right">
             <CopyButton value={json}>
               {({ copied, copy: onCopy }) => (

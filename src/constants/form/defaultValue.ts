@@ -1,4 +1,4 @@
-import type { JsonCreateForm } from "~/interfaces/model/From.interface";
+import type { JsonCreateForm } from "~/interfaces/model/Form.interface";
 
 export const defaultValues: JsonCreateForm = {
   length: 5,

@@ -4,7 +4,7 @@ import type {
   NumberDummyTypeOption,
   ObjectValueTypeOption,
   StringDummyTypeOption,
-} from "~/interfaces/model/From.interface";
+} from "~/interfaces/model/Form.interface";
 
 export const jsonLengthOption = [
   { value: "1", label: "1" },

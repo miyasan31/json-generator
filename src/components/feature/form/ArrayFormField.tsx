@@ -10,7 +10,7 @@ import { StringFormField } from "~/components/feature/form/StringFormField";
 import { ArrayTypeWatch } from "~/components/feature/form/watcher/ArrayTypeWatch";
 import { appendValue } from "~/constants/form/appendValue";
 import { arrayValueTypeOption } from "~/constants/form/selectOption";
-import type { ValueType } from "~/interfaces/model/From.interface";
+import type { ValueType } from "~/interfaces/model/Form.interface";
 
 type Props = {
   name: string;
@@ -22,10 +22,9 @@ export const ArrayFormField: FC<Props> = ({ name }) => {
   return (
     <Stack
       spacing="xs"
-      ml="2.375rem"
       sx={(theme) => ({
         borderRadius: theme.radius.sm,
-        padding: theme.spacing.sm,
+        padding: theme.spacing.lg,
         backgroundColor: theme.colorScheme === "light" ? theme.colors.gray[0] : theme.colors.dark[7],
         border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[5]}`,
       })}
@@ -53,7 +52,14 @@ export const ArrayFormField: FC<Props> = ({ name }) => {
           control={control}
           name={`${name}.options.item`}
           render={({ field: { onChange, value } }) => {
-            const onChangeValue = (value: ValueType) => onChange({ valueType: value, options: appendValue[value] });
+            const onChangeValue = (changeValue: ValueType) => {
+              onChange({
+                ...value,
+                keyName: value.keyName,
+                valueType: changeValue,
+                options: appendValue[changeValue],
+              });
+            };
             return (
               <Select
                 size="xs"
@@ -70,22 +76,17 @@ export const ArrayFormField: FC<Props> = ({ name }) => {
       <ArrayTypeWatch name={`${name}.options.item.valueType`} control={control}>
         {(value) => {
           if (value === "string") {
-            return <StringFormField leftSpace={false} name={`${name}.options.item`} />;
+            return <StringFormField name={`${name}.options.item`} />;
           }
           if (value === "number") {
-            return <NumberFormField leftSpace={false} name={`${name}.options.item`} />;
+            return <NumberFormField name={`${name}.options.item`} />;
           }
           if (value === "boolean") {
-            return <BooleanFormField leftSpace={false} name={`${name}.options.item`} />;
+            return <BooleanFormField name={`${name}.options.item`} />;
           }
           if (value === "object") {
             return (
-              <ObjectFormField
-                leftSpace={false}
-                register={register}
-                control={control}
-                name={`${name}.options.item.options.object`}
-              />
+              <ObjectFormField register={register} control={control} name={`${name}.options.item.options.object`} />
             );
           }
         }}

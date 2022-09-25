@@ -9,7 +9,7 @@ export const InputLayout = () => {
   const { control, register } = useFormContext();
 
   return (
-    <Stack spacing="sm" sx={{ height: "100%" }}>
+    <Stack spacing="sm" sx={{ flex: 3, height: "100%" }}>
       <Group spacing="sm" position="left" align="end">
         <Controller
           control={control}
@@ -42,7 +42,6 @@ export const InputLayout = () => {
           border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[4] : theme.colors.dark[4]}`,
         })}
       >
-        {/*<FormFields {...{ control, register }} />*/}
         <ObjectFormField name="object" border={false} {...{ control, register }} />
       </ScrollArea>
     </Stack>

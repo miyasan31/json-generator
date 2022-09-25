@@ -4,7 +4,7 @@ import type {
   JsonValue,
   NumberDummyType,
   StringDummyType,
-} from "~/interfaces/model/From.interface";
+} from "~/interfaces/model/Form.interface";
 
 type ArrayValueType = string[] | number[] | boolean[] | ObjectValue[];
 type ArrayValue = ArrayValueType;

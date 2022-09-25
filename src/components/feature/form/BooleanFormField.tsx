@@ -7,14 +7,13 @@ import { booleanDummyTypeOption } from "~/constants/form/selectOption";
 
 type Props = {
   name: string;
-  leftSpace?: boolean;
 };
 
-export const BooleanFormField: FC<Props> = ({ name, leftSpace = true }) => {
+export const BooleanFormField: FC<Props> = ({ name }) => {
   const { control } = useFormContext();
 
   return (
-    <Group spacing="xs" align="end" ml={leftSpace ? "2.375rem" : 0}>
+    <Group spacing="xs" align="end">
       <Controller
         control={control}
         name={`${name}.options.dummyType`}

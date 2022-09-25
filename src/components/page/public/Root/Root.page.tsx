@@ -6,7 +6,7 @@ import { InputLayout } from "~/components/layout/JsonEditor/InputLayout";
 import { OutputLayout } from "~/components/layout/JsonEditor/OutputLayout";
 import { useRHForm } from "~/components/lib/react-hook-form/useRHForm";
 import { defaultValues } from "~/constants/form/defaultValue";
-import type { JsonCreateForm } from "~/interfaces/model/From.interface";
+import type { JsonCreateForm } from "~/interfaces/model/Form.interface";
 import { onEnterKeySubmitBlock } from "~/utils/onEnterKeySubmitBlock";
 
 export const Root = () => {
@@ -23,7 +23,7 @@ export const Root = () => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={onSubmit(onCreateJson)} onKeyDown={onEnterKeySubmitBlock}>
-        <Group spacing="sm" align="start" grow sx={{ height: "calc(100vh - 100px)" }}>
+        <Group spacing="sm" align="start" sx={{ height: "calc(100vh - 100px)" }}>
           <InputLayout />
           <OutputLayout />
         </Group>
