@@ -1,22 +1,22 @@
-import type { JsonCreateForm } from "~/interfaces/model/Form.interface";
+import type { JsonCreateForm } from "~/interfaces/model/form";
 
 export const defaultValues: JsonCreateForm = {
-  length: 5,
-  object: [
+  length: 1,
+  json: [
     {
       keyName: "id",
       valueType: "number",
-      options: { dummyType: "autoincrement" },
+      options: { numberDummyType: "autoincrement" },
     },
     {
       keyName: "tweet",
       valueType: "string",
-      options: { dummyType: "name", prefix: "", suffix: "" },
+      options: { stringDummyType: "name", prefix: "", suffix: "" },
     },
     {
       keyName: "admin",
       valueType: "boolean",
-      options: { dummyType: "random" },
+      options: { booleanDummyType: "random" },
     },
     {
       keyName: "idList",
@@ -26,7 +26,7 @@ export const defaultValues: JsonCreateForm = {
         item: {
           keyName: "id",
           valueType: "number",
-          options: { dummyType: "autoincrement" },
+          options: { numberDummyType: "autoincrement" },
         },
       },
     },
@@ -34,21 +34,21 @@ export const defaultValues: JsonCreateForm = {
       keyName: "user",
       valueType: "object",
       options: {
-        object: [
+        nest: [
           {
             keyName: "id",
             valueType: "number",
-            options: { dummyType: "autoincrement" },
+            options: { numberDummyType: "autoincrement" },
           },
           {
             keyName: "name",
             valueType: "string",
-            options: { dummyType: "name", prefix: "", suffix: "" },
+            options: { stringDummyType: "name", prefix: "", suffix: "" },
           },
           {
             keyName: "avatar",
             valueType: "string",
-            options: { dummyType: "name", prefix: "", suffix: "" },
+            options: { stringDummyType: "name", prefix: "", suffix: "" },
           },
         ],
       },

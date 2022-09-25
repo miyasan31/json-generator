@@ -1,10 +1,9 @@
+import type { ArrayValueTypeOption, ObjectValueTypeOption } from "~/interfaces/model/object";
 import type {
-  ArrayValueTypeOption,
   BooleanDummyTypeOption,
   NumberDummyTypeOption,
-  ObjectValueTypeOption,
   StringDummyTypeOption,
-} from "~/interfaces/model/Form.interface";
+} from "~/interfaces/model/primitive";
 
 export const jsonLengthOption = [
   { value: "1", label: "1" },

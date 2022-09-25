@@ -6,8 +6,6 @@ import type { Control, UseFormRegister } from "react-hook-form";
 import { Controller, useFieldArray } from "react-hook-form";
 
 import { BooleanFormField } from "~/components/feature/form/BooleanFormField";
-import { FirstNestArrayFormField } from "~/components/feature/form/first-nest/FirstNestArrayFormField";
-import { FirstNestObjectFormField } from "~/components/feature/form/first-nest/FirstNestObjectFormField";
 import { NumberFormField } from "~/components/feature/form/NumberFormField";
 import { StringFormField } from "~/components/feature/form/StringFormField";
 import { FormTypeWatch } from "~/components/feature/form/watcher/FormTypeWatch";
@@ -18,13 +16,13 @@ import type { JsonCreateForm } from "~/interfaces/model/form";
 import type { ValueType } from "~/interfaces/model/object";
 
 type Props = {
-  name: `json.${number}.options.nest`;
+  name: `json.${number}.options.nest.${number}.options.nest` | `json.${number}.options.item.options.nest`;
   control: Control<JsonCreateForm>;
   register: UseFormRegister<JsonCreateForm>;
   border?: boolean;
 };
 
-export const ObjectFormField: FC<Props> = ({ name, control, register, border = true }) => {
+export const FirstNestObjectFormField: FC<Props> = ({ name, control, register, border = true }) => {
   const { fields, remove, append } = useFieldArray({
     control,
     name,
@@ -95,7 +93,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                         label="value"
                         value={value.valueType}
                         onChange={onChangeValue}
-                        data={objectValueTypeOption}
+                        data={objectValueTypeOption.slice(0, 3)}
                         sx={{
                           flex: 1,
                         }}
@@ -147,27 +145,6 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                       <BooleanFormField
                         name={{
                           booleanDummy: `${name}.${index}.options.booleanDummyType`,
-                        }}
-                      />
-                    );
-                  }
-
-                  if (value === "object") {
-                    return (
-                      <FirstNestObjectFormField
-                        register={register}
-                        control={control}
-                        name={`${name}.${index}.options.nest`}
-                      />
-                    );
-                  }
-
-                  if (value === "array") {
-                    return (
-                      <FirstNestArrayFormField
-                        name={{
-                          item: `${name}.${index}.options.item`,
-                          length: `${name}.${index}.options.length`,
                         }}
                       />
                     );

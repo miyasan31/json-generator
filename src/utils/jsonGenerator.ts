@@ -1,20 +1,15 @@
-import type {
-  ArrayItemType,
-  BooleanDummyType,
-  JsonValue,
-  NumberDummyType,
-  StringDummyType,
-} from "~/interfaces/model/Form.interface";
+import type { FirstNestArrayItemType } from "~/interfaces/model/first-nest/object";
+import type { SecondNestArrayItemType } from "~/interfaces/model/first-nest/second-nest/object";
+import type { JsonValue } from "~/interfaces/model/form";
+import type { BooleanDummyType, NumberDummyType, StringDummyType } from "~/interfaces/model/primitive";
 
-type ArrayValueType = string[] | number[] | boolean[] | ObjectValue[];
-type ArrayValue = ArrayValueType;
-
+type ArrayValue = string[] | number[] | boolean[] | ObjectValue[];
 type ObjectValueType = string | number | boolean | ArrayValue;
 type ObjectValue = Record<string, ObjectValueType>;
 
-const StringGenerator = (options: { dummyType: StringDummyType; prefix: string; suffix: string }): string => {
-  const { dummyType, prefix, suffix } = options;
-  switch (dummyType) {
+const StringGenerator = (options: { stringDummyType: StringDummyType; prefix: string; suffix: string }): string => {
+  const { stringDummyType, prefix, suffix } = options;
+  switch (stringDummyType) {
     case "name":
       return `${prefix}{name}${suffix}`;
     case "email":
@@ -34,9 +29,9 @@ const StringGenerator = (options: { dummyType: StringDummyType; prefix: string; 
   }
 };
 
-const NumberGenerator = (options: { dummyType: NumberDummyType }, index: number): number => {
-  const { dummyType } = options;
-  switch (dummyType) {
+const NumberGenerator = (options: { numberDummyType: NumberDummyType }, index: number): number => {
+  const { numberDummyType } = options;
+  switch (numberDummyType) {
     case "autoincrement":
       return index;
     case "random":
@@ -54,9 +49,9 @@ const NumberGenerator = (options: { dummyType: NumberDummyType }, index: number)
   }
 };
 
-const BooleanGenerator = (options: { dummyType: BooleanDummyType }): boolean => {
-  const { dummyType } = options;
-  switch (dummyType) {
+const BooleanGenerator = (options: { booleanDummyType: BooleanDummyType }): boolean => {
+  const { booleanDummyType } = options;
+  switch (booleanDummyType) {
     case "true":
       return true;
     case "false":
@@ -67,6 +62,8 @@ const BooleanGenerator = (options: { dummyType: BooleanDummyType }): boolean => 
       return false;
   }
 };
+
+type ArrayItemType = FirstNestArrayItemType | SecondNestArrayItemType;
 
 const arrayGenerator = (options: { item: ArrayItemType; length: number }): ArrayValue => {
   const { item, length } = options;
@@ -79,7 +76,7 @@ const arrayGenerator = (options: { item: ArrayItemType; length: number }): Array
       return [...new Array(length)].map(() => BooleanGenerator(item.options));
     case "object":
       return [...new Array(length)].map((_, index) =>
-        item.options.object ? jsonGenerator(item.options.object, index) : {},
+        item.options.nest ? jsonGenerator(item.options.nest, index) : {},
       );
   }
 };
@@ -96,7 +93,7 @@ export const jsonGenerator = (object: JsonValue[], index: number): ObjectValue =
       case "object":
         return {
           ...json,
-          [property.keyName || "key"]: property.options.object ? jsonGenerator(property.options.object, index) : {},
+          [property.keyName || "key"]: property.options.nest ? jsonGenerator(property.options.nest, index) : {},
         };
       case "array":
         return { ...json, [property.keyName || "key"]: arrayGenerator(property.options) };

@@ -5,10 +5,10 @@ import { Fragment, useCallback } from "react";
 import type { Control, UseFormRegister } from "react-hook-form";
 import { Controller, useFieldArray } from "react-hook-form";
 
+import { ArrayFormField } from "~/components/feature/form/ArrayFormField";
 import { BooleanFormField } from "~/components/feature/form/BooleanFormField";
-import { FirstNestArrayFormField } from "~/components/feature/form/first-nest/FirstNestArrayFormField";
-import { FirstNestObjectFormField } from "~/components/feature/form/first-nest/FirstNestObjectFormField";
 import { NumberFormField } from "~/components/feature/form/NumberFormField";
+import { ObjectFormField } from "~/components/feature/form/ObjectFormField";
 import { StringFormField } from "~/components/feature/form/StringFormField";
 import { FormTypeWatch } from "~/components/feature/form/watcher/FormTypeWatch";
 import { Divider } from "~/components/shared/Divider";
@@ -18,16 +18,15 @@ import type { JsonCreateForm } from "~/interfaces/model/form";
 import type { ValueType } from "~/interfaces/model/object";
 
 type Props = {
-  name: `json.${number}.options.nest`;
   control: Control<JsonCreateForm>;
   register: UseFormRegister<JsonCreateForm>;
   border?: boolean;
 };
 
-export const ObjectFormField: FC<Props> = ({ name, control, register, border = true }) => {
+export const JsonFormField: FC<Props> = ({ control, register, border = true }) => {
   const { fields, remove, append } = useFieldArray({
     control,
-    name,
+    name: "json",
   });
 
   const onRemove = useCallback((index: number) => remove(index), [remove]);
@@ -66,7 +65,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                   required
                   size="xs"
                   label="key"
-                  {...register(`${name}.${index}.keyName`, {
+                  {...register(`json.${index}.keyName`, {
                     required: {
                       value: true,
                       message: "key is required",
@@ -79,7 +78,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
 
                 <Controller
                   control={control}
-                  name={`${name}.${index}`}
+                  name={`json.${index}`}
                   render={({ field: { onChange, value } }) => {
                     const onChangeValue = (changeValue: ValueType) => {
                       onChange({
@@ -118,35 +117,29 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                 </Tooltip>
               </Group>
 
-              <FormTypeWatch name={`${name}.${index}.valueType`} control={control}>
+              <FormTypeWatch name={`json.${index}.valueType`} control={control}>
                 {(value) => {
                   if (value === "string") {
                     return (
                       <StringFormField
                         name={{
-                          stringDummyType: `${name}.${index}.options.stringDummyType`,
-                          prefix: `${name}.${index}.options.prefix`,
-                          suffix: `${name}.${index}.options.suffix`,
+                          stringDummyType: `json.${index}.options.stringDummyType`,
+                          prefix: `json.${index}.options.prefix`,
+                          suffix: `json.${index}.options.suffix`,
                         }}
                       />
                     );
                   }
 
                   if (value === "number") {
-                    return (
-                      <NumberFormField
-                        name={{
-                          numberDummy: `${name}.${index}.options.numberDummyType`,
-                        }}
-                      />
-                    );
+                    return <NumberFormField name={{ numberDummy: `json.${index}.options.numberDummyType` }} />;
                   }
 
                   if (value === "boolean") {
                     return (
                       <BooleanFormField
                         name={{
-                          booleanDummy: `${name}.${index}.options.booleanDummyType`,
+                          booleanDummy: `json.${index}.options.booleanDummyType`,
                         }}
                       />
                     );
@@ -154,20 +147,16 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
 
                   if (value === "object") {
                     return (
-                      <FirstNestObjectFormField
-                        register={register}
-                        control={control}
-                        name={`${name}.${index}.options.nest`}
-                      />
+                      <ObjectFormField register={register} control={control} name={`json.${index}.options.nest`} />
                     );
                   }
 
                   if (value === "array") {
                     return (
-                      <FirstNestArrayFormField
+                      <ArrayFormField
                         name={{
-                          item: `${name}.${index}.options.item`,
-                          length: `${name}.${index}.options.length`,
+                          item: `json.${index}.options.item`,
+                          length: `json.${index}.options.length`,
                         }}
                       />
                     );

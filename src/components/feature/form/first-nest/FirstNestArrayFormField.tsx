@@ -3,7 +3,6 @@ import type { FC } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 import { BooleanFormField } from "~/components/feature/form/BooleanFormField";
-import { FirstNestObjectFormField } from "~/components/feature/form/first-nest/FirstNestObjectFormField";
 import { NumberFormField } from "~/components/feature/form/NumberFormField";
 import { StringFormField } from "~/components/feature/form/StringFormField";
 import { ArrayTypeWatch } from "~/components/feature/form/watcher/ArrayTypeWatch";
@@ -14,13 +13,13 @@ import type { ValueType } from "~/interfaces/model/object";
 
 type Props = {
   name: {
-    item: `json.${number}.options.item`;
-    length: `json.${number}.options.length`;
+    item: `json.${number}.options.nest.${number}.options.item`;
+    length: `json.${number}.options.nest.${number}.options.length`;
   };
 };
 
-export const ArrayFormField: FC<Props> = ({ name }) => {
-  const { register, control } = useFormContext<JsonCreateForm>();
+export const FirstNestArrayFormField: FC<Props> = ({ name }) => {
+  const { control } = useFormContext<JsonCreateForm>();
 
   return (
     <Stack
@@ -70,7 +69,7 @@ export const ArrayFormField: FC<Props> = ({ name }) => {
                 label="value"
                 value={value.valueType}
                 onChange={onChangeValue}
-                data={arrayValueTypeOption}
+                data={arrayValueTypeOption.slice(0, 3)}
               />
             );
           }}
@@ -108,12 +107,6 @@ export const ArrayFormField: FC<Props> = ({ name }) => {
                   booleanDummy: `${name.item}.options.booleanDummyType`,
                 }}
               />
-            );
-          }
-
-          if (value === "object") {
-            return (
-              <FirstNestObjectFormField register={register} control={control} name={`${name.item}.options.nest`} />
             );
           }
         }}

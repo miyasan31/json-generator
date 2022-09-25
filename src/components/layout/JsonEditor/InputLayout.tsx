@@ -1,12 +1,12 @@
 import { Button, Group, ScrollArea, Select, Stack } from "@mantine/core";
-import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { ObjectFormField } from "~/components/feature/form/ObjectFormField";
+import { JsonFormField } from "~/components/feature/form/JsonFormField";
 import { jsonLengthOption } from "~/constants/form/selectOption";
+import type { JsonCreateForm } from "~/interfaces/model/form";
 
 export const InputLayout = () => {
-  const { control, register } = useFormContext();
+  const { control, register } = useFormContext<JsonCreateForm>();
 
   return (
     <Stack spacing="sm" sx={{ flex: 3, height: "100%" }}>
@@ -42,7 +42,7 @@ export const InputLayout = () => {
           border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[4] : theme.colors.dark[4]}`,
         })}
       >
-        <ObjectFormField name="object" border={false} {...{ control, register }} />
+        <JsonFormField border={false} {...{ control, register }} />
       </ScrollArea>
     </Stack>
   );

@@ -1,14 +1,14 @@
 export const appendValue = {
   string: {
-    dummyType: "name",
+    stringDummyType: "name",
     prefix: "",
     suffix: "",
   },
   number: {
-    dummyType: "autoincrement",
+    numberDummyType: "autoincrement",
   },
   boolean: {
-    dummyType: "random",
+    booleanDummyType: "random",
   },
   array: {
     length: 3,
@@ -16,19 +16,19 @@ export const appendValue = {
       keyName: "",
       valueType: "string",
       options: {
-        dummyType: "name",
+        stringDummyType: "name",
         prefix: "",
         suffix: "",
       },
     },
   },
   object: {
-    object: [
+    nest: [
       {
         keyName: "",
         valueType: "string",
         options: {
-          dummyType: "name",
+          stringDummyType: "name",
           prefix: "",
           suffix: "",
         },
