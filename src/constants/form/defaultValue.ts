@@ -34,7 +34,7 @@ export const defaultValues: JsonCreateForm = {
       keyName: "user",
       valueType: "object",
       options: {
-        nest: [
+        object: [
           {
             keyName: "id",
             valueType: "number",

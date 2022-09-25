@@ -17,7 +17,7 @@ interface FirstNestObjectValue {
   keyName: string;
   valueType: "object";
   options: {
-    nest: SecondNestObjectPropertyType[];
+    object: SecondNestObjectPropertyType[];
   };
 }
 

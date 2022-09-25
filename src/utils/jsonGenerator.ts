@@ -76,7 +76,7 @@ const arrayGenerator = (options: { item: ArrayItemType; length: number }): Array
       return [...new Array(length)].map(() => BooleanGenerator(item.options));
     case "object":
       return [...new Array(length)].map((_, index) =>
-        item.options.nest ? jsonGenerator(item.options.nest, index) : {},
+        item.options.object ? jsonGenerator(item.options.object, index) : {},
       );
   }
 };
@@ -93,7 +93,7 @@ export const jsonGenerator = (object: JsonValue[], index: number): ObjectValue =
       case "object":
         return {
           ...json,
-          [property.keyName || "key"]: property.options.nest ? jsonGenerator(property.options.nest, index) : {},
+          [property.keyName || "key"]: property.options.object ? jsonGenerator(property.options.object, index) : {},
         };
       case "array":
         return { ...json, [property.keyName || "key"]: arrayGenerator(property.options) };

@@ -13,8 +13,8 @@ import type { ValueType } from "~/interfaces/model/object";
 
 type Props = {
   name: {
-    item: `json.${number}.options.nest.${number}.options.item`;
-    length: `json.${number}.options.nest.${number}.options.length`;
+    item: `json.${number}.options.object.${number}.options.item`;
+    length: `json.${number}.options.object.${number}.options.length`;
   };
 };
 

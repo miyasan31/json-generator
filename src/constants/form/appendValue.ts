@@ -23,7 +23,7 @@ export const appendValue = {
     },
   },
   object: {
-    nest: [
+    object: [
       {
         keyName: "",
         valueType: "string",

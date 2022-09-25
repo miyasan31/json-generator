@@ -23,7 +23,7 @@ export interface ObjectValue {
   keyName: string;
   valueType: "object";
   options: {
-    nest: FirstNestObjectPropertyType[];
+    object: FirstNestObjectPropertyType[];
   };
 }
 

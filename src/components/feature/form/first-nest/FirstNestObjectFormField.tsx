@@ -16,7 +16,7 @@ import type { JsonCreateForm } from "~/interfaces/model/form";
 import type { ValueType } from "~/interfaces/model/object";
 
 type Props = {
-  name: `json.${number}.options.nest.${number}.options.nest` | `json.${number}.options.item.options.nest`;
+  name: `json.${number}.options.object.${number}.options.object` | `json.${number}.options.item.options.object`;
   control: Control<JsonCreateForm>;
   register: UseFormRegister<JsonCreateForm>;
   border?: boolean;

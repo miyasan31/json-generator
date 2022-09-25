@@ -113,7 +113,7 @@ export const ArrayFormField: FC<Props> = ({ name }) => {
 
           if (value === "object") {
             return (
-              <FirstNestObjectFormField register={register} control={control} name={`${name.item}.options.nest`} />
+              <FirstNestObjectFormField register={register} control={control} name={`${name.item}.options.object`} />
             );
           }
         }}

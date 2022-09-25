@@ -18,7 +18,7 @@ import type { JsonCreateForm } from "~/interfaces/model/form";
 import type { ValueType } from "~/interfaces/model/object";
 
 type Props = {
-  name: `json.${number}.options.nest`;
+  name: `json.${number}.options.object`;
   control: Control<JsonCreateForm>;
   register: UseFormRegister<JsonCreateForm>;
   border?: boolean;
@@ -157,7 +157,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                       <FirstNestObjectFormField
                         register={register}
                         control={control}
-                        name={`${name}.${index}.options.nest`}
+                        name={`${name}.${index}.options.object`}
                       />
                     );
                   }

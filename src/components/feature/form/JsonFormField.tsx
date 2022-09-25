@@ -147,7 +147,7 @@ export const JsonFormField: FC<Props> = ({ control, register, border = true }) =
 
                   if (value === "object") {
                     return (
-                      <ObjectFormField register={register} control={control} name={`json.${index}.options.nest`} />
+                      <ObjectFormField register={register} control={control} name={`json.${index}.options.object`} />
                     );
                   }
 
