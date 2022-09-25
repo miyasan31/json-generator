@@ -49,6 +49,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
       sx={(theme) => ({
         borderRadius: theme.radius.sm,
         padding: theme.spacing.lg,
+        marginTop: theme.spacing.xs,
         border: border
           ? `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[5]}`
           : "",
@@ -143,7 +144,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
         );
       })}
 
-      <Button size="xs" type="button" color="red" variant="outline" onClick={onAppend}>
+      <Button size="xs" mt="xs" type="button" color="red" variant="outline" onClick={onAppend}>
         Add key
       </Button>
     </Stack>

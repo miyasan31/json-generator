@@ -25,6 +25,7 @@ export const ArrayFormField: FC<Props> = ({ name }) => {
       sx={(theme) => ({
         borderRadius: theme.radius.sm,
         padding: theme.spacing.lg,
+        marginTop: theme.spacing.xs,
         backgroundColor: theme.colorScheme === "light" ? theme.colors.gray[0] : theme.colors.dark[7],
         border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[5]}`,
       })}
