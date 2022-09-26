@@ -1,22 +1,22 @@
-import type { JsonCreateForm } from "~/interfaces/model/form";
+import type { ICreateJson, ICreateJsonResponse } from "~/interfaces/useCase/json";
 import { supabaseClient } from "~/libs/supabase/supabaseClient";
 
 interface ISupabaseRepository {
-  generateJson: (jsonCreateBody: JsonCreateForm) => Promise<unknown>;
+  generateJson: (jsonCreateBody: ICreateJson) => Promise<string | null>;
 }
 
 export const supabaseRepository: ISupabaseRepository = {
-  generateJson: async (jsonCreateBody: JsonCreateForm): Promise<unknown> => {
+  generateJson: async (jsonCreateBody: ICreateJson): Promise<string | null> => {
     return await supabaseClient.functions
-      .invoke("generateJson", {
+      .invoke<ICreateJsonResponse>("generateJson", {
         body: JSON.stringify(jsonCreateBody),
       })
       .then((res) => {
-        console.info(res);
-        return res;
-      })
-      .catch((error) => {
-        console.error(error);
+        if (!res.data || res.error) {
+          return null;
+        }
+
+        return JSON.stringify(res.data ?? [], null, 2);
       });
   },
 };

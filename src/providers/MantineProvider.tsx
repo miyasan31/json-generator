@@ -5,8 +5,8 @@ import {
 } from "@mantine/core";
 import type { FC, ReactNode } from "react";
 
-import { useColorScheme } from "~/libs/mantine/hook/useColorScheme";
 import { customTheme } from "~/libs/mantine/theme.config";
+import { useColorScheme } from "~/libs/mantine/useColorScheme";
 
 type Props = {
   children: ReactNode;

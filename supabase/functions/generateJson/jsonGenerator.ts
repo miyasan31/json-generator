@@ -1,7 +1,7 @@
-import { FirstNestArrayItemType } from "./types/model/first-nest/object.ts";
-import { SecondNestArrayItemType } from "./types/model/first-nest/second-nest/object.ts";
-import { JsonValue } from "./types/model/form.ts";
-import { BooleanDummyType, NumberDummyType, StringDummyType } from "./types/model/primitive.ts";
+import { FirstNestArrayItemType } from "./interfaces/model/object/first-nest.ts";
+import { SecondNestArrayItemType } from "./interfaces/model/object/second-nest.ts";
+import { BooleanDummyType, NumberDummyType, StringDummyType } from "./interfaces/model/primitive.ts";
+import { JsonValue } from "./interfaces/useCase/json.ts";
 
 type ArrayValue = string[] | number[] | boolean[] | ObjectValue[];
 type ObjectValueType = string | number | boolean | ArrayValue;

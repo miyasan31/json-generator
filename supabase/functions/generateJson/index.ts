@@ -3,7 +3,7 @@
 // This enables autocomplete, go to definition, etc.
 
 import { serve } from "https://deno.land/std@0.131.0/http/server.ts";
-import { corsHeaders } from "../configs/cors.ts";
+import { corsHeaders } from "../shared/cors.ts";
 import { jsonGenerator } from "./jsonGenerator.ts";
 
 serve(async (req) => {

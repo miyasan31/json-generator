@@ -8,7 +8,7 @@ type HeadProps = {
 
 export const Head: FC<HeadProps> = ({ title, description }) => {
   return (
-    <Helmet title={title} defaultTitle="React-Vite-TailwindCSS-Starter">
+    <Helmet title={title} defaultTitle="JSON Generator">
       <meta name="description" content={description} />
     </Helmet>
   );

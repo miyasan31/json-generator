@@ -3,7 +3,7 @@ import { Box, Stack } from "@mantine/core";
 import { Header } from "~/components/layout/CommonLayout/Header";
 import { Outlet } from "~/components/lib/react-router/Outlet";
 import { Suspense } from "~/components/provider/Suspense";
-import { useMediaQuery } from "~/libs/mantine/hook/useMediaQuery";
+import { useMediaQuery } from "~/libs/mantine/useMediaQuery";
 
 export const CommonLayout = () => {
   const isMediumScreen = useMediaQuery("md");

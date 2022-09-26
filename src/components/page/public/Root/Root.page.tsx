@@ -3,37 +3,34 @@ import { useCallback, useState } from "react";
 import { FormProvider } from "react-hook-form";
 
 import { JsonGenerateModel } from "~/components/feature/modal/JsonGenerateModel";
-import { InputLayout } from "~/components/layout/JsonEditor/InputLayout";
-import { OutputLayout } from "~/components/layout/JsonEditor/OutputLayout";
-import { useRHForm } from "~/components/lib/react-hook-form/useRHForm";
+import { InputLayout } from "~/components/layout/JsonEditorLayout/InputLayout";
+import { OutputLayout } from "~/components/layout/JsonEditorLayout/OutputLayout";
 import { defaultValues } from "~/constants/form/defaultValue";
-import type { JsonCreateForm } from "~/interfaces/model/form";
+import type { ICreateJson } from "~/interfaces/useCase/json";
+import { useRHForm } from "~/libs/react-hook-form/useRHForm";
 import { supabaseService } from "~/services/supabase.service";
 import { onEnterKeySubmitBlock } from "~/utils/onEnterKeySubmitBlock";
 
 const { useCreateJson } = supabaseService;
 
 export const Root = () => {
+  const { mutate } = useCreateJson();
+
   const [json, setJson] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const { mutate } = useCreateJson();
-  const methods = useRHForm<JsonCreateForm>({
+
+  const methods = useRHForm<ICreateJson>({
     mode: "onBlur",
     defaultValues,
   });
+
   const { handleSubmit: onSubmit } = methods;
 
-  const onCreateJson = useCallback((data: JsonCreateForm) => {
+  const onCreateJson = useCallback((data: ICreateJson) => {
     mutate(data, {
-      onSuccess(data) {
-        setJson(JSON.stringify(data.data, null, 2));
+      onSuccess(res) {
+        setJson(JSON.stringify(res || {}, null, 2));
         onModalToggle();
-      },
-      onError(error) {
-        console.error(error.error);
-      },
-      onSettled() {
-        console.info("settled");
       },
     });
   }, []);

@@ -1,7 +1,7 @@
-import type { FirstNestArrayItemType } from "~/interfaces/model/first-nest/object";
-import type { SecondNestArrayItemType } from "~/interfaces/model/first-nest/second-nest/object";
-import type { JsonValue } from "~/interfaces/model/form";
+import type { FirstNestArrayItemType } from "~/interfaces/model/object/first-nest";
+import type { SecondNestArrayItemType } from "~/interfaces/model/object/second-nest";
 import type { BooleanDummyType, NumberDummyType, StringDummyType } from "~/interfaces/model/primitive";
+import type { JsonValue } from "~/interfaces/useCase/json";
 
 type ArrayValue = string[] | number[] | boolean[] | ObjectValue[];
 type ObjectValueType = string | number | boolean | ArrayValue;

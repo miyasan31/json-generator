@@ -1,6 +1,6 @@
-import type { JsonCreateForm } from "~/interfaces/model/form";
+import type { ICreateJson } from "~/interfaces/useCase/json";
 
-export const defaultValues: JsonCreateForm = {
+export const defaultValues: ICreateJson = {
   length: 1,
   json: [
     {
