@@ -7,9 +7,13 @@ import { OutputLayout } from "~/components/layout/JsonEditor/OutputLayout";
 import { useRHForm } from "~/components/lib/react-hook-form/useRHForm";
 import { defaultValues } from "~/constants/form/defaultValue";
 import type { JsonCreateForm } from "~/interfaces/model/form";
+import { supabaseService } from "~/services/supabase.service";
 import { onEnterKeySubmitBlock } from "~/utils/onEnterKeySubmitBlock";
 
+const { useCreateJson } = supabaseService;
+
 export const Root = () => {
+  const { mutate } = useCreateJson();
   const methods = useRHForm<JsonCreateForm>({
     mode: "onBlur",
     defaultValues,
@@ -18,6 +22,14 @@ export const Root = () => {
 
   const onCreateJson = useCallback((data: JsonCreateForm) => {
     console.info(data);
+    mutate(data, {
+      onSuccess(data) {
+        console.info(data);
+      },
+      onError(error) {
+        console.error(error);
+      },
+    });
   }, []);
 
   return (
