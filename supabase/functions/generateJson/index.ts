@@ -3,15 +3,33 @@
 // This enables autocomplete, go to definition, etc.
 
 import { serve } from "https://deno.land/std@0.131.0/http/server.ts";
+import { corsHeaders } from "../configs/cors.ts";
 import { jsonGenerator } from "./jsonGenerator.ts";
 
 serve(async (req) => {
-  const { length, json } = await req.json();
+  // This is needed if you're planning to invoke your function from a browser.
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
 
-  const result =
-    Number(length) > 1 ? [...new Array(Number(length))].map((_, i) => jsonGenerator(json, i)) : jsonGenerator(json, 0);
+  try {
+    const { length, json } = await req.json();
 
-  return new Response(JSON.stringify(result), { headers: { "Content-Type": "application/json" } });
+    const result =
+      Number(length) > 1
+        ? [...new Array(Number(length))].map((_, i) => jsonGenerator(json, i))
+        : jsonGenerator(json, 0);
+
+    return new Response(JSON.stringify(result), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      status: 200,
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: error.message }), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      status: 400,
+    });
+  }
 });
 
 // To invoke:
