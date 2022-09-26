@@ -3,6 +3,7 @@ import {
   createEmotionCache,
   MantineProvider as MantineThemeProvider,
 } from "@mantine/core";
+import { NotificationsProvider } from "@mantine/notifications";
 import type { FC, ReactNode } from "react";
 
 import { customTheme } from "~/libs/mantine/theme.config";
@@ -23,7 +24,7 @@ export const MantineProvider: FC<Props> = ({ children }) => {
         theme={{ ...customTheme, colorScheme }}
         emotionCache={createEmotionCache({ key: "mantine", prepend: false })}
       >
-        {children}
+        <NotificationsProvider position="bottom-right">{children}</NotificationsProvider>
       </MantineThemeProvider>
     </MantineColorSchemeProvider>
   );

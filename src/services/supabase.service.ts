@@ -8,8 +8,8 @@ const { generateJson } = supabaseRepository;
 
 interface ISupabaseService {
   useCreateJson: (
-    options?: UseMutationOptions<string | null, unknown, ICreateJson, unknown>,
-  ) => UseMutationResult<string | null, unknown, ICreateJson, unknown>;
+    options?: UseMutationOptions<string, unknown, ICreateJson, unknown>,
+  ) => UseMutationResult<string, unknown, ICreateJson, unknown>;
 }
 
 export const supabaseService: ISupabaseService = {

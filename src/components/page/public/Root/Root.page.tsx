@@ -1,4 +1,5 @@
 import { Group } from "@mantine/core";
+import { showNotification, updateNotification } from "@mantine/notifications";
 import { useCallback, useState } from "react";
 import { FormProvider } from "react-hook-form";
 
@@ -6,6 +7,7 @@ import { JsonGenerateModel } from "~/components/feature/modal/JsonGenerateModel"
 import { InputLayout } from "~/components/layout/JsonEditorLayout/InputLayout";
 import { OutputLayout } from "~/components/layout/JsonEditorLayout/OutputLayout";
 import { defaultValues } from "~/constants/form/defaultValue";
+import { createJsonNotification } from "~/constants/toast/createJson";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import { useRHForm } from "~/libs/react-hook-form/useRHForm";
 import { supabaseService } from "~/services/supabase.service";
@@ -27,10 +29,16 @@ export const Root = () => {
   const { handleSubmit: onSubmit } = methods;
 
   const onCreateJson = useCallback((data: ICreateJson) => {
+    showNotification(createJsonNotification["loading"]);
+
     mutate(data, {
       onSuccess(res) {
-        setJson(JSON.stringify(res || {}, null, 2));
+        setJson(res);
         onModalToggle();
+        updateNotification(createJsonNotification["success"]);
+      },
+      onError() {
+        updateNotification(createJsonNotification["error"]);
       },
     });
   }, []);
