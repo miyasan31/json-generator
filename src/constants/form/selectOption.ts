@@ -35,7 +35,7 @@ export const stringDummyTypeOption: StringDummyTypeOption[] = [
   // { value: "address", label: "address" },
   // { value: "zipCode", label: "zip code" },
   // { value: "profile", label: "profile" },
-  // { value: "article", label: "article" },
+  { value: "article", label: "article" },
   // { value: "tweet", label: "tweet" },
   // { value: "pokemon", label: "pokemon" },
   // { value: "ipAddress", label: "ip address" },

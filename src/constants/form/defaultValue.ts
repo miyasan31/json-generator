@@ -19,7 +19,7 @@ export const defaultValues: JsonCreateForm = {
       options: { booleanDummyType: "random" },
     },
     {
-      keyName: "tweets",
+      keyName: "articles",
       valueType: "array",
       options: {
         length: 3,
@@ -36,10 +36,10 @@ export const defaultValues: JsonCreateForm = {
                 },
               },
               {
-                keyName: "body",
+                keyName: "name",
                 valueType: "string",
                 options: {
-                  stringDummyType: "tweet",
+                  stringDummyType: "article",
                   prefix: "",
                   suffix: "",
                 },

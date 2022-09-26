@@ -53,8 +53,8 @@ const StringGenerator = (
     //   return `${prefix}{prefecture}${suffix}`;
     // case "profile":
     //   return `${prefix}{profile}${suffix}`;
-    // case "article":
-    //   return `${prefix}{article}${suffix}`;
+    case "article":
+      return `${prefix}{article}${suffix}`;
     // case "tweet":
     //   return `${prefix}{tweet}${suffix}`;
     // case "pokemon":
@@ -137,6 +137,8 @@ const arrayGenerator = (options: { item: ArrayItemType; length: number }): Array
       return [...new Array(length)].map((_, index) =>
         item.options.object ? jsonGenerator(item.options.object, index) : {},
       );
+    default:
+      return [];
   }
 };
 

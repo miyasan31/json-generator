@@ -20,7 +20,7 @@ export type StringDummyType =
   // | "zipCode"
   // | "prefecture"
   // | "profile"
-  // | "article"
+  | "article"
   // | "tweet"
   // | "pokemon"
   // | "ipAddress"
