@@ -9,6 +9,7 @@ import { OutputLayout } from "~/components/layout/JsonEditorLayout/OutputLayout"
 import { defaultValues } from "~/constants/form/defaultValue";
 import { createJsonNotification } from "~/constants/toast/createJson";
 import type { ICreateJson } from "~/interfaces/useCase/json";
+import { useMediaQuery } from "~/libs/mantine/useMediaQuery";
 import { useRHForm } from "~/libs/react-hook-form/useRHForm";
 import { supabaseService } from "~/services/supabase.service";
 import { onEnterKeySubmitBlock } from "~/utils/onEnterKeySubmitBlock";
@@ -16,8 +17,8 @@ import { onEnterKeySubmitBlock } from "~/utils/onEnterKeySubmitBlock";
 const { useCreateJson } = supabaseService;
 
 export const Root = () => {
+  const isMediumScreen = useMediaQuery("md");
   const { mutate } = useCreateJson();
-
   const [json, setJson] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,7 +26,6 @@ export const Root = () => {
     mode: "onBlur",
     defaultValues,
   });
-
   const { handleSubmit: onSubmit } = methods;
 
   const onCreateJson = useCallback((data: ICreateJson) => {
@@ -54,7 +54,7 @@ export const Root = () => {
         <form onSubmit={onSubmit(onCreateJson)} onKeyDown={onEnterKeySubmitBlock}>
           <Group spacing="sm" align="start" sx={{ height: "calc(100vh - 100px)" }}>
             <InputLayout />
-            <OutputLayout />
+            {isMediumScreen ? <OutputLayout /> : null}
           </Group>
         </form>
       </FormProvider>
