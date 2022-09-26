@@ -17,46 +17,60 @@ const StringGenerator = (
       return `${prefix}{${String(index)}}${suffix}`;
     case "fullName":
       return `${prefix}{full name}${suffix}`;
-    case "firstName":
-      return `${prefix}{first name}${suffix}`;
-    case "lastName":
-      return `${prefix}{last name}${suffix}`;
+    // case "firstName":
+    //   return `${prefix}{first name}${suffix}`;
+    // case "lastName":
+    //   return `${prefix}{last name}${suffix}`;
     case "email":
       return `${prefix}{email}${suffix}`;
-    case "date":
-      return `${prefix}{date}${suffix}`;
-    case "time":
-      return `${prefix}{time}${suffix}`;
-    case "dateTime":
-      return `${prefix}{date time}${suffix}`;
     case "password":
       return `${prefix}{password}${suffix}`;
-    case "image":
-      return `${prefix}{image}${suffix}`;
-    case "cuid":
-      return `${prefix}{cuid}${suffix}`;
-    case "uuid":
-      return `${prefix}{uuid}${suffix}`;
-    case "local":
-      return `${prefix}{local}${suffix}`;
-    case "country":
-      return `${prefix}{country}${suffix}`;
-    case "prefecture":
-      return `${prefix}{prefecture}${suffix}`;
-    case "address":
-      return `${prefix}{address}${suffix}`;
-    case "zipCode":
-      return `${prefix}{zip code}${suffix}`;
-    case "profile":
-      return `${prefix}{profile}${suffix}`;
-    case "article":
-      return `${prefix}{article}${suffix}`;
-    case "tweet":
-      return `${prefix}{tweet}${suffix}`;
-    case "pokemon":
-      return `${prefix}{pokemon}${suffix}`;
-    case "animal":
-      return `${prefix}{animal}${suffix}`;
+    case "dateTime":
+      return `${prefix}{date time}${suffix}`;
+    // case "date":
+    //   return `${prefix}{date}${suffix}`;
+    // case "time":
+    //   return `${prefix}{time}${suffix}`;
+    // case "image":
+    //   return `${prefix}{image}${suffix}`;
+    // case "cuid":
+    //   return `${prefix}{cuid}${suffix}`;
+    // case "uuid":
+    //   return `${prefix}{uuid}${suffix}`;
+    // case "ulid":
+    //   return `${prefix}{ulid}${suffix}`;
+    // case "local":
+    //   return `${prefix}{local}${suffix}`;
+    // case "country":
+    //   return `${prefix}{country}${suffix}`;
+    // case "city":
+    //   return `${prefix}{city}${suffix}`;
+    // case "address":
+    //   return `${prefix}{address}${suffix}`;
+    // case "zipCode":
+    //   return `${prefix}{zip code}${suffix}`;
+    // case "prefecture":
+    //   return `${prefix}{prefecture}${suffix}`;
+    // case "profile":
+    //   return `${prefix}{profile}${suffix}`;
+    // case "article":
+    //   return `${prefix}{article}${suffix}`;
+    // case "tweet":
+    //   return `${prefix}{tweet}${suffix}`;
+    // case "pokemon":
+    //   return `${prefix}{pokemon}${suffix}`;
+    // case "ipAddress":
+    //   return `${prefix}{ip address}${suffix}`;
+    // case "domain":
+    //   return `${prefix}{domain}${suffix}`;
+    // case "phone":
+    //   return `${prefix}{phone}${suffix}`;
+    // case "role":
+    //   return `${prefix}{role}${suffix}`;
+    // case "tech":
+    //   return `${prefix}{tech}${suffix}`;
+    case "any":
+      return `${prefix}{any}${suffix}`;
     default:
       return `${prefix}${suffix}`;
   }
@@ -71,13 +85,23 @@ const NumberGenerator = (options: { numberDummyType: NumberDummyType }, index: n
       return Math.floor(Math.random() * 100);
     case "age":
       return Math.floor(Math.random() * 100);
-    case "height":
-      return Math.floor(Math.random() * 100);
-    case "weight":
-      return Math.floor(Math.random() * 100);
-    case "price":
-      return Math.floor(Math.random() * 100);
-    case "zipCode":
+    // case "height":
+    //   return Math.floor(Math.random() * 100);
+    // case "weight":
+    //   return Math.floor(Math.random() * 100);
+    // case "price":
+    //   return Math.floor(Math.random() * 100);
+    // case "zipCode":
+    //   return Math.floor(Math.random() * 100);
+    // case "amount":
+    //   return Math.floor(Math.random() * 100);
+    // case "volume":
+    //   return Math.floor(Math.random() * 100);
+    // case "priority":
+    //   return Math.floor(Math.random() * 100);
+    // case "permission":
+    //   return Math.floor(Math.random() * 100);
+    case "any":
       return Math.floor(Math.random() * 100);
     default:
       return 0;

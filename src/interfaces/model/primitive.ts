@@ -2,26 +2,33 @@
 export type StringDummyType =
   | "autoIncrement"
   | "fullName"
-  | "firstName"
-  | "lastName"
+  // | "firstName"
+  // | "lastName"
   | "email"
   | "password"
   | "dateTime"
-  | "date"
-  | "time"
-  | "image"
-  | "uuid"
-  | "cuid"
-  | "local"
-  | "country"
-  | "address"
-  | "zipCode"
-  | "prefecture"
-  | "profile"
-  | "article"
-  | "tweet"
-  | "pokemon"
-  | "animal";
+  // | "date"
+  // | "time"
+  // | "image"
+  // | "uuid"
+  // | "cuid"
+  // | "ulid"
+  // | "local"
+  // | "country"
+  // | "city"
+  // | "address"
+  // | "zipCode"
+  // | "prefecture"
+  // | "profile"
+  // | "article"
+  // | "tweet"
+  // | "pokemon"
+  // | "ipAddress"
+  // | "domain"
+  // | "phone"
+  // | "role"
+  // | "tech"
+  | "any";
 
 export interface StringValue {
   keyName: string;
@@ -39,7 +46,19 @@ export interface StringDummyTypeOption {
 }
 
 /** number */
-export type NumberDummyType = "autoIncrement" | "age" | "height" | "weight" | "price" | "zipCode" | "random";
+export type NumberDummyType =
+  | "autoIncrement"
+  | "random"
+  | "age"
+  // | "height"
+  // | "weight"
+  // | "price"
+  // | "zipCode"
+  // | "amount"
+  // | "volume"
+  // | "priority"
+  // | "permission"
+  | "any";
 
 export interface NumberDummyTypeOption {
   value: NumberDummyType;
