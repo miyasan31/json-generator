@@ -1,5 +1,7 @@
 {
   "imports": {
-    "fmt/": "https://deno.land/std@0.83.0/fmt/"
+    "/": "./supabase/functions/",
+    "fmt/": "https://deno.land/std@0.83.0/fmt/",
+    "faker-js/faker/": "https://cdn.skypack.dev/@faker-js/faker"
   }
 }
