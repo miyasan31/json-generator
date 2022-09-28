@@ -1,6 +1,8 @@
 import { Modal as MantineModal, useMantineTheme } from "@mantine/core";
 import type { FC, ReactNode } from "react";
 
+import { useMediaQuery } from "~/libs/mantine/useMediaQuery";
+
 type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
@@ -20,6 +22,7 @@ export const Modal: FC<ModalProps> = ({
   onClose,
   isOpen,
 }) => {
+  const isMediumScreen = useMediaQuery("md");
   const { colorScheme, colors } = useMantineTheme();
 
   return (
@@ -34,6 +37,7 @@ export const Modal: FC<ModalProps> = ({
       onClose={onClose}
       closeOnClickOutside={false}
       overflow="inside"
+      fullScreen={!isMediumScreen}
       styles={{
         title: {
           fontSize: "1.2rem",
