@@ -94,7 +94,7 @@ const NumberGenerator = (options: { numberDummyType: NumberDummyType }, index: n
     case "height":
       return Math.floor(Math.random() * 100) + 100;
     case "weight":
-      return Math.floor(Math.random() * 100) + 100;
+      return Math.floor(Math.random() * 100) + 30;
     case "price":
       return Number(faker.commerce.price(100, 2000, 0));
     // case "amount":
