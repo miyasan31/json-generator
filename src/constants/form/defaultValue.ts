@@ -11,7 +11,7 @@ export const defaultValues: ICreateJson = {
     {
       keyName: "name",
       valueType: "string",
-      options: { stringDummyType: "autoIncrement", prefix: "", suffix: "" },
+      options: { stringDummyType: "fullName", prefix: "", suffix: "" },
     },
     {
       keyName: "isAdmin",
@@ -36,12 +36,10 @@ export const defaultValues: ICreateJson = {
                 },
               },
               {
-                keyName: "name",
-                valueType: "string",
+                keyName: "like",
+                valueType: "number",
                 options: {
-                  stringDummyType: "article",
-                  prefix: "",
-                  suffix: "",
+                  numberDummyType: "random",
                 },
               },
               {
