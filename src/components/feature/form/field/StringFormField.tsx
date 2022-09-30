@@ -3,6 +3,7 @@ import type { FC } from "react";
 import type { FieldPath } from "react-hook-form";
 import { Controller, useFormContext } from "react-hook-form";
 
+import { dummyTypeLabel, prefixLabel, suffixLabel } from "~/constants/form/label";
 import { stringDummyTypeOption } from "~/constants/form/selectOption";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
@@ -24,11 +25,21 @@ export const StringFormField: FC<Props> = ({ name }) => {
         control={control}
         name={name.stringDummyType}
         render={({ field: { onChange, value } }) => {
-          return <Select size="xs" label="dummy type" value={value} onChange={onChange} data={stringDummyTypeOption} />;
+          return (
+            <Select
+              size="xs"
+              searchable
+              label={dummyTypeLabel}
+              value={value}
+              onChange={onChange}
+              data={stringDummyTypeOption}
+              filter={(value, item) => item.value.toLowerCase().includes(value.toLowerCase().trim())}
+            />
+          );
         }}
       />
-      <TextInput size="xs" label="prefix" {...register(name.prefix)} />
-      <TextInput size="xs" label="suffix" {...register(name.suffix)} />
+      <TextInput size="xs" label={prefixLabel} {...register(name.prefix)} />
+      <TextInput size="xs" label={suffixLabel} {...register(name.suffix)} />
     </Group>
   );
 };

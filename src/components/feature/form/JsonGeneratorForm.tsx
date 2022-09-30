@@ -14,6 +14,7 @@ import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatch
 import { OptionVisibleWatcher } from "~/components/feature/form/watcher/OptionVisibleWatcher";
 import { Divider } from "~/components/shared/Divider";
 import { appendValue } from "~/constants/form/appendValue";
+import { addKeyLabel, deleteTooltipLabel, keyNameLabel, valueTypeLabel } from "~/constants/form/label";
 import { objectValueTypeOption } from "~/constants/form/selectOption";
 import type { ObjectValueType } from "~/interfaces/model/object";
 import type { ICreateJson } from "~/interfaces/useCase/json";
@@ -67,13 +68,8 @@ export const JsonGeneratorForm: FC<Props> = ({ control, register, border = true 
                     <TextInput
                       required
                       size="xs"
-                      label="key"
-                      {...register(`json.${index}.keyName`, {
-                        required: {
-                          value: true,
-                          message: "key is required",
-                        },
-                      })}
+                      label={keyNameLabel}
+                      {...register(`json.${index}.keyName`)}
                       sx={{
                         flex: 2,
                       }}
@@ -94,7 +90,8 @@ export const JsonGeneratorForm: FC<Props> = ({ control, register, border = true 
                         return (
                           <Select
                             size="xs"
-                            label="value"
+                            searchable
+                            label={valueTypeLabel}
                             value={value.valueType}
                             onChange={onChangeValue}
                             data={objectValueTypeOption}
@@ -106,13 +103,11 @@ export const JsonGeneratorForm: FC<Props> = ({ control, register, border = true 
                       }}
                     />
 
-                    <Tooltip label="option" position="top-start">
-                      <ActionIcon mb={1} component="button" onClick={onToggle}>
-                        {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
-                      </ActionIcon>
-                    </Tooltip>
+                    <ActionIcon mb={1} component="button" onClick={onToggle}>
+                      {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
+                    </ActionIcon>
 
-                    <Tooltip label="delete" position="top-start">
+                    <Tooltip label={deleteTooltipLabel} position="top-start">
                       <ActionIcon mb={1} component="button" onClick={() => onRemove(index)}>
                         <IconX size={16} color="red" />
                       </ActionIcon>
@@ -181,7 +176,7 @@ export const JsonGeneratorForm: FC<Props> = ({ control, register, border = true 
       })}
 
       <Button size="xs" mt="xs" type="button" color="red" variant="outline" onClick={onAppend}>
-        Add key
+        {addKeyLabel}
       </Button>
     </Stack>
   );

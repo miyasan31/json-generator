@@ -11,7 +11,7 @@ export const defaultValues: ICreateJson = {
     {
       keyName: "name",
       valueType: "string",
-      options: { stringDummyType: "fullName", prefix: "", suffix: "" },
+      options: { stringDummyType: "dataUli", prefix: "", suffix: "" },
     },
     {
       keyName: "isAdmin",

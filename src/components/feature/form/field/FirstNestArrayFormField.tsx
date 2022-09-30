@@ -7,6 +7,7 @@ import { NumberFormField } from "~/components/feature/form/field/NumberFormField
 import { StringFormField } from "~/components/feature/form/field/StringFormField";
 import { ArrayTypeWatcher } from "~/components/feature/form/watcher/ArrayTypeWatcher";
 import { appendValue } from "~/constants/form/appendValue";
+import { generateLengthLabel, valueTypeLabel } from "~/constants/form/label";
 import { arrayValueTypeOption } from "~/constants/form/selectOption";
 import type { ObjectValueType } from "~/interfaces/model/object";
 import type { ICreateJson } from "~/interfaces/useCase/json";
@@ -43,7 +44,7 @@ export const FirstNestArrayFormField: FC<Props> = ({ name }) => {
                 min={1}
                 max={100}
                 size="xs"
-                label="length"
+                label={generateLengthLabel}
                 value={value}
                 onChange={onChange}
               />
@@ -66,7 +67,8 @@ export const FirstNestArrayFormField: FC<Props> = ({ name }) => {
             return (
               <Select
                 size="xs"
-                label="value"
+                searchable
+                label={valueTypeLabel}
                 value={value.valueType}
                 onChange={onChangeValue}
                 data={arrayValueTypeOption.slice(0, 3)}

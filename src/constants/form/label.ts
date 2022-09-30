@@ -1,0 +1,10 @@
+export const keyNameLabel = "キー名";
+export const valueTypeLabel = "型";
+export const dummyTypeLabel = "ダミーデータ";
+export const generateLengthLabel = "生成数";
+export const deleteTooltipLabel = "削除する";
+export const addKeyLabel = "キーを追加する";
+export const prefixLabel = "接頭辞";
+export const suffixLabel = "接尾辞";
+export const saveButtonLabel = "保存する";
+export const generateButtonLabel = "生成する";

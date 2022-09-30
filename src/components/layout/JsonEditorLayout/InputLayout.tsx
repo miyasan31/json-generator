@@ -2,6 +2,7 @@ import { Button, Group, ScrollArea, Select, Stack } from "@mantine/core";
 import { Controller, useFormContext } from "react-hook-form";
 
 import { JsonGeneratorForm } from "~/components/feature/form/JsonGeneratorForm";
+import { generateButtonLabel, generateLengthLabel } from "~/constants/form/label";
 import { jsonLengthOption } from "~/constants/form/selectOption";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 
@@ -17,21 +18,21 @@ export const InputLayout = () => {
           render={({ field: { onChange, value } }) => {
             return (
               <Select
-                label="Length"
+                label={generateLengthLabel}
                 value={String(value)}
                 onChange={onChange}
                 data={jsonLengthOption}
                 styles={{
                   root: { display: "flex", alignItems: "center", width: "fit-content", gap: "0.5rem" },
                   label: { flex: "auto", minWidth: "fit-content" },
-                  input: { flex: "auto", width: "80px", textAlign: "right" },
+                  input: { flex: "auto", width: "100px" },
                 }}
               />
             );
           }}
         />
 
-        <Button type="submit">Generate</Button>
+        <Button type="submit">{generateButtonLabel}</Button>
       </Group>
 
       <ScrollArea

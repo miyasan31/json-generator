@@ -3,6 +3,7 @@ import type { FC } from "react";
 import type { FieldPath } from "react-hook-form";
 import { Controller, useFormContext } from "react-hook-form";
 
+import { dummyTypeLabel } from "~/constants/form/label";
 import { numberDummyTypeOption } from "~/constants/form/selectOption";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
@@ -22,7 +23,17 @@ export const NumberFormField: FC<Props> = ({ name }) => {
         control={control}
         name={name.numberDummy}
         render={({ field: { onChange, value } }) => {
-          return <Select size="xs" label="dummy type" value={value} onChange={onChange} data={numberDummyTypeOption} />;
+          return (
+            <Select
+              size="xs"
+              searchable
+              label={dummyTypeLabel}
+              value={value}
+              onChange={onChange}
+              data={numberDummyTypeOption}
+              filter={(value, item) => item.value.toLowerCase().includes(value.toLowerCase().trim())}
+            />
+          );
         }}
       />
     </Group>

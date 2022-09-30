@@ -11,7 +11,7 @@ type JsonGenerateModelProps = {
 
 export const JsonGenerateModel: FC<JsonGenerateModelProps> = ({ json, isOpen, onClose }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="lg" title="JSON Generate">
+    <Modal isOpen={isOpen} onClose={onClose} size="lg" title="JSONを生成しました 🎉">
       <Prism
         language="json"
         withLineNumbers

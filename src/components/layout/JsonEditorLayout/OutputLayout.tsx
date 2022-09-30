@@ -1,9 +1,9 @@
-import { Button, CopyButton, Group, Stack } from "@mantine/core";
+import { Button, Group, Stack } from "@mantine/core";
 import { Prism } from "@mantine/prism";
-import { IconCheck } from "@tabler/icons";
 import { useFormContext } from "react-hook-form";
 
 import { JsonGeneratorWatcher } from "~/components/feature/form/watcher/JsonGeneratorWatcher";
+import { saveButtonLabel } from "~/constants/form/label";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 
 export const OutputLayout = () => {
@@ -12,16 +12,9 @@ export const OutputLayout = () => {
   return (
     <JsonGeneratorWatcher control={control}>
       {(json: string) => (
-        <Stack spacing="sm" sx={{ flex: 2, height: "100%" }}>
+        <Stack spacing="sm" sx={{ flex: 2, height: "100%", width: "100%" }}>
           <Group spacing="sm" position="right">
-            <CopyButton value={json}>
-              {({ copied, copy: onCopy }) => (
-                <Button leftIcon={copied && <IconCheck size={16} />} onClick={onCopy}>
-                  {copied ? "Copied JSON" : "Copy JSON"}
-                </Button>
-              )}
-            </CopyButton>
-            <Button type="button">Save</Button>
+            <Button type="button">{saveButtonLabel}</Button>
           </Group>
 
           <Prism
@@ -30,6 +23,7 @@ export const OutputLayout = () => {
             withLineNumbers
             styles={(theme) => ({
               root: {
+                width: "100%",
                 height: "100%",
                 borderRadius: theme.radius.sm,
                 backgroundColor: theme.colorScheme === "light" ? "white" : theme.colors.dark[6],
@@ -46,7 +40,11 @@ export const OutputLayout = () => {
               },
               line: {
                 height: "100%",
+                width: "100%",
                 backgroundColor: theme.colorScheme === "light" ? "white" : theme.colors.dark[6],
+              },
+              lineContent: {
+                width: "300px",
               },
             })}
           >
