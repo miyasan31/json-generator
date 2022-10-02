@@ -89,7 +89,7 @@ export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({
                           onChange({
                             keyName: value.keyName,
                             valueType: changeValue,
-                            options: appendValue[changeValue],
+                            ...appendValue[changeValue],
                           });
                         };
                         return (

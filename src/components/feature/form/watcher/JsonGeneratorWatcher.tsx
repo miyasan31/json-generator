@@ -1,4 +1,6 @@
 import type { FC, ReactNode } from "react";
+import { useMemo } from "react";
+import { memo } from "react";
 import type { Control } from "react-hook-form";
 import { useWatch } from "react-hook-form";
 
@@ -10,9 +12,11 @@ type JsonGeneratorWatcherProps = {
   children: (json: string) => ReactNode;
 };
 
-export const JsonGeneratorWatcher: FC<JsonGeneratorWatcherProps> = ({ control, children }) => {
+export const JsonGeneratorWatcher: FC<JsonGeneratorWatcherProps> = memo(({ control, children }) => {
   const value = useWatch({ name: "json", control });
-  const object = jsonGenerator(value, 0);
+  const object = useMemo(() => {
+    return jsonGenerator(value, 0);
+  }, [JSON.stringify(value)]);
   const json = JSON.stringify(object, null, 2);
   return <>{children(json)}</>;
-};
+});

@@ -28,7 +28,7 @@ export const defaultValues: ICreateJson = {
       valueType: "array",
       length: 3,
       item: {
-        keyName: "id",
+        keyName: null,
         valueType: "object",
         object: [
           {

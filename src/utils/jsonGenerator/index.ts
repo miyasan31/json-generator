@@ -1,9 +1,9 @@
 import type { JsonValue } from "~/interfaces/useCase/json";
-import type { ArrayValue } from "~/utils/arrayGenerator";
-import { arrayGenerator } from "~/utils/arrayGenerator";
-import { booleanGenerator } from "~/utils/booleanGenerator";
-import { numberGenerator } from "~/utils/numberGenerator";
-import { stringGenerator } from "~/utils/stringGenerator";
+import type { ArrayValue } from "~/utils/jsonGenerator/arrayGenerator";
+import { arrayGenerator } from "~/utils/jsonGenerator/arrayGenerator";
+import { booleanGenerator } from "~/utils/jsonGenerator/booleanGenerator";
+import { numberGenerator } from "~/utils/jsonGenerator/numberGenerator";
+import { stringGenerator } from "~/utils/jsonGenerator/stringGenerator";
 
 type ObjectValueType = string | number | boolean | ArrayValue;
 export type ObjectValue = Record<string, ObjectValueType>;

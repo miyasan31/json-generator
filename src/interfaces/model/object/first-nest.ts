@@ -9,7 +9,7 @@ interface FirstNestArrayValue {
 }
 
 interface FirstNestObjectValue {
-  keyName: string;
+  keyName: null;
   valueType: "object";
   object: SecondNestObjectPropertyType[];
 }

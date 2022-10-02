@@ -72,7 +72,7 @@ export const FirstNestArrayOptionFormField: FC<FirstNestArrayOptionFormFieldProp
                   onChange({
                     keyName: value.keyName,
                     valueType: changeValue,
-                    options: appendValue[changeValue],
+                    ...appendValue[changeValue],
                   });
                 };
                 return (

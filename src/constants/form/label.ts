@@ -11,3 +11,6 @@ export const prefixLabel = "接頭辞";
 export const suffixLabel = "接尾辞";
 export const saveButtonLabel = "保存する";
 export const generateButtonLabel = "生成する";
+export const importButtonLabel = "JSONを入力";
+export const importExecutionButtonLabel = "確定";
+export const cancelButtonLabel = "キャンセル";

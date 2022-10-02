@@ -86,7 +86,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                           onChange({
                             keyName: value.keyName,
                             valueType: changeValue,
-                            options: appendValue[changeValue],
+                            ...appendValue[changeValue],
                           });
                         };
                         return (

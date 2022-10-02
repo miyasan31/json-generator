@@ -1,10 +1,10 @@
 import type { FirstNestArrayItemType } from "~/interfaces/model/object/first-nest";
 import type { SecondNestArrayItemType } from "~/interfaces/model/object/second-nest";
-import { booleanGenerator } from "~/utils/booleanGenerator";
 import type { ObjectValue } from "~/utils/jsonGenerator";
 import { jsonGenerator } from "~/utils/jsonGenerator";
-import { numberGenerator } from "~/utils/numberGenerator";
-import { stringGenerator } from "~/utils/stringGenerator";
+import { booleanGenerator } from "~/utils/jsonGenerator/booleanGenerator";
+import { numberGenerator } from "~/utils/jsonGenerator/numberGenerator";
+import { stringGenerator } from "~/utils/jsonGenerator/stringGenerator";
 
 type ArrayItemType = FirstNestArrayItemType | SecondNestArrayItemType;
 export type ArrayValue = string[] | number[] | boolean[] | ObjectValue[];

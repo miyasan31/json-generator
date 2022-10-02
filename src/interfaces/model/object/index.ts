@@ -18,7 +18,7 @@ export interface ArrayValueTypeOption {
 
 /** object */
 export interface ObjectValue {
-  keyName: string;
+  keyName: null;
   valueType: "object";
   object: FirstNestObjectPropertyType[];
 }
