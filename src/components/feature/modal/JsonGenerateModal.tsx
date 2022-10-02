@@ -3,13 +3,13 @@ import type { FC } from "react";
 
 import { Modal } from "~/components/shared/Modal";
 
-type JsonGenerateModelProps = {
+type JsonGenerateModalProps = {
   json: string;
   isOpen: boolean;
   onClose: () => void;
 };
 
-export const JsonGenerateModel: FC<JsonGenerateModelProps> = ({ json, isOpen, onClose }) => {
+export const JsonGenerateModal: FC<JsonGenerateModalProps> = ({ json, isOpen, onClose }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="lg" title="JSONを生成しました 🎉">
       <Prism

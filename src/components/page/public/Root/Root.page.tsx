@@ -3,7 +3,7 @@ import { showNotification, updateNotification } from "@mantine/notifications";
 import { useCallback, useState } from "react";
 import { FormProvider } from "react-hook-form";
 
-import { JsonGenerateModel } from "~/components/feature/modal/JsonGenerateModel";
+import { JsonGenerateModal } from "~/components/feature/modal/JsonGenerateModal";
 import { InputLayout } from "~/components/layout/JsonEditorLayout/InputLayout";
 import { OutputLayout } from "~/components/layout/JsonEditorLayout/OutputLayout";
 import { defaultValues } from "~/constants/form/defaultValue";
@@ -29,19 +29,18 @@ export const Root = () => {
   const { handleSubmit: onSubmit } = methods;
 
   const onCreateJson = useCallback((data: ICreateJson) => {
-    console.info(data);
-    // showNotification(createJsonNotification["loading"]);
+    showNotification(createJsonNotification["loading"]);
 
-    // mutate(data, {
-    //   onSuccess(res) {
-    //     setJson(res);
-    //     onModalToggle();
-    //     updateNotification(createJsonNotification["success"]);
-    //   },
-    //   onError() {
-    //     updateNotification(createJsonNotification["error"]);
-    //   },
-    // });
+    mutate(data, {
+      onSuccess(res) {
+        setJson(res);
+        onModalToggle();
+        updateNotification(createJsonNotification["success"]);
+      },
+      onError() {
+        updateNotification(createJsonNotification["error"]);
+      },
+    });
   }, []);
 
   const onModalToggle = useCallback(() => {
@@ -50,7 +49,8 @@ export const Root = () => {
 
   return (
     <>
-      <JsonGenerateModel json={json} isOpen={isOpen} onClose={onModalToggle} />
+      <JsonGenerateModal json={json} isOpen={isOpen} onClose={onModalToggle} />
+
       <FormProvider {...methods}>
         <form onSubmit={onSubmit(onCreateJson)} onKeyDown={onEnterKeySubmitBlock}>
           <Group spacing="sm" align="start" sx={{ height: "calc(100vh - 100px)" }}>
