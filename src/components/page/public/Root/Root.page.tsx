@@ -16,7 +16,7 @@ import {
   // saveButtonLabel
 } from "~/constants/form/label";
 import { jsonLengthOption } from "~/constants/form/selectOption";
-import { createJsonNotification } from "~/constants/toast/createJson";
+import { createJsonNotification } from "~/constants/notification/createJson";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import { useMediaQuery } from "~/libs/mantine/useMediaQuery";
 import { useRHForm } from "~/libs/react-hook-form/useRHForm";

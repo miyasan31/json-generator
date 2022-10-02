@@ -11,7 +11,7 @@ export const createJsonNotification: Record<
   loading: {
     id: toastId,
     color: "yellow",
-    title: "In the process of being generated",
+    title: "JSONを生成しています...",
     message: "",
     loading: true,
     autoClose: false,
@@ -20,7 +20,7 @@ export const createJsonNotification: Record<
   success: {
     id: toastId,
     color: "green",
-    title: "Generated Successful",
+    title: "JSONを生成しました",
     message: "",
     loading: false,
     autoClose: 2000,
@@ -28,8 +28,8 @@ export const createJsonNotification: Record<
   error: {
     id: toastId,
     color: "red",
-    title: "Failed to generated",
-    message: "Please give it some time and try again.",
+    title: "JSONの生成に失敗しました",
+    message: "時間を空けて再試行をお願いします",
     loading: false,
     autoClose: 2000,
   },
