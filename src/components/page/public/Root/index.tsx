@@ -8,7 +8,7 @@ export const RootPage = () => {
   return (
     <ErrorBoundary>
       <Suspense>
-        <Head title="トップページ" description="トップページ" />
+        <Head title="JSON Generator" description="JSON Generator" />
         <Root />
       </Suspense>
     </ErrorBoundary>
