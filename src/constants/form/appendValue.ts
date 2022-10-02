@@ -1,11 +1,14 @@
 export const appendValue = {
   string: {
     stringDummyType: "fullName",
-    prefix: "",
-    suffix: "",
+    stringOptions: {
+      prefix: "",
+      suffix: "",
+    },
   },
   number: {
     numberDummyType: "autoIncrement",
+    numberOptions: null,
   },
   boolean: {
     booleanDummyType: "random",
@@ -15,8 +18,8 @@ export const appendValue = {
     item: {
       keyName: "",
       valueType: "string",
-      options: {
-        stringDummyType: "fullName",
+      stringDummyType: "fullName",
+      stringOptions: {
         prefix: "",
         suffix: "",
       },
@@ -27,8 +30,8 @@ export const appendValue = {
       {
         keyName: "",
         valueType: "string",
-        options: {
-          stringDummyType: "fullName",
+        stringDummyType: "fullName",
+        stringOptions: {
           prefix: "",
           suffix: "",
         },

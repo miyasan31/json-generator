@@ -11,7 +11,6 @@ type JsonGeneratorWatcherProps = {
 };
 
 export const JsonGeneratorWatcher: FC<JsonGeneratorWatcherProps> = ({ control, children }) => {
-  // const length = useWatch({ name: "length", control });
   const value = useWatch({ name: "json", control });
   const object = jsonGenerator(value, 0);
   const json = JSON.stringify(object, null, 2);

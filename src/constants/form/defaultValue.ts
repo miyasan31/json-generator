@@ -6,54 +6,53 @@ export const defaultValues: ICreateJson = {
     {
       keyName: "id",
       valueType: "number",
-      options: { numberDummyType: "autoIncrement" },
+      numberDummyType: "autoIncrement",
+      numberOptions: null,
     },
     {
       keyName: "name",
       valueType: "string",
-      options: { stringDummyType: "dataUli", prefix: "", suffix: "" },
+      stringDummyType: "autoIncrement",
+      stringOptions: {
+        prefix: "",
+        suffix: "",
+      },
     },
     {
       keyName: "isAdmin",
       valueType: "boolean",
-      options: { booleanDummyType: "random" },
+      booleanDummyType: "random",
     },
     {
       keyName: "articles",
       valueType: "array",
-      options: {
-        length: 3,
-        item: {
-          keyName: "id",
-          valueType: "object",
-          options: {
-            object: [
-              {
-                keyName: "id",
-                valueType: "number",
-                options: {
-                  numberDummyType: "autoIncrement",
-                },
-              },
-              {
-                keyName: "like",
-                valueType: "number",
-                options: {
-                  numberDummyType: "random",
-                },
-              },
-              {
-                keyName: "createdAt",
-                valueType: "string",
-                options: {
-                  stringDummyType: "dateTime",
-                  prefix: "",
-                  suffix: "",
-                },
-              },
-            ],
+      length: 3,
+      item: {
+        keyName: "id",
+        valueType: "object",
+        object: [
+          {
+            keyName: "id",
+            valueType: "number",
+            numberDummyType: "autoIncrement",
+            numberOptions: null,
           },
-        },
+          {
+            keyName: "like",
+            valueType: "number",
+            numberDummyType: "random",
+            numberOptions: {
+              min: 1,
+              max: 10,
+            },
+          },
+          {
+            keyName: "createdAt",
+            valueType: "string",
+            stringDummyType: "dateTime",
+            stringOptions: null,
+          },
+        ],
       },
     },
   ],

@@ -29,18 +29,19 @@ export const Root = () => {
   const { handleSubmit: onSubmit } = methods;
 
   const onCreateJson = useCallback((data: ICreateJson) => {
-    showNotification(createJsonNotification["loading"]);
+    console.info(data);
+    // showNotification(createJsonNotification["loading"]);
 
-    mutate(data, {
-      onSuccess(res) {
-        setJson(res);
-        onModalToggle();
-        updateNotification(createJsonNotification["success"]);
-      },
-      onError() {
-        updateNotification(createJsonNotification["error"]);
-      },
-    });
+    // mutate(data, {
+    //   onSuccess(res) {
+    //     setJson(res);
+    //     onModalToggle();
+    //     updateNotification(createJsonNotification["success"]);
+    //   },
+    //   onError() {
+    //     updateNotification(createJsonNotification["error"]);
+    //   },
+    // });
   }, []);
 
   const onModalToggle = useCallback(() => {

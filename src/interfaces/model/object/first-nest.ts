@@ -4,18 +4,14 @@ import type { BooleanValue, NumberValue, StringValue } from "~/interfaces/model/
 interface FirstNestArrayValue {
   keyName: string;
   valueType: "array";
-  options: {
-    length: number;
-    item: SecondNestArrayItemType;
-  };
+  length: number;
+  item: SecondNestArrayItemType;
 }
 
 interface FirstNestObjectValue {
   keyName: string;
   valueType: "object";
-  options: {
-    object: SecondNestObjectPropertyType[];
-  };
+  object: SecondNestObjectPropertyType[];
 }
 
 /** array */

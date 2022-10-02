@@ -1,4 +1,6 @@
-/** string */
+type StrictExtract<T, V extends T> = Extract<T, V>;
+
+/** -------- string -------- */
 export type StringDummyType =
   | "autoIncrement"
   | "fullName"
@@ -31,22 +33,40 @@ export type StringDummyType =
   // | "tech"
   | "any";
 
-export interface StringValue {
-  keyName: string;
-  valueType: "string";
-  options: {
+export type NoStringOption = {
+  stringDummyType: StrictExtract<
+    StringDummyType,
+    "password" | "dateTime" | "image" | "dataUli" | "uuid" | "country" | "zipCode" | "ipAddress" | "domain" | "phone"
+  >;
+  stringOptions: null;
+};
+
+export type AnyStringOption = {
+  stringDummyType: StrictExtract<StringDummyType, "any">;
+  stringOptions: {
+    stringAnyValue: string;
+  };
+};
+
+export type CustomStringOption = {
+  stringDummyType: StrictExtract<StringDummyType, "autoIncrement" | "fullName" | "firstName" | "lastName" | "email">;
+  stringOptions: {
     prefix: string;
     suffix: string;
-    stringDummyType: StringDummyType;
   };
-}
+};
 
-export interface StringDummyTypeOption {
+export type StringValue = (NoStringOption | AnyStringOption | CustomStringOption) & {
+  keyName: string;
+  valueType: "string";
+};
+
+export type StringDummyTypeOption = {
   value: StringDummyType;
   label: string;
-}
+};
 
-/** number */
+/** -------- number -------- */
 export type NumberDummyType =
   | "autoIncrement"
   | "random"
@@ -60,31 +80,46 @@ export type NumberDummyType =
   // | "permission"
   | "any";
 
-export interface NumberDummyTypeOption {
+export type NumberDummyTypeOption = {
   value: NumberDummyType;
   label: string;
-}
+};
 
-export interface NumberValue {
+export type NoNumberOption = {
+  numberDummyType: StrictExtract<NumberDummyType, "autoIncrement" | "age" | "height" | "weight">;
+  numberOptions: null;
+};
+
+export type AnyNumberOption = {
+  numberDummyType: StrictExtract<NumberDummyType, "any">;
+  numberOptions: {
+    numberAnyValue: number;
+  };
+};
+
+export type RangeNumberOption = {
+  numberDummyType: StrictExtract<NumberDummyType, "random" | "price">;
+  numberOptions: {
+    min: number;
+    max: number;
+  };
+};
+
+export type NumberValue = (NoNumberOption | AnyNumberOption | RangeNumberOption) & {
   keyName: string;
   valueType: "number";
-  options: {
-    numberDummyType: NumberDummyType;
-  };
-}
+};
 
-/** boolean */
+/** -------- boolean -------- */
 export type BooleanDummyType = "true" | "false" | "random";
 
-export interface BooleanValue {
+export type BooleanValue = {
   keyName: string;
   valueType: "boolean";
-  options: {
-    booleanDummyType: BooleanDummyType;
-  };
-}
+  booleanDummyType: BooleanDummyType;
+};
 
-export interface BooleanDummyTypeOption {
+export type BooleanDummyTypeOption = {
   value: BooleanDummyType;
   label: string;
-}
+};
