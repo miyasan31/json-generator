@@ -8,55 +8,78 @@ type ArrayValue = string[] | number[] | boolean[] | ObjectValue[];
 type ObjectValueType = string | number | boolean | ArrayValue;
 type ObjectValue = Record<string, ObjectValueType>;
 
-const StringGenerator = (
-  options: { stringDummyType: StringDummyType; prefix: string; suffix: string },
+export const stringGenerator = (
+  dummyType: StringDummyType,
+  options: { prefix?: string; suffix?: string; stringAnyValue?: string } | null,
   index: number,
 ): string => {
   faker.setLocale("en");
-  const { stringDummyType, prefix, suffix } = options;
-  switch (stringDummyType) {
-    case "autoIncrement":
-      return `${prefix}${index}${suffix}`;
-    case "fullName":
-      faker.setLocale("ja");
-      return `${prefix}${faker.helpers.fake("{{name.lastName}} {{name.firstName}}")}${suffix}`;
-    case "firstName":
-      faker.setLocale("ja");
-      return `${prefix}${faker.name.firstName()}${suffix}`;
-    case "lastName":
-      faker.setLocale("ja");
-      return `${prefix}${faker.name.lastName()}${suffix}`;
-    case "email":
-      return `${prefix}${faker.internet.email()}${suffix}`.toLowerCase();
+
+  if (["autoIncrement", "fullName", "firstName", "lastName", "email"].includes(dummyType)) {
+    const prefix = options?.prefix ?? "";
+    const suffix = options?.suffix ?? "";
+
+    switch (dummyType) {
+      case "autoIncrement":
+        return `${prefix}${index}${suffix}`;
+      case "fullName":
+        faker.setLocale("ja");
+        return `${prefix}${faker.helpers.fake("{{name.lastName}} {{name.firstName}}")}${suffix}`;
+      case "firstName":
+        faker.setLocale("ja");
+        return `${prefix}${faker.name.firstName()}${suffix}`;
+      case "lastName":
+        faker.setLocale("ja");
+        return `${prefix}${faker.name.lastName()}${suffix}`;
+      case "email":
+        return `${prefix}${faker.internet.email()}${suffix}`.toLowerCase();
+    }
+  }
+
+  if (dummyType === "any") {
+    const stringAnyValue = options?.stringAnyValue ?? "";
+    return stringAnyValue;
+  }
+
+  switch (dummyType) {
     case "password":
-      return `${prefix}${faker.internet.password()}${suffix}`;
+      return faker.internet.password();
     case "dateTime":
-      return faker.datatype.datetime();
-    // case "date":
-    //   return `${prefix}{date}${suffix}`;
-    // case "time":
-    //   return `${prefix}{time}${suffix}`;
+      return `${faker.datatype.datetime()}`;
     case "image":
       return faker.image.image();
     case "dataUli":
       return faker.image.dataUri();
+    case "uuid":
+      return faker.datatype.uuid();
+    case "country":
+      faker.setLocale("ja");
+      return faker.address.country();
+    case "zipCode":
+      return faker.address.zipCode("###-####");
+    case "ipAddress":
+      return faker.internet.ip();
+    case "domain":
+      return faker.internet.domainName();
+    case "phone":
+      return faker.phone.phoneNumber("080-###-###");
+    default:
+      return "";
+
+    // case "date":
+    //   return `${prefix}{date}${suffix}`;
+    // case "time":
+    //   return `${prefix}{time}${suffix}`;
     // case "cuid":
     //   return `${prefix}{cuid}${suffix}`;
-    case "uuid":
-      return `${prefix}${faker.datatype.uuid()}${suffix}`;
     // case "ulid":
     //   return `${prefix}{ulid}${suffix}`;
     // case "local":
     //   return `${prefix}{local}${suffix}`;
-    case "country":
-      faker.setLocale("ja");
-      return faker.address.country();
     // case "city":
     //   return `${prefix}{city}${suffix}`;
     // case "address":
     //   return `${prefix}{address}${suffix}`;
-    case "zipCode":
-      return faker.address.zipCode("###-####");
     // case "prefecture":
     //   return `${prefix}{prefecture}${suffix}`;
     // case "profile":
@@ -67,51 +90,59 @@ const StringGenerator = (
     //   return `${prefix}{tweet}${suffix}`;
     // case "pokemon":
     //   return `${prefix}{pokemon}${suffix}`;
-    case "ipAddress":
-      return faker.internet.ip();
-    case "domain":
-      return faker.internet.domainName();
-    case "phone":
-      return faker.phone.phoneNumber("080-###-###");
     // case "role":
     //   return `${prefix}{role}${suffix}`;
     // case "tech":
     //   return `${prefix}{tech}${suffix}`;
-    default:
-      return `${prefix}{any}${suffix}`;
   }
 };
 
-const NumberGenerator = (options: { numberDummyType: NumberDummyType }, index: number): number => {
-  const { numberDummyType } = options;
-  switch (numberDummyType) {
+export const numberGenerator = (
+  dummyType: NumberDummyType,
+  options: { min?: number; max?: number; numberAnyValue?: number } | null,
+  index: number,
+): number => {
+  if (["random", "price"].includes(dummyType)) {
+    const min = options?.min ?? 0;
+    const max = options?.max ?? 10000;
+
+    switch (dummyType) {
+      case "random":
+        return Math.floor(Math.random() * (max - min)) - min;
+      case "price":
+        return Number(faker.commerce.price(min, max, 0));
+    }
+  }
+
+  if (dummyType === "any") {
+    const numberAnyValue = options?.numberAnyValue ?? 0;
+    return numberAnyValue;
+  }
+
+  switch (dummyType) {
     case "autoIncrement":
       return index;
-    case "random":
-      return Math.floor(Math.random() * 1000);
     case "age":
       return Math.floor(Math.random() * 100);
     case "height":
       return Math.floor(Math.random() * 100) + 100;
     case "weight":
       return Math.floor(Math.random() * 100) + 30;
-    case "price":
-      return Number(faker.commerce.price(100, 2000, 0));
-    // case "amount":
-    //   return Math.floor(Math.random() * 100);
-    // case "volume":
-    //   return Math.floor(Math.random() * 100);
-    // case "priority":
-    //   return Math.floor(Math.random() * 100);
-    // case "permission":
-    //   return Math.floor(Math.random() * 100);
     default:
       return 0;
   }
+
+  // case "amount":
+  //   return Math.floor(Math.random() * 100);
+  // case "volume":
+  //   return Math.floor(Math.random() * 100);
+  // case "priority":
+  //   return Math.floor(Math.random() * 100);
+  // case "permission":
+  //   return Math.floor(Math.random() * 100);
 };
 
-const BooleanGenerator = (options: { booleanDummyType: BooleanDummyType }): boolean => {
-  const { booleanDummyType } = options;
+export const booleanGenerator = (booleanDummyType: BooleanDummyType): boolean => {
   switch (booleanDummyType) {
     case "true":
       return true;
@@ -126,19 +157,16 @@ const BooleanGenerator = (options: { booleanDummyType: BooleanDummyType }): bool
 
 type ArrayItemType = FirstNestArrayItemType | SecondNestArrayItemType;
 
-const arrayGenerator = (options: { item: ArrayItemType; length: number }): ArrayValue => {
-  const { item, length } = options;
+export const arrayGenerator = (length: number, item: ArrayItemType): ArrayValue => {
   switch (item.valueType) {
     case "string":
-      return [...new Array(length)].map((_, index) => StringGenerator(item.options, index));
+      return [...new Array(length)].map((_, index) => stringGenerator(item.stringDummyType, item.stringOptions, index));
     case "number":
-      return [...new Array(length)].map((_, index) => NumberGenerator(item.options, index));
+      return [...new Array(length)].map((_, index) => numberGenerator(item.numberDummyType, item.numberOptions, index));
     case "boolean":
-      return [...new Array(length)].map(() => BooleanGenerator(item.options));
+      return [...new Array(length)].map(() => booleanGenerator(item.booleanDummyType));
     case "object":
-      return [...new Array(length)].map((_, index) =>
-        item.options.object ? jsonGenerator(item.options.object, index) : {},
-      );
+      return [...new Array(length)].map((_, index) => (item.object ? jsonGenerator(item.object, index) : {}));
     default:
       return [];
   }
@@ -148,18 +176,24 @@ export const jsonGenerator = (object: JsonValue[], index: number): ObjectValue =
   return object.reduce((json, property) => {
     switch (property.valueType) {
       case "string":
-        return { ...json, [property.keyName || "key"]: StringGenerator(property.options, index) };
+        return {
+          ...json,
+          [property.keyName || "key"]: stringGenerator(property.stringDummyType, property.stringOptions, index),
+        };
       case "number":
-        return { ...json, [property.keyName || "key"]: NumberGenerator(property.options, index) };
+        return {
+          ...json,
+          [property.keyName || "key"]: numberGenerator(property.numberDummyType, property.numberOptions, index),
+        };
       case "boolean":
-        return { ...json, [property.keyName || "key"]: BooleanGenerator(property.options) };
+        return { ...json, [property.keyName || "key"]: booleanGenerator(property.booleanDummyType) };
       case "object":
         return {
           ...json,
-          [property.keyName || "key"]: property.options.object ? jsonGenerator(property.options.object, index) : {},
+          [property.keyName || "key"]: property.object ? jsonGenerator(property.object, index) : {},
         };
       case "array":
-        return { ...json, [property.keyName || "key"]: arrayGenerator(property.options) };
+        return { ...json, [property.keyName || "key"]: arrayGenerator(property.length, property.item) };
     }
   }, {});
 };

@@ -4,18 +4,14 @@ import { SecondNestArrayItemType, SecondNestObjectPropertyType } from "./second-
 interface FirstNestArrayValue {
   keyName: string;
   valueType: "array";
-  options: {
-    length: number;
-    item: SecondNestArrayItemType;
-  };
+  length: number;
+  item: SecondNestArrayItemType;
 }
 
 interface FirstNestObjectValue {
-  keyName: string;
+  keyName: null;
   valueType: "object";
-  options: {
-    object: SecondNestObjectPropertyType[];
-  };
+  object: SecondNestObjectPropertyType[];
 }
 
 /** array */

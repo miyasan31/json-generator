@@ -7,10 +7,8 @@ export type ObjectValueType = "string" | "number" | "boolean" | "object" | "arra
 export interface ArrayValue {
   keyName: string;
   valueType: "array";
-  options: {
-    length: number;
-    item: FirstNestArrayItemType;
-  };
+  length: number;
+  item: FirstNestArrayItemType;
 }
 
 export interface ArrayValueTypeOption {
@@ -20,11 +18,9 @@ export interface ArrayValueTypeOption {
 
 /** object */
 export interface ObjectValue {
-  keyName: string;
+  keyName: null;
   valueType: "object";
-  options: {
-    object: FirstNestObjectPropertyType[];
-  };
+  object: FirstNestObjectPropertyType[];
 }
 
 export interface ObjectValueTypeOption {
