@@ -9,8 +9,8 @@ import tsconfigPaths from "vite-tsconfig-paths";
 const pwaOptions: Partial<VitePWAOptions> = {
   includeAssets: ["favicon.svg", "favicon.ico", "robots.txt", "apple-touch-icon.png"],
   manifest: {
-    name: "PWA",
-    short_name: "PWA",
+    name: "JSON Generator",
+    short_name: "JSON Generator",
     theme_color: "#333333",
     icons: [
       {
