@@ -11,6 +11,7 @@ type ModalProps = {
   centered?: boolean;
   withCloseButton?: boolean;
   title?: string;
+  isBorder?: boolean;
 };
 
 export const Modal: FC<ModalProps> = ({
@@ -19,6 +20,7 @@ export const Modal: FC<ModalProps> = ({
   size,
   centered = false,
   withCloseButton = true,
+  isBorder = false,
   onClose,
   isOpen,
 }) => {
@@ -38,12 +40,18 @@ export const Modal: FC<ModalProps> = ({
       closeOnClickOutside={false}
       overflow="inside"
       fullScreen={!isMediumScreen}
-      styles={{
+      styles={(theme) => ({
         title: {
           fontSize: "1.2rem",
           fontWeight: "bold",
         },
-      }}
+        body: isBorder
+          ? {
+              borderRadius: theme.radius.sm,
+              border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[4] : theme.colors.dark[4]}`,
+            }
+          : {},
+      })}
     >
       {children}
     </MantineModal>

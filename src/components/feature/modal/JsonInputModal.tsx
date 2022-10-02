@@ -33,10 +33,15 @@ export const JsonInputModal: FC<JsonInputModalProps> = ({ isOpen, onClose, onCha
           formatOnBlur
           minRows={10}
           autosize={false}
-          styles={{
-            wrapper: { height: "500px" },
-            input: { height: "100%" },
-          }}
+          styles={(theme) => ({
+            wrapper: {
+              height: "500px",
+            },
+            input: {
+              height: "100%",
+              backgroundColor: theme.colorScheme === "light" ? "white" : theme.colors.dark[7],
+            },
+          })}
         />
 
         <Group spacing="sm" position="right">
