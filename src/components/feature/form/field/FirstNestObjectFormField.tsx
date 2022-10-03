@@ -109,57 +109,35 @@ export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({
 
                     <FormTypeWatcher name={`${name}.${index}.valueType`} control={control}>
                       {(value) => {
-                        switch (value) {
-                          case "string":
-                            return (
-                              <>
-                                <StringTypeFormField name={`${name}.${index}.stringDummyType`} />
-                                <OptionWatcher
-                                  type="string"
-                                  name={`${name}.${index}.stringDummyType`}
-                                  control={control}
-                                >
-                                  {(isOptionVisible) => {
-                                    if (!isOptionVisible) return <Space w={28} />;
-                                    return (
-                                      <ActionIcon mb={1} component="button" onClick={onToggle}>
-                                        {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
-                                      </ActionIcon>
-                                    );
-                                  }}
-                                </OptionWatcher>
-                              </>
-                            );
-                          case "number":
-                            return (
-                              <>
-                                <NumberTypeFormField name={`${name}.${index}.numberDummyType`} />
-                                <OptionWatcher
-                                  type="number"
-                                  name={`${name}.${index}.numberDummyType`}
-                                  control={control}
-                                >
-                                  {(isOptionVisible) => {
-                                    if (!isOptionVisible) return <Space w={28} />;
-                                    return (
-                                      <ActionIcon mb={1} component="button" onClick={onToggle}>
-                                        {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
-                                      </ActionIcon>
-                                    );
-                                  }}
-                                </OptionWatcher>
-                              </>
-                            );
-                          case "boolean":
-                            return (
-                              <>
-                                <BooleanTypeFormField name={`${name}.${index}.booleanDummyType`} />
-                                <Space w={28} />
-                              </>
-                            );
+                        if (value === "string") {
+                          return <StringTypeFormField name={`${name}.${index}.stringDummyType`} />;
+                        }
+                        if (value === "number") {
+                          return <NumberTypeFormField name={`${name}.${index}.numberDummyType`} />;
+                        }
+                        if (value === "boolean") {
+                          return <BooleanTypeFormField name={`${name}.${index}.booleanDummyType`} />;
                         }
                       }}
                     </FormTypeWatcher>
+
+                    <OptionWatcher
+                      name={{
+                        valueType: `${name}.${index}.valueType`,
+                        stringDummyType: `${name}.${index}.stringDummyType`,
+                        numberDummyType: `${name}.${index}.numberDummyType`,
+                      }}
+                      control={control}
+                    >
+                      {(isOptionVisible) => {
+                        if (!isOptionVisible) return <Space w={28} />;
+                        return (
+                          <ActionIcon mb={1} component="button" onClick={onToggle}>
+                            {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
+                          </ActionIcon>
+                        );
+                      }}
+                    </OptionWatcher>
 
                     <Tooltip label={deleteTooltipLabel} position="top-start">
                       <ActionIcon mb={1} component="button" onClick={() => onRemove(index)}>
@@ -171,25 +149,26 @@ export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({
                   {isVisible ? (
                     <FormTypeWatcher name={`${name}.${index}.valueType`} control={control}>
                       {(value) => {
-                        switch (value) {
-                          case "string":
-                            return (
-                              <StringOptionFormField
-                                name={{
-                                  stringDummyType: `${name}.${index}.stringDummyType`,
-                                  options: `${name}.${index}.stringOptions`,
-                                }}
-                              />
-                            );
-                          case "number":
-                            return (
-                              <NumberOptionFormField
-                                name={{
-                                  numberDummyType: `${name}.${index}.numberDummyType`,
-                                  options: `${name}.${index}.numberOptions`,
-                                }}
-                              />
-                            );
+                        if (value === "string") {
+                          return (
+                            <StringOptionFormField
+                              name={{
+                                stringDummyType: `${name}.${index}.stringDummyType`,
+                                options: `${name}.${index}.stringOptions`,
+                              }}
+                            />
+                          );
+                        }
+
+                        if (value === "number") {
+                          return (
+                            <NumberOptionFormField
+                              name={{
+                                numberDummyType: `${name}.${index}.numberDummyType`,
+                                options: `${name}.${index}.numberOptions`,
+                              }}
+                            />
+                          );
                         }
                       }}
                     </FormTypeWatcher>

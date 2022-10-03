@@ -1,4 +1,4 @@
-import { ActionIcon, Group, NumberInput, Select, Stack } from "@mantine/core";
+import { ActionIcon, Group, NumberInput, Select, Space, Stack } from "@mantine/core";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons";
 import type { FC } from "react";
 import type { FieldPath } from "react-hook-form";
@@ -13,6 +13,7 @@ import { StringTypeFormField } from "~/components/feature/form/field/StringTypeF
 import { ArrayTypeWatcher } from "~/components/feature/form/watcher/ArrayTypeWatcher";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { OptionVisibleWatcher } from "~/components/feature/form/watcher/OptionVisibleWatcher";
+import { OptionWatcher } from "~/components/feature/form/watcher/OptionWatcher";
 import { appendValue } from "~/constants/form/appendValue";
 import { generateLengthLabel, valueTypeLabel } from "~/constants/form/label";
 import { arrayValueTypeOption } from "~/constants/form/selectOption";
@@ -93,48 +94,66 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ name }) =>
 
             <FormTypeWatcher name={`${name.item}.valueType`} control={control}>
               {(value) => {
-                switch (value) {
-                  case "string":
-                    return <StringTypeFormField name={`${name.item}.stringDummyType`} />;
-                  case "number":
-                    return <NumberTypeFormField name={`${name.item}.numberDummyType`} />;
-                  case "boolean":
-                    return <BooleanTypeFormField name={`${name.item}.booleanDummyType`} />;
+                if (value === "string") {
+                  return <StringTypeFormField name={`${name.item}.stringDummyType`} />;
+                }
+                if (value === "number") {
+                  return <NumberTypeFormField name={`${name.item}.numberDummyType`} />;
+                }
+                if (value === "boolean") {
+                  return <BooleanTypeFormField name={`${name.item}.booleanDummyType`} />;
                 }
               }}
             </FormTypeWatcher>
 
-            <ActionIcon mb={1} component="button" onClick={onToggle}>
-              {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
-            </ActionIcon>
+            <OptionWatcher
+              name={{
+                valueType: `${name.item}.valueType`,
+                stringDummyType: `${name.item}.stringDummyType`,
+                numberDummyType: `${name.item}.numberDummyType`,
+              }}
+              control={control}
+            >
+              {(isOptionVisible) => {
+                if (!isOptionVisible) return <Space w={28} />;
+                return (
+                  <ActionIcon mb={1} component="button" onClick={onToggle}>
+                    {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
+                  </ActionIcon>
+                );
+              }}
+            </OptionWatcher>
           </Group>
 
           {isVisible ? (
             <ArrayTypeWatcher name={`${name.item}.valueType`} control={control}>
               {(value) => {
-                switch (value) {
-                  case "string":
-                    return (
-                      <StringOptionFormField
-                        name={{
-                          stringDummyType: `${name.item}.stringDummyType`,
-                          options: `${name.item}.stringOptions`,
-                        }}
-                      />
-                    );
-                  case "number":
-                    return (
-                      <NumberOptionFormField
-                        name={{
-                          numberDummyType: `${name.item}.numberDummyType`,
-                          options: `${name.item}.numberOptions`,
-                        }}
-                      />
-                    );
-                  case "object":
-                    return (
-                      <FirstNestObjectFormField register={register} control={control} name={`${name.item}.object`} />
-                    );
+                if (value === "string") {
+                  return (
+                    <StringOptionFormField
+                      name={{
+                        stringDummyType: `${name.item}.stringDummyType`,
+                        options: `${name.item}.stringOptions`,
+                      }}
+                    />
+                  );
+                }
+
+                if (value === "number") {
+                  return (
+                    <NumberOptionFormField
+                      name={{
+                        numberDummyType: `${name.item}.numberDummyType`,
+                        options: `${name.item}.numberOptions`,
+                      }}
+                    />
+                  );
+                }
+
+                if (value === "object") {
+                  return (
+                    <FirstNestObjectFormField register={register} control={control} name={`${name.item}.object`} />
+                  );
                 }
               }}
             </ArrayTypeWatcher>

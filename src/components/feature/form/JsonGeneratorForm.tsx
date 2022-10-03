@@ -107,56 +107,35 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
 
                     <FormTypeWatcher name={`json.${index}.valueType`} control={control}>
                       {(value) => {
-                        switch (value) {
-                          case "string":
-                            return (
-                              <>
-                                <StringTypeFormField name={`json.${index}.stringDummyType`} />
-                                <OptionWatcher type="string" name={`json.${index}.stringDummyType`} control={control}>
-                                  {(isOptionVisible) => {
-                                    if (!isOptionVisible) return <Space w={28} />;
-                                    return (
-                                      <ActionIcon mb={1} component="button" onClick={onToggle}>
-                                        {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
-                                      </ActionIcon>
-                                    );
-                                  }}
-                                </OptionWatcher>
-                              </>
-                            );
-                          case "number":
-                            return (
-                              <>
-                                <NumberTypeFormField name={`json.${index}.numberDummyType`} />
-                                <OptionWatcher type="number" name={`json.${index}.numberDummyType`} control={control}>
-                                  {(isOptionVisible) => {
-                                    if (!isOptionVisible) return <Space w={28} />;
-                                    return (
-                                      <ActionIcon mb={1} component="button" onClick={onToggle}>
-                                        {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
-                                      </ActionIcon>
-                                    );
-                                  }}
-                                </OptionWatcher>
-                              </>
-                            );
-                          case "boolean":
-                            return (
-                              <>
-                                <BooleanTypeFormField name={`json.${index}.booleanDummyType`} />
-                                <Space w={28} />
-                              </>
-                            );
-                          case "array":
-                          case "object":
-                            return (
-                              <ActionIcon mb={1} component="button" onClick={onToggle}>
-                                {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
-                              </ActionIcon>
-                            );
+                        if (value === "string") {
+                          return <StringTypeFormField name={`json.${index}.stringDummyType`} />;
+                        }
+                        if (value === "number") {
+                          return <NumberTypeFormField name={`json.${index}.numberDummyType`} />;
+                        }
+                        if (value === "boolean") {
+                          return <BooleanTypeFormField name={`json.${index}.booleanDummyType`} />;
                         }
                       }}
                     </FormTypeWatcher>
+
+                    <OptionWatcher
+                      name={{
+                        valueType: `json.${index}.valueType`,
+                        stringDummyType: `json.${index}.stringDummyType`,
+                        numberDummyType: `json.${index}.numberDummyType`,
+                      }}
+                      control={control}
+                    >
+                      {(isOptionVisible) => {
+                        if (!isOptionVisible) return <Space w={28} />;
+                        return (
+                          <ActionIcon mb={1} component="button" onClick={onToggle}>
+                            {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
+                          </ActionIcon>
+                        );
+                      }}
+                    </OptionWatcher>
 
                     <Tooltip label={deleteTooltipLabel} position="top-start">
                       <ActionIcon mb={1} component="button" onClick={() => onRemove(index)}>
@@ -168,38 +147,43 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
                   {isVisible ? (
                     <FormTypeWatcher name={`json.${index}.valueType`} control={control}>
                       {(value) => {
-                        switch (value) {
-                          case "string":
-                            return (
-                              <StringOptionFormField
-                                name={{
-                                  stringDummyType: `json.${index}.stringDummyType`,
-                                  options: `json.${index}.stringOptions`,
-                                }}
-                              />
-                            );
-                          case "number":
-                            return (
-                              <NumberOptionFormField
-                                name={{
-                                  numberDummyType: `json.${index}.numberDummyType`,
-                                  options: `json.${index}.numberOptions`,
-                                }}
-                              />
-                            );
-                          case "array":
-                            return (
-                              <ArrayOptionFormField
-                                name={{
-                                  length: `json.${index}.length`,
-                                  item: `json.${index}.item`,
-                                }}
-                              />
-                            );
-                          case "object":
-                            return (
-                              <ObjectFormField register={register} control={control} name={`json.${index}.object`} />
-                            );
+                        if (value === "string") {
+                          return (
+                            <StringOptionFormField
+                              name={{
+                                stringDummyType: `json.${index}.stringDummyType`,
+                                options: `json.${index}.stringOptions`,
+                              }}
+                            />
+                          );
+                        }
+
+                        if (value === "number") {
+                          return (
+                            <NumberOptionFormField
+                              name={{
+                                numberDummyType: `json.${index}.numberDummyType`,
+                                options: `json.${index}.numberOptions`,
+                              }}
+                            />
+                          );
+                        }
+
+                        if (value === "array") {
+                          return (
+                            <ArrayOptionFormField
+                              name={{
+                                length: `json.${index}.length`,
+                                item: `json.${index}.item`,
+                              }}
+                            />
+                          );
+                        }
+
+                        if (value === "object") {
+                          return (
+                            <ObjectFormField register={register} control={control} name={`json.${index}.object`} />
+                          );
                         }
                       }}
                     </FormTypeWatcher>
