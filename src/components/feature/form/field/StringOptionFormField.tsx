@@ -21,7 +21,7 @@ export const StringOptionFormField: FC<StringOptionFormFieldProps> = ({ name }) 
 
   if (["autoIncrement", "fullName", "firstName", "lastName", "email"].includes(stringDummyType)) {
     return (
-      <Group spacing="xs" grow>
+      <Group spacing="xs" grow align="flex-start">
         <TextInput size="xs" label={prefixLabel} {...register(`${name.options}.prefix`)} />
         <TextInput size="xs" label={suffixLabel} {...register(`${name.options}.suffix`)} />
       </Group>

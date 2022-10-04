@@ -16,6 +16,7 @@ import { OptionVisibleWatcher } from "~/components/feature/form/watcher/OptionVi
 import { OptionWatcher } from "~/components/feature/form/watcher/OptionWatcher";
 import { Divider } from "~/components/shared/Divider";
 import { appendValue } from "~/constants/form/appendValue";
+import { formRules } from "~/constants/form/formRules";
 import { addKeyLabel, deleteTooltipLabel, keyNameLabel, valueTypeLabel } from "~/constants/form/label";
 import { objectValueTypeOption } from "~/constants/form/selectOption";
 import type { ObjectValueType } from "~/interfaces/model/object";
@@ -67,12 +68,12 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
             {(isVisible, onToggle) => (
               <>
                 <Stack spacing="xs">
-                  <Group spacing="xs" align="end">
+                  <Group spacing="xs" align="flex-start">
                     <TextInput
                       required
                       size="xs"
                       label={keyNameLabel}
-                      {...register(`${name}.${index}.keyName`)}
+                      {...register(`${name}.${index}.keyName`, formRules.keyName)}
                       sx={{
                         flex: 2,
                       }}
@@ -96,7 +97,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                             label={valueTypeLabel}
                             value={value.valueType}
                             onChange={onChangeValue}
-                            data={objectValueTypeOption}
+                            data={objectValueTypeOption.slice(0, 4)}
                             sx={{
                               flex: 1,
                             }}
@@ -105,7 +106,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                       }}
                     />
 
-                    <FormTypeWatcher name={`json.${index}.valueType`} control={control}>
+                    <FormTypeWatcher name={`${name}.${index}.valueType`} control={control}>
                       {(value) => {
                         if (value === "string") {
                           return <StringTypeFormField name={`json.${index}.stringDummyType`} />;
@@ -121,16 +122,16 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
 
                     <OptionWatcher
                       name={{
-                        valueType: `json.${index}.valueType`,
-                        stringDummyType: `json.${index}.stringDummyType`,
-                        numberDummyType: `json.${index}.numberDummyType`,
+                        valueType: `${name}.${index}.valueType`,
+                        stringDummyType: `${name}.${index}.stringDummyType`,
+                        numberDummyType: `${name}.${index}.numberDummyType`,
                       }}
                       control={control}
                     >
                       {(isOptionVisible) => {
                         if (!isOptionVisible) return <Space w={28} />;
                         return (
-                          <ActionIcon mb={1} component="button" onClick={onToggle}>
+                          <ActionIcon mt={26} component="button" onClick={onToggle}>
                             {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
                           </ActionIcon>
                         );
@@ -138,7 +139,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                     </OptionWatcher>
 
                     <Tooltip label={deleteTooltipLabel} position="top-start">
-                      <ActionIcon mb={1} component="button" onClick={() => onRemove(index)}>
+                      <ActionIcon mt={26} component="button" onClick={() => onRemove(index)}>
                         <IconX size={16} color="red" />
                       </ActionIcon>
                     </Tooltip>

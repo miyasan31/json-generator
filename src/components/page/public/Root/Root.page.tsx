@@ -38,7 +38,6 @@ export const Root = () => {
   const { handleSubmit: onSubmit, control, reset } = methods;
 
   const onCreateJson = useCallback((data: ICreateJson) => {
-    console.info(data);
     showNotification(createJsonNotification["loading"]);
 
     mutate(data, {

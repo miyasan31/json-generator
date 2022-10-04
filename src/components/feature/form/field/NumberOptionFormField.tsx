@@ -21,15 +21,13 @@ export const NumberOptionFormField: FC<NumberOptionFormFieldProps> = ({ name }) 
 
   if (["random", "age", "height", "weight", "price"].includes(numberDummyType)) {
     return (
-      <Group spacing="xs" grow>
+      <Group spacing="xs" grow align="flex-start">
         <Controller
-          control={control}
           name={`${name.options}.min`}
+          control={control}
           render={({ field: { onChange, value } }) => {
             return (
-              <>
-                <NumberInput defaultValue={0} min={0} size="xs" label={minLabel} value={value} onChange={onChange} />
-              </>
+              <NumberInput defaultValue={0} min={0} size="xs" label={minLabel} value={value} onChange={onChange} />
             );
           }}
         />
@@ -39,16 +37,14 @@ export const NumberOptionFormField: FC<NumberOptionFormFieldProps> = ({ name }) 
           name={`${name.options}.max`}
           render={({ field: { onChange, value } }) => {
             return (
-              <>
-                <NumberInput
-                  defaultValue={10000}
-                  max={10000}
-                  size="xs"
-                  label={maxLabel}
-                  value={value}
-                  onChange={onChange}
-                />
-              </>
+              <NumberInput
+                defaultValue={10000}
+                max={10000}
+                size="xs"
+                label={maxLabel}
+                value={value}
+                onChange={onChange}
+              />
             );
           }}
         />

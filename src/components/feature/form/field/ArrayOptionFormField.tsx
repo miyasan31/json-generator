@@ -44,7 +44,7 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ name }) =>
             border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[5]}`,
           })}
         >
-          <Group spacing="xs" align="end">
+          <Group spacing="xs" align="flex-start">
             <Controller
               control={control}
               name={`${name.length}`}
@@ -53,7 +53,7 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ name }) =>
                   <NumberInput
                     defaultValue={5}
                     min={1}
-                    max={100}
+                    max={20}
                     size="xs"
                     label={generateLengthLabel}
                     value={value}
@@ -117,7 +117,7 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ name }) =>
               {(isOptionVisible) => {
                 if (!isOptionVisible) return <Space w={28} />;
                 return (
-                  <ActionIcon mb={1} component="button" onClick={onToggle}>
+                  <ActionIcon mt={26} component="button" onClick={onToggle}>
                     {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
                   </ActionIcon>
                 );

@@ -15,6 +15,7 @@ import { OptionVisibleWatcher } from "~/components/feature/form/watcher/OptionVi
 import { OptionWatcher } from "~/components/feature/form/watcher/OptionWatcher";
 import { Divider } from "~/components/shared/Divider";
 import { appendValue } from "~/constants/form/appendValue";
+import { formRules } from "~/constants/form/formRules";
 import { addKeyLabel, deleteTooltipLabel, keyNameLabel, valueTypeLabel } from "~/constants/form/label";
 import { objectValueTypeOption } from "~/constants/form/selectOption";
 import type { ObjectValueType } from "~/interfaces/model/object";
@@ -71,12 +72,12 @@ export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({
             {(isVisible, onToggle) => (
               <>
                 <Stack spacing="xs">
-                  <Group spacing="xs" align="end">
+                  <Group spacing="xs" align="flex-start">
                     <TextInput
                       required
                       size="xs"
                       label={keyNameLabel}
-                      {...register(`${name}.${index}.keyName`)}
+                      {...register(`${name}.${index}.keyName`, formRules.keyName)}
                       sx={{
                         flex: 2,
                       }}
@@ -132,7 +133,7 @@ export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({
                       {(isOptionVisible) => {
                         if (!isOptionVisible) return <Space w={28} />;
                         return (
-                          <ActionIcon mb={1} component="button" onClick={onToggle}>
+                          <ActionIcon mt={26} component="button" onClick={onToggle}>
                             {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
                           </ActionIcon>
                         );
@@ -140,7 +141,7 @@ export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({
                     </OptionWatcher>
 
                     <Tooltip label={deleteTooltipLabel} position="top-start">
-                      <ActionIcon mb={1} component="button" onClick={() => onRemove(index)}>
+                      <ActionIcon mt={26} component="button" onClick={() => onRemove(index)}>
                         <IconX size={16} color="red" />
                       </ActionIcon>
                     </Tooltip>

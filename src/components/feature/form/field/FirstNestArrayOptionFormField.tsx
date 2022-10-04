@@ -43,7 +43,7 @@ export const FirstNestArrayOptionFormField: FC<FirstNestArrayOptionFormFieldProp
             border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[5]}`,
           })}
         >
-          <Group spacing="xs" align="end">
+          <Group spacing="xs" align="flex-start">
             <Controller
               control={control}
               name={`${name.length}`}
@@ -83,7 +83,7 @@ export const FirstNestArrayOptionFormField: FC<FirstNestArrayOptionFormFieldProp
                     label={valueTypeLabel}
                     value={value.valueType}
                     onChange={onChangeValue}
-                    data={arrayValueTypeOption}
+                    data={arrayValueTypeOption.slice(0, 3)}
                     sx={{
                       flex: 1,
                     }}
@@ -117,7 +117,7 @@ export const FirstNestArrayOptionFormField: FC<FirstNestArrayOptionFormFieldProp
               {(isOptionVisible) => {
                 if (!isOptionVisible) return <Space w={28} />;
                 return (
-                  <ActionIcon mb={1} component="button" onClick={onToggle}>
+                  <ActionIcon mt={26} component="button" onClick={onToggle}>
                     {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
                   </ActionIcon>
                 );
