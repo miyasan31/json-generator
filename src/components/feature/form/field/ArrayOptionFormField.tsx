@@ -72,6 +72,7 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ name }) =>
               render={({ field: { onChange, value } }) => {
                 const onChangeValue = (changeValue: ObjectValueType) => {
                   onChange({
+                    keyName: value.keyName,
                     valueType: changeValue,
                     ...appendValue[changeValue],
                   });
