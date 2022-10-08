@@ -7,7 +7,7 @@ import { useWatch } from "react-hook-form";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
-type OptionToggleProps = {
+type OptionToggleButtonProps = {
   isVisible: boolean;
   onToggle: () => void;
   name: {
@@ -18,7 +18,7 @@ type OptionToggleProps = {
   control: Control<ICreateJson>;
 };
 
-export const OptionToggle: FC<OptionToggleProps> = ({ name, control, onToggle, isVisible }) => {
+export const OptionToggleButton: FC<OptionToggleButtonProps> = ({ name, control, onToggle, isVisible }) => {
   const type = useWatch({ name: name.valueType, control });
   const stringDummyType = useWatch({ name: name.stringDummyType, control });
   const numberDummyType = useWatch({ name: name.numberDummyType, control });

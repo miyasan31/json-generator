@@ -12,7 +12,7 @@ import { NumberTypeFormField } from "~/components/feature/form/field/NumberTypeF
 import { StringOptionFormField } from "~/components/feature/form/field/StringOptionFormField";
 import { StringTypeFormField } from "~/components/feature/form/field/StringTypeFormField";
 import { OptionController } from "~/components/feature/form/OptionController";
-import { OptionToggle } from "~/components/feature/form/OptionToggle";
+import { OptionToggleButton } from "~/components/feature/form/OptionToggleButton";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { Divider } from "~/components/shared/Divider";
 import { appendValue } from "~/constants/form/appendValue";
@@ -120,7 +120,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                       }}
                     </FormTypeWatcher>
 
-                    <OptionToggle
+                    <OptionToggleButton
                       isVisible={isVisible}
                       onToggle={onToggle}
                       control={control}

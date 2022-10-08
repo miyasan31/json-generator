@@ -10,7 +10,7 @@ import { NumberTypeFormField } from "~/components/feature/form/field/NumberTypeF
 import { StringOptionFormField } from "~/components/feature/form/field/StringOptionFormField";
 import { StringTypeFormField } from "~/components/feature/form/field/StringTypeFormField";
 import { OptionController } from "~/components/feature/form/OptionController";
-import { OptionToggle } from "~/components/feature/form/OptionToggle";
+import { OptionToggleButton } from "~/components/feature/form/OptionToggleButton";
 import { ArrayTypeWatcher } from "~/components/feature/form/watcher/ArrayTypeWatcher";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { appendValue } from "~/constants/form/appendValue";
@@ -87,7 +87,7 @@ export const FirstNestArrayOptionFormField: FC<FirstNestArrayOptionFormFieldProp
               }}
             </FormTypeWatcher>
 
-            <OptionToggle
+            <OptionToggleButton
               isVisible={isVisible}
               onToggle={onToggle}
               name={{
