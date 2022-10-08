@@ -11,6 +11,8 @@ type OptionControllerProps = {
 
 export const OptionController: FC<OptionControllerProps> = ({ type, children }) => {
   const [isVisible, setIsVisible] = useState(["array", "object"].includes(type));
+
   const onToggle = useCallback(() => setIsVisible((prev) => !prev), []);
+
   return <>{children(isVisible, onToggle)}</>;
 };

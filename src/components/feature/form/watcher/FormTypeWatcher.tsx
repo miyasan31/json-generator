@@ -14,5 +14,6 @@ type FormTypeWatcherProps = {
 
 export const FormTypeWatcher: FC<FormTypeWatcherProps> = ({ name, control, children }) => {
   const value = useWatch({ name, control });
+
   return <>{children(value)}</>;
 };

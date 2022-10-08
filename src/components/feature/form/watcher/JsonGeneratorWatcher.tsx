@@ -14,9 +14,12 @@ type JsonGeneratorWatcherProps = {
 
 export const JsonGeneratorWatcher: FC<JsonGeneratorWatcherProps> = memo(({ control, children }) => {
   const value = useWatch({ name: "json", control });
+
   const object = useMemo(() => {
     return jsonGenerator(value, 0);
   }, [JSON.stringify(value)]);
+
   const json = JSON.stringify(object, null, 2);
+
   return <>{children(json)}</>;
 });

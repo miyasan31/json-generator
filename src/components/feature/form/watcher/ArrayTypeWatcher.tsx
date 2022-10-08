@@ -14,5 +14,6 @@ type ArrayTypeWatcherProps = {
 
 export const ArrayTypeWatcher: FC<ArrayTypeWatcherProps> = ({ name, control, children }) => {
   const value = useWatch({ name, control });
+
   return <>{children(value)}</>;
 };

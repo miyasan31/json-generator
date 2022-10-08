@@ -50,9 +50,11 @@ export const FirstNestArrayOptionFormField: FC<FirstNestArrayOptionFormFieldProp
                 if (value === "string") {
                   return <StringTypeFormField control={control} name={`${name.item}.stringDummyType`} />;
                 }
+
                 if (value === "number") {
                   return <NumberTypeFormField control={control} name={`${name.item}.numberDummyType`} />;
                 }
+
                 if (value === "boolean") {
                   return <BooleanTypeFormField control={control} name={`${name.item}.booleanDummyType`} />;
                 }

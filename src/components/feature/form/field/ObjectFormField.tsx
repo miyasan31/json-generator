@@ -91,9 +91,11 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                         if (value === "string") {
                           return <StringTypeFormField control={control} name={`json.${index}.stringDummyType`} />;
                         }
+
                         if (value === "number") {
                           return <NumberTypeFormField control={control} name={`json.${index}.numberDummyType`} />;
                         }
+
                         if (value === "boolean") {
                           return <BooleanTypeFormField control={control} name={`json.${index}.booleanDummyType`} />;
                         }

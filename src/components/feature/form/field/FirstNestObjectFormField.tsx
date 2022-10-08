@@ -95,9 +95,11 @@ export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({
                         if (value === "string") {
                           return <StringTypeFormField control={control} name={`${name}.${index}.stringDummyType`} />;
                         }
+
                         if (value === "number") {
                           return <NumberTypeFormField control={control} name={`${name}.${index}.numberDummyType`} />;
                         }
+
                         if (value === "boolean") {
                           return <BooleanTypeFormField control={control} name={`${name}.${index}.booleanDummyType`} />;
                         }
