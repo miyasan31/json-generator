@@ -1,7 +1,6 @@
 import { Group, Stack } from "@mantine/core";
 import type { FC } from "react";
-import type { FieldPath } from "react-hook-form";
-import { useFormContext } from "react-hook-form";
+import type { Control, FieldPath, UseFormRegister } from "react-hook-form";
 
 import { ArrayLengthFormField } from "~/components/feature/form/field/ArrayLengthFormField";
 import { BooleanTypeFormField } from "~/components/feature/form/field/BooleanTypeFormField";
@@ -20,15 +19,15 @@ import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
 type ArrayOptionFormFieldProps = {
+  control: Control<ICreateJson>;
+  register: UseFormRegister<ICreateJson>;
   name: {
     length: FilterFieldPath<FieldPath<ICreateJson>, "length">;
     item: `json.${number}.item`;
   };
 };
 
-export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ name }) => {
-  const { control, register } = useFormContext<ICreateJson>();
-
+export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ control, register, name }) => {
   return (
     <OptionController type="array">
       {(isVisible, onToggle) => (
@@ -43,23 +42,24 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ name }) =>
           })}
         >
           <Group spacing="xs" align="flex-start">
-            <ArrayLengthFormField name={`${name.length}`} />
+            <ArrayLengthFormField control={control} name={`${name.length}`} />
 
-            <FormTypeFormField data={arrayValueTypeOption} name={`${name.item}`} />
+            <FormTypeFormField data={arrayValueTypeOption} control={control} name={`${name.item}`} />
 
-            <FormTypeWatcher name={`${name.item}.valueType`} control={control}>
+            <FormTypeWatcher control={control} name={`${name.item}.valueType`}>
               {(value) => {
                 if (value === "string") {
-                  return <StringTypeFormField name={`${name.item}.stringDummyType`} />;
+                  return <StringTypeFormField control={control} name={`${name.item}.stringDummyType`} />;
                 }
                 if (value === "number") {
-                  return <NumberTypeFormField name={`${name.item}.numberDummyType`} />;
+                  return <NumberTypeFormField control={control} name={`${name.item}.numberDummyType`} />;
                 }
                 if (value === "boolean") {
-                  return <BooleanTypeFormField name={`${name.item}.booleanDummyType`} />;
+                  return <BooleanTypeFormField control={control} name={`${name.item}.booleanDummyType`} />;
                 }
               }}
             </FormTypeWatcher>
+
             <OptionToggleButton
               isVisible={isVisible}
               onToggle={onToggle}
@@ -73,11 +73,13 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ name }) =>
           </Group>
 
           {isVisible ? (
-            <ArrayTypeWatcher name={`${name.item}.valueType`} control={control}>
+            <ArrayTypeWatcher control={control} name={`${name.item}.valueType`}>
               {(value) => {
                 if (value === "string") {
                   return (
                     <StringOptionFormField
+                      control={control}
+                      register={register}
                       name={{
                         stringDummyType: `${name.item}.stringDummyType`,
                         options: `${name.item}.stringOptions`,
@@ -89,6 +91,7 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ name }) =>
                 if (value === "number") {
                   return (
                     <NumberOptionFormField
+                      control={control}
                       name={{
                         numberDummyType: `${name.item}.numberDummyType`,
                         options: `${name.item}.numberOptions`,

@@ -36,6 +36,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
   });
 
   const onRemove = useCallback((index: number) => remove(index), [remove]);
+
   const onAppend = useCallback(
     () =>
       append({
@@ -79,18 +80,22 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                       }}
                     />
 
-                    <FormTypeFormField data={objectValueTypeOption.slice(0, 4)} name={`${name}.${index}`} />
+                    <FormTypeFormField
+                      data={objectValueTypeOption.slice(0, 4)}
+                      control={control}
+                      name={`${name}.${index}`}
+                    />
 
-                    <FormTypeWatcher name={`${name}.${index}.valueType`} control={control}>
+                    <FormTypeWatcher control={control} name={`${name}.${index}.valueType`}>
                       {(value) => {
                         if (value === "string") {
-                          return <StringTypeFormField name={`json.${index}.stringDummyType`} />;
+                          return <StringTypeFormField control={control} name={`json.${index}.stringDummyType`} />;
                         }
                         if (value === "number") {
-                          return <NumberTypeFormField name={`json.${index}.numberDummyType`} />;
+                          return <NumberTypeFormField control={control} name={`json.${index}.numberDummyType`} />;
                         }
                         if (value === "boolean") {
-                          return <BooleanTypeFormField name={`json.${index}.booleanDummyType`} />;
+                          return <BooleanTypeFormField control={control} name={`json.${index}.booleanDummyType`} />;
                         }
                       }}
                     </FormTypeWatcher>
@@ -110,11 +115,13 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                   </Group>
 
                   {isVisible ? (
-                    <FormTypeWatcher name={`${name}.${index}.valueType`} control={control}>
+                    <FormTypeWatcher control={control} name={`${name}.${index}.valueType`}>
                       {(value) => {
                         if (value === "string") {
                           return (
                             <StringOptionFormField
+                              control={control}
+                              register={register}
                               name={{
                                 stringDummyType: `${name}.${index}.stringDummyType`,
                                 options: `${name}.${index}.stringOptions`,
@@ -126,6 +133,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                         if (value === "number") {
                           return (
                             <NumberOptionFormField
+                              control={control}
                               name={{
                                 numberDummyType: `${name}.${index}.numberDummyType`,
                                 options: `${name}.${index}.numberOptions`,
@@ -137,6 +145,8 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                         if (value === "array") {
                           return (
                             <FirstNestArrayOptionFormField
+                              control={control}
+                              register={register}
                               name={{
                                 length: `${name}.${index}.length`,
                                 item: `${name}.${index}.item`,

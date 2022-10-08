@@ -1,22 +1,22 @@
 import { Group, TextInput } from "@mantine/core";
 import type { FC } from "react";
-import type { FieldPath } from "react-hook-form";
+import type { Control, FieldPath, UseFormRegister } from "react-hook-form";
 import { useWatch } from "react-hook-form";
-import { useFormContext } from "react-hook-form";
 
 import { anyLabel, prefixLabel, suffixLabel } from "~/constants/form/label";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
 type StringOptionFormFieldProps = {
+  control: Control<ICreateJson>;
+  register: UseFormRegister<ICreateJson>;
   name: {
     stringDummyType: FilterFieldPath<FieldPath<ICreateJson>, "stringDummyType">;
     options: FilterFieldPath<FieldPath<ICreateJson>, "stringOptions">;
   };
 };
 
-export const StringOptionFormField: FC<StringOptionFormFieldProps> = ({ name }) => {
-  const { register, control } = useFormContext<ICreateJson>();
+export const StringOptionFormField: FC<StringOptionFormFieldProps> = ({ control, register, name }) => {
   const stringDummyType = useWatch({ name: name.stringDummyType, control });
 
   if (["autoIncrement", "fullName", "firstName", "lastName", "email"].includes(stringDummyType)) {

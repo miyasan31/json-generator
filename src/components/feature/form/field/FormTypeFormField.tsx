@@ -1,6 +1,7 @@
 import { Select } from "@mantine/core";
 import type { FC } from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import type { Control } from "react-hook-form";
+import { Controller } from "react-hook-form";
 
 import { appendValue } from "~/constants/form/appendValue";
 import { valueTypeLabel } from "~/constants/form/label";
@@ -8,6 +9,7 @@ import type { ArrayValueTypeOption, ObjectValueType, ObjectValueTypeOption } fro
 import type { ICreateJson } from "~/interfaces/useCase/json";
 
 type FormTypeFormFieldProps = {
+  control: Control<ICreateJson>;
   name:
     | `json.${number}`
     | `json.${number}.item`
@@ -18,9 +20,7 @@ type FormTypeFormFieldProps = {
   data: ObjectValueTypeOption[] | ArrayValueTypeOption[];
 };
 
-export const FormTypeFormField: FC<FormTypeFormFieldProps> = ({ data, name }) => {
-  const { control } = useFormContext<ICreateJson>();
-
+export const FormTypeFormField: FC<FormTypeFormFieldProps> = ({ data, control, name }) => {
   return (
     <Controller
       control={control}

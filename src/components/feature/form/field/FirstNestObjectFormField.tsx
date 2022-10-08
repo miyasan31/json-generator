@@ -40,6 +40,7 @@ export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({
   });
 
   const onRemove = useCallback((index: number) => remove(index), [remove]);
+
   const onAppend = useCallback(
     () =>
       append({
@@ -83,18 +84,22 @@ export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({
                       }}
                     />
 
-                    <FormTypeFormField data={objectValueTypeOption.slice(0, 3)} name={`${name}.${index}`} />
+                    <FormTypeFormField
+                      data={objectValueTypeOption.slice(0, 3)}
+                      control={control}
+                      name={`${name}.${index}`}
+                    />
 
-                    <FormTypeWatcher name={`${name}.${index}.valueType`} control={control}>
+                    <FormTypeWatcher control={control} name={`${name}.${index}.valueType`}>
                       {(value) => {
                         if (value === "string") {
-                          return <StringTypeFormField name={`${name}.${index}.stringDummyType`} />;
+                          return <StringTypeFormField control={control} name={`${name}.${index}.stringDummyType`} />;
                         }
                         if (value === "number") {
-                          return <NumberTypeFormField name={`${name}.${index}.numberDummyType`} />;
+                          return <NumberTypeFormField control={control} name={`${name}.${index}.numberDummyType`} />;
                         }
                         if (value === "boolean") {
-                          return <BooleanTypeFormField name={`${name}.${index}.booleanDummyType`} />;
+                          return <BooleanTypeFormField control={control} name={`${name}.${index}.booleanDummyType`} />;
                         }
                       }}
                     </FormTypeWatcher>
@@ -114,11 +119,13 @@ export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({
                   </Group>
 
                   {isVisible ? (
-                    <FormTypeWatcher name={`${name}.${index}.valueType`} control={control}>
+                    <FormTypeWatcher control={control} name={`${name}.${index}.valueType`}>
                       {(value) => {
                         if (value === "string") {
                           return (
                             <StringOptionFormField
+                              control={control}
+                              register={register}
                               name={{
                                 stringDummyType: `${name}.${index}.stringDummyType`,
                                 options: `${name}.${index}.stringOptions`,
@@ -130,6 +137,7 @@ export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({
                         if (value === "number") {
                           return (
                             <NumberOptionFormField
+                              control={control}
                               name={{
                                 numberDummyType: `${name}.${index}.numberDummyType`,
                                 options: `${name}.${index}.numberOptions`,

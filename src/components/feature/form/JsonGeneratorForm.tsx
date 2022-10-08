@@ -34,12 +34,14 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
   const {
     errors: { json },
   } = useFormState({ control });
+
   const { fields, remove, append } = useFieldArray({
     control,
     name: "json",
   });
 
   const onRemove = useCallback((index: number) => remove(index), [remove]);
+
   const onAppend = useCallback(
     () =>
       append({
@@ -84,18 +86,18 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
                       error={json && json[index]?.keyName?.message}
                     />
 
-                    <FormTypeFormField data={objectValueTypeOption} name={`json.${index}`} />
+                    <FormTypeFormField data={objectValueTypeOption} control={control} name={`json.${index}`} />
 
-                    <FormTypeWatcher name={`json.${index}.valueType`} control={control}>
+                    <FormTypeWatcher control={control} name={`json.${index}.valueType`}>
                       {(value) => {
                         if (value === "string") {
-                          return <StringTypeFormField name={`json.${index}.stringDummyType`} />;
+                          return <StringTypeFormField control={control} name={`json.${index}.stringDummyType`} />;
                         }
                         if (value === "number") {
-                          return <NumberTypeFormField name={`json.${index}.numberDummyType`} />;
+                          return <NumberTypeFormField control={control} name={`json.${index}.numberDummyType`} />;
                         }
                         if (value === "boolean") {
-                          return <BooleanTypeFormField name={`json.${index}.booleanDummyType`} />;
+                          return <BooleanTypeFormField control={control} name={`json.${index}.booleanDummyType`} />;
                         }
                       }}
                     </FormTypeWatcher>
@@ -115,11 +117,13 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
                   </Group>
 
                   {isVisible ? (
-                    <FormTypeWatcher name={`json.${index}.valueType`} control={control}>
+                    <FormTypeWatcher control={control} name={`json.${index}.valueType`}>
                       {(value) => {
                         if (value === "string") {
                           return (
                             <StringOptionFormField
+                              control={control}
+                              register={register}
                               name={{
                                 stringDummyType: `json.${index}.stringDummyType`,
                                 options: `json.${index}.stringOptions`,
@@ -131,6 +135,7 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
                         if (value === "number") {
                           return (
                             <NumberOptionFormField
+                              control={control}
                               name={{
                                 numberDummyType: `json.${index}.numberDummyType`,
                                 options: `json.${index}.numberOptions`,
@@ -142,6 +147,8 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
                         if (value === "array") {
                           return (
                             <ArrayOptionFormField
+                              control={control}
+                              register={register}
                               name={{
                                 length: `json.${index}.length`,
                                 item: `json.${index}.item`,
