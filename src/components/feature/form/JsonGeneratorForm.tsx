@@ -1,11 +1,11 @@
-import { ActionIcon, Button, Group, Select, Stack, TextInput, Tooltip } from "@mantine/core";
-import { IconX } from "@tabler/icons";
+import { Button, Group, Select, Stack, TextInput } from "@mantine/core";
 import type { FC } from "react";
 import { useCallback } from "react";
 import type { Control, UseFormRegister } from "react-hook-form";
 import { useFormState } from "react-hook-form";
 import { Controller, useFieldArray } from "react-hook-form";
 
+import { DeleteButton } from "~/components/feature/form/DeleteButton";
 import { ArrayOptionFormField } from "~/components/feature/form/field/ArrayOptionFormField";
 import { BooleanTypeFormField } from "~/components/feature/form/field/BooleanTypeFormField";
 import { NumberOptionFormField } from "~/components/feature/form/field/NumberOptionFormField";
@@ -19,7 +19,7 @@ import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatch
 import { Divider } from "~/components/shared/Divider";
 import { appendValue } from "~/constants/form/appendValue";
 import { formRules } from "~/constants/form/formRules";
-import { addKeyLabel, deleteTooltipLabel, keyNameLabel, valueTypeLabel } from "~/constants/form/label";
+import { addKeyLabel, keyNameLabel, valueTypeLabel } from "~/constants/form/label";
 import { objectValueTypeOption } from "~/constants/form/selectOption";
 import type { ObjectValueType } from "~/interfaces/model/object";
 import type { ICreateJson } from "~/interfaces/useCase/json";
@@ -128,19 +128,15 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
                     <OptionToggle
                       isVisible={isVisible}
                       onToggle={onToggle}
+                      control={control}
                       name={{
                         valueType: `json.${index}.valueType`,
                         stringDummyType: `json.${index}.stringDummyType`,
                         numberDummyType: `json.${index}.numberDummyType`,
                       }}
-                      control={control}
                     />
 
-                    <Tooltip label={deleteTooltipLabel} position="top-start">
-                      <ActionIcon mt={26} component="button" onClick={() => onRemove(index)}>
-                        <IconX size={16} color="red" />
-                      </ActionIcon>
-                    </Tooltip>
+                    <DeleteButton index={index} onRemove={onRemove} />
                   </Group>
 
                   {isVisible ? (
