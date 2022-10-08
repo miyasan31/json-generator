@@ -1,8 +1,9 @@
-import { Group, NumberInput, Select, Stack } from "@mantine/core";
+import { Group, Select, Stack } from "@mantine/core";
 import type { FC } from "react";
 import type { FieldPath } from "react-hook-form";
 import { Controller, useFormContext } from "react-hook-form";
 
+import { ArrayLengthFormField } from "~/components/feature/form/field/ArrayLengthFormField";
 import { BooleanTypeFormField } from "~/components/feature/form/field/BooleanTypeFormField";
 import { FirstNestObjectFormField } from "~/components/feature/form/field/FirstNestObjectFormField";
 import { NumberOptionFormField } from "~/components/feature/form/field/NumberOptionFormField";
@@ -14,7 +15,7 @@ import { OptionToggle } from "~/components/feature/form/OptionToggle";
 import { ArrayTypeWatcher } from "~/components/feature/form/watcher/ArrayTypeWatcher";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { appendValue } from "~/constants/form/appendValue";
-import { generateLengthLabel, valueTypeLabel } from "~/constants/form/label";
+import { valueTypeLabel } from "~/constants/form/label";
 import { arrayValueTypeOption } from "~/constants/form/selectOption";
 import type { ObjectValueType } from "~/interfaces/model/object";
 import type { ICreateJson } from "~/interfaces/useCase/json";
@@ -44,26 +45,7 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ name }) =>
           })}
         >
           <Group spacing="xs" align="flex-start">
-            <Controller
-              control={control}
-              name={`${name.length}`}
-              render={({ field: { onChange, value } }) => {
-                return (
-                  <NumberInput
-                    defaultValue={5}
-                    min={1}
-                    max={20}
-                    size="xs"
-                    label={generateLengthLabel}
-                    value={value}
-                    onChange={onChange}
-                    sx={{
-                      flex: 1,
-                    }}
-                  />
-                );
-              }}
-            />
+            <ArrayLengthFormField name={`${name.length}`} />
 
             <Controller
               control={control}
@@ -91,7 +73,6 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ name }) =>
                 );
               }}
             />
-
             <FormTypeWatcher name={`${name.item}.valueType`} control={control}>
               {(value) => {
                 if (value === "string") {
@@ -105,7 +86,6 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ name }) =>
                 }
               }}
             </FormTypeWatcher>
-
             <OptionToggle
               isVisible={isVisible}
               onToggle={onToggle}

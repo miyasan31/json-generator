@@ -21,9 +21,8 @@ export const ArrayLengthFormField: FC<ArrayLengthFormFieldProps> = ({ name }) =>
       render={({ field: { onChange, value } }) => {
         return (
           <NumberInput
-            defaultValue={5}
             min={1}
-            max={100}
+            max={20}
             size="xs"
             label={generateLengthLabel}
             value={value}
