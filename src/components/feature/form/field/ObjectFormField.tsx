@@ -1,13 +1,14 @@
-import { Group, Select, Stack, TextInput } from "@mantine/core";
+import { Group, Stack, TextInput } from "@mantine/core";
 import type { FC } from "react";
 import { useCallback } from "react";
 import type { Control, UseFormRegister } from "react-hook-form";
-import { Controller, useFieldArray } from "react-hook-form";
+import { useFieldArray } from "react-hook-form";
 
 import { AddKeyButton } from "~/components/feature/form/AddKeyButton";
 import { DeleteButton } from "~/components/feature/form/DeleteButton";
 import { BooleanTypeFormField } from "~/components/feature/form/field/BooleanTypeFormField";
 import { FirstNestArrayOptionFormField } from "~/components/feature/form/field/FirstNestArrayOptionFormField";
+import { FormTypeFormField } from "~/components/feature/form/field/FormTypeFormField";
 import { NumberOptionFormField } from "~/components/feature/form/field/NumberOptionFormField";
 import { NumberTypeFormField } from "~/components/feature/form/field/NumberTypeFormField";
 import { StringOptionFormField } from "~/components/feature/form/field/StringOptionFormField";
@@ -16,11 +17,9 @@ import { OptionController } from "~/components/feature/form/OptionController";
 import { OptionToggleButton } from "~/components/feature/form/OptionToggleButton";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { Divider } from "~/components/shared/Divider";
-import { appendValue } from "~/constants/form/appendValue";
 import { formRules } from "~/constants/form/formRules";
-import { keyNameLabel, valueTypeLabel } from "~/constants/form/label";
+import { keyNameLabel } from "~/constants/form/label";
 import { objectValueTypeOption } from "~/constants/form/selectOption";
-import type { ObjectValueType } from "~/interfaces/model/object";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 
 type Props = {
@@ -80,32 +79,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                       }}
                     />
 
-                    <Controller
-                      control={control}
-                      name={`${name}.${index}`}
-                      render={({ field: { onChange, value } }) => {
-                        const onChangeValue = (changeValue: ObjectValueType) => {
-                          onChange({
-                            keyName: value.keyName,
-                            valueType: changeValue,
-                            ...appendValue[changeValue],
-                          });
-                        };
-                        return (
-                          <Select
-                            size="xs"
-                            searchable
-                            label={valueTypeLabel}
-                            value={value.valueType}
-                            onChange={onChangeValue}
-                            data={objectValueTypeOption.slice(0, 4)}
-                            sx={{
-                              flex: 1,
-                            }}
-                          />
-                        );
-                      }}
-                    />
+                    <FormTypeFormField data={objectValueTypeOption.slice(0, 4)} name={`${name}.${index}`} />
 
                     <FormTypeWatcher name={`${name}.${index}.valueType`} control={control}>
                       {(value) => {

@@ -1,10 +1,11 @@
-import { Group, Select, Stack } from "@mantine/core";
+import { Group, Stack } from "@mantine/core";
 import type { FC } from "react";
 import type { FieldPath } from "react-hook-form";
-import { Controller, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 import { ArrayLengthFormField } from "~/components/feature/form/field/ArrayLengthFormField";
 import { BooleanTypeFormField } from "~/components/feature/form/field/BooleanTypeFormField";
+import { FormTypeFormField } from "~/components/feature/form/field/FormTypeFormField";
 import { NumberOptionFormField } from "~/components/feature/form/field/NumberOptionFormField";
 import { NumberTypeFormField } from "~/components/feature/form/field/NumberTypeFormField";
 import { StringOptionFormField } from "~/components/feature/form/field/StringOptionFormField";
@@ -13,10 +14,7 @@ import { OptionController } from "~/components/feature/form/OptionController";
 import { OptionToggleButton } from "~/components/feature/form/OptionToggleButton";
 import { ArrayTypeWatcher } from "~/components/feature/form/watcher/ArrayTypeWatcher";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
-import { appendValue } from "~/constants/form/appendValue";
-import { valueTypeLabel } from "~/constants/form/label";
 import { arrayValueTypeOption } from "~/constants/form/selectOption";
-import type { ObjectValueType } from "~/interfaces/model/object";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
@@ -46,32 +44,7 @@ export const FirstNestArrayOptionFormField: FC<FirstNestArrayOptionFormFieldProp
           <Group spacing="xs" align="flex-start">
             <ArrayLengthFormField name={`${name.length}`} />
 
-            <Controller
-              control={control}
-              name={`${name.item}`}
-              render={({ field: { onChange, value } }) => {
-                const onChangeValue = (changeValue: ObjectValueType) => {
-                  onChange({
-                    keyName: value.keyName,
-                    valueType: changeValue,
-                    ...appendValue[changeValue],
-                  });
-                };
-                return (
-                  <Select
-                    size="xs"
-                    searchable
-                    label={valueTypeLabel}
-                    value={value.valueType}
-                    onChange={onChangeValue}
-                    data={arrayValueTypeOption.slice(0, 3)}
-                    sx={{
-                      flex: 1,
-                    }}
-                  />
-                );
-              }}
-            />
+            <FormTypeFormField data={arrayValueTypeOption.slice(0, 3)} name={`${name.item}`} />
 
             <FormTypeWatcher name={`${name.item}.valueType`} control={control}>
               {(value) => {
