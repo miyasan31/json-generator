@@ -1,4 +1,4 @@
-import { Group, Stack, TextInput } from "@mantine/core";
+import { Group, Stack } from "@mantine/core";
 import type { FC } from "react";
 import type { Control, UseFormRegister } from "react-hook-form";
 
@@ -7,6 +7,7 @@ import { DeleteButton } from "~/components/feature/form/DeleteButton";
 import { BooleanTypeFormField } from "~/components/feature/form/field/BooleanTypeFormField";
 import { FirstNestArrayOptionFormField } from "~/components/feature/form/field/FirstNestArrayOptionFormField";
 import { FormTypeFormField } from "~/components/feature/form/field/FormTypeFormField";
+import { KeyNameFormField } from "~/components/feature/form/field/KeyNameFormField";
 import { NumberOptionFormField } from "~/components/feature/form/field/NumberOptionFormField";
 import { NumberTypeFormField } from "~/components/feature/form/field/NumberTypeFormField";
 import { StringOptionFormField } from "~/components/feature/form/field/StringOptionFormField";
@@ -16,8 +17,6 @@ import { OptionToggleButton } from "~/components/feature/form/OptionToggleButton
 import { useObjectFormField } from "~/components/feature/form/useObjectFormField";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { Divider } from "~/components/shared/Divider";
-import { formRules } from "~/constants/form/formRules";
-import { keyNameLabel } from "~/constants/form/label";
 import { objectValueTypeOption } from "~/constants/form/selectOption";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 
@@ -50,15 +49,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
               <>
                 <Stack spacing="xs">
                   <Group spacing="xs" align="flex-start">
-                    <TextInput
-                      required
-                      size="xs"
-                      label={keyNameLabel}
-                      {...register(`${name}.${index}.keyName`, formRules.keyName)}
-                      sx={{
-                        flex: 2,
-                      }}
-                    />
+                    <KeyNameFormField register={register} name={`${name}.${index}.keyName`} />
 
                     <FormTypeFormField
                       data={objectValueTypeOption.slice(0, 4)}
