@@ -1,9 +1,10 @@
-import { Button, Group, Select, Stack, TextInput } from "@mantine/core";
+import { Group, Select, Stack, TextInput } from "@mantine/core";
 import type { FC } from "react";
 import { useCallback } from "react";
 import type { Control, UseFormRegister } from "react-hook-form";
 import { Controller, useFieldArray } from "react-hook-form";
 
+import { AddKeyButton } from "~/components/feature/form/AddKeyButton";
 import { DeleteButton } from "~/components/feature/form/DeleteButton";
 import { BooleanTypeFormField } from "~/components/feature/form/field/BooleanTypeFormField";
 import { FirstNestArrayOptionFormField } from "~/components/feature/form/field/FirstNestArrayOptionFormField";
@@ -17,7 +18,7 @@ import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatch
 import { Divider } from "~/components/shared/Divider";
 import { appendValue } from "~/constants/form/appendValue";
 import { formRules } from "~/constants/form/formRules";
-import { addKeyLabel, keyNameLabel, valueTypeLabel } from "~/constants/form/label";
+import { keyNameLabel, valueTypeLabel } from "~/constants/form/label";
 import { objectValueTypeOption } from "~/constants/form/selectOption";
 import type { ObjectValueType } from "~/interfaces/model/object";
 import type { ICreateJson } from "~/interfaces/useCase/json";
@@ -181,9 +182,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
         );
       })}
 
-      <Button size="xs" mt="xs" type="button" color="red" variant="outline" onClick={onAppend}>
-        {addKeyLabel}
-      </Button>
+      <AddKeyButton onAppend={onAppend} />
     </Stack>
   );
 };
