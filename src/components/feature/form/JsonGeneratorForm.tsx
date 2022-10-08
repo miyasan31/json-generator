@@ -1,9 +1,7 @@
 import { Group, Stack, TextInput } from "@mantine/core";
 import type { FC } from "react";
-import { useCallback } from "react";
 import type { Control, UseFormRegister } from "react-hook-form";
 import { useFormState } from "react-hook-form";
-import { useFieldArray } from "react-hook-form";
 
 import { AddKeyButton } from "~/components/feature/form/AddKeyButton";
 import { DeleteButton } from "~/components/feature/form/DeleteButton";
@@ -17,6 +15,7 @@ import { StringOptionFormField } from "~/components/feature/form/field/StringOpt
 import { StringTypeFormField } from "~/components/feature/form/field/StringTypeFormField";
 import { OptionController } from "~/components/feature/form/OptionController";
 import { OptionToggleButton } from "~/components/feature/form/OptionToggleButton";
+import { useObjectFormField } from "~/components/feature/form/useObjectFormField";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { Divider } from "~/components/shared/Divider";
 import { formRules } from "~/constants/form/formRules";
@@ -31,30 +30,11 @@ type JsonGeneratorFormProps = {
 };
 
 export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, register, border = true }) => {
+  const { fields, onAppend, onRemove } = useObjectFormField("json", control);
+
   const {
     errors: { json },
   } = useFormState({ control });
-
-  const { fields, remove, append } = useFieldArray({
-    control,
-    name: "json",
-  });
-
-  const onRemove = useCallback((index: number) => remove(index), [remove]);
-
-  const onAppend = useCallback(
-    () =>
-      append({
-        keyName: "",
-        valueType: "string",
-        stringDummyType: "autoIncrement",
-        stringOptions: {
-          prefix: "",
-          suffix: "",
-        },
-      }),
-    [append],
-  );
 
   return (
     <Stack
