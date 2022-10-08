@@ -4,12 +4,12 @@ import { useState } from "react";
 
 import type { ObjectValueType } from "~/interfaces/model/object";
 
-type ArrayTypeWatcherProps = {
+type OptionControllerProps = {
   type: ObjectValueType;
   children: (isVisible: boolean, onToggle: () => void) => ReactNode;
 };
 
-export const OptionVisibleWatcher: FC<ArrayTypeWatcherProps> = ({ type, children }) => {
+export const OptionController: FC<OptionControllerProps> = ({ type, children }) => {
   const [isVisible, setIsVisible] = useState(["array", "object"].includes(type));
   const onToggle = useCallback(() => setIsVisible((prev) => !prev), []);
   return <>{children(isVisible, onToggle)}</>;

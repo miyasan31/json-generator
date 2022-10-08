@@ -1,5 +1,4 @@
-import { ActionIcon, Group, NumberInput, Select, Space, Stack } from "@mantine/core";
-import { IconChevronDown, IconChevronUp } from "@tabler/icons";
+import { Group, NumberInput, Select, Stack } from "@mantine/core";
 import type { FC } from "react";
 import type { FieldPath } from "react-hook-form";
 import { Controller, useFormContext } from "react-hook-form";
@@ -10,10 +9,10 @@ import { NumberOptionFormField } from "~/components/feature/form/field/NumberOpt
 import { NumberTypeFormField } from "~/components/feature/form/field/NumberTypeFormField";
 import { StringOptionFormField } from "~/components/feature/form/field/StringOptionFormField";
 import { StringTypeFormField } from "~/components/feature/form/field/StringTypeFormField";
+import { OptionController } from "~/components/feature/form/OptionController";
+import { OptionToggle } from "~/components/feature/form/OptionToggle";
 import { ArrayTypeWatcher } from "~/components/feature/form/watcher/ArrayTypeWatcher";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
-import { OptionVisibleWatcher } from "~/components/feature/form/watcher/OptionVisibleWatcher";
-import { OptionWatcher } from "~/components/feature/form/watcher/OptionWatcher";
 import { appendValue } from "~/constants/form/appendValue";
 import { generateLengthLabel, valueTypeLabel } from "~/constants/form/label";
 import { arrayValueTypeOption } from "~/constants/form/selectOption";
@@ -32,7 +31,7 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ name }) =>
   const { control, register } = useFormContext<ICreateJson>();
 
   return (
-    <OptionVisibleWatcher type="array">
+    <OptionController type="array">
       {(isVisible, onToggle) => (
         <Stack
           spacing="xs"
@@ -107,23 +106,16 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ name }) =>
               }}
             </FormTypeWatcher>
 
-            <OptionWatcher
+            <OptionToggle
+              isVisible={isVisible}
+              onToggle={onToggle}
               name={{
                 valueType: `${name.item}.valueType`,
                 stringDummyType: `${name.item}.stringDummyType`,
                 numberDummyType: `${name.item}.numberDummyType`,
               }}
               control={control}
-            >
-              {(isOptionVisible) => {
-                if (!isOptionVisible) return <Space w={28} />;
-                return (
-                  <ActionIcon mt={26} component="button" onClick={onToggle}>
-                    {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
-                  </ActionIcon>
-                );
-              }}
-            </OptionWatcher>
+            />
           </Group>
 
           {isVisible ? (
@@ -161,6 +153,6 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ name }) =>
           ) : null}
         </Stack>
       )}
-    </OptionVisibleWatcher>
+    </OptionController>
   );
 };

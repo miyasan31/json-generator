@@ -1,5 +1,5 @@
-import { ActionIcon, Button, Group, Select, Space, Stack, TextInput, Tooltip } from "@mantine/core";
-import { IconChevronDown, IconChevronUp, IconX } from "@tabler/icons";
+import { ActionIcon, Button, Group, Select, Stack, TextInput, Tooltip } from "@mantine/core";
+import { IconX } from "@tabler/icons";
 import type { FC } from "react";
 import { useCallback } from "react";
 import type { Control, UseFormRegister } from "react-hook-form";
@@ -13,9 +13,9 @@ import { NumberTypeFormField } from "~/components/feature/form/field/NumberTypeF
 import { ObjectFormField } from "~/components/feature/form/field/ObjectFormField";
 import { StringOptionFormField } from "~/components/feature/form/field/StringOptionFormField";
 import { StringTypeFormField } from "~/components/feature/form/field/StringTypeFormField";
+import { OptionController } from "~/components/feature/form/OptionController";
+import { OptionToggle } from "~/components/feature/form/OptionToggle";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
-import { OptionVisibleWatcher } from "~/components/feature/form/watcher/OptionVisibleWatcher";
-import { OptionWatcher } from "~/components/feature/form/watcher/OptionWatcher";
 import { Divider } from "~/components/shared/Divider";
 import { appendValue } from "~/constants/form/appendValue";
 import { formRules } from "~/constants/form/formRules";
@@ -68,7 +68,7 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
     >
       {fields.map((item, index) => {
         return (
-          <OptionVisibleWatcher key={item.id} type={item.valueType}>
+          <OptionController key={item.id} type={item.valueType}>
             {(isVisible, onToggle) => (
               <>
                 <Stack spacing="xs">
@@ -125,23 +125,16 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
                       }}
                     </FormTypeWatcher>
 
-                    <OptionWatcher
+                    <OptionToggle
+                      isVisible={isVisible}
+                      onToggle={onToggle}
                       name={{
                         valueType: `json.${index}.valueType`,
                         stringDummyType: `json.${index}.stringDummyType`,
                         numberDummyType: `json.${index}.numberDummyType`,
                       }}
                       control={control}
-                    >
-                      {(isOptionVisible) => {
-                        if (!isOptionVisible) return <Space w={28} />;
-                        return (
-                          <ActionIcon mt={26} component="button" onClick={onToggle}>
-                            {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
-                          </ActionIcon>
-                        );
-                      }}
-                    </OptionWatcher>
+                    />
 
                     <Tooltip label={deleteTooltipLabel} position="top-start">
                       <ActionIcon mt={26} component="button" onClick={() => onRemove(index)}>
@@ -199,7 +192,7 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
                 <Divider />
               </>
             )}
-          </OptionVisibleWatcher>
+          </OptionController>
         );
       })}
 

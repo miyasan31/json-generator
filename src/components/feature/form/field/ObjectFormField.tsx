@@ -1,5 +1,5 @@
-import { ActionIcon, Button, Group, Select, Space, Stack, TextInput, Tooltip } from "@mantine/core";
-import { IconChevronDown, IconChevronUp, IconX } from "@tabler/icons";
+import { ActionIcon, Button, Group, Select, Stack, TextInput, Tooltip } from "@mantine/core";
+import { IconX } from "@tabler/icons";
 import type { FC } from "react";
 import { useCallback } from "react";
 import type { Control, UseFormRegister } from "react-hook-form";
@@ -11,9 +11,9 @@ import { NumberOptionFormField } from "~/components/feature/form/field/NumberOpt
 import { NumberTypeFormField } from "~/components/feature/form/field/NumberTypeFormField";
 import { StringOptionFormField } from "~/components/feature/form/field/StringOptionFormField";
 import { StringTypeFormField } from "~/components/feature/form/field/StringTypeFormField";
+import { OptionController } from "~/components/feature/form/OptionController";
+import { OptionToggle } from "~/components/feature/form/OptionToggle";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
-import { OptionVisibleWatcher } from "~/components/feature/form/watcher/OptionVisibleWatcher";
-import { OptionWatcher } from "~/components/feature/form/watcher/OptionWatcher";
 import { Divider } from "~/components/shared/Divider";
 import { appendValue } from "~/constants/form/appendValue";
 import { formRules } from "~/constants/form/formRules";
@@ -64,7 +64,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
     >
       {fields.map((item, index) => {
         return (
-          <OptionVisibleWatcher key={item.id} type={item.valueType}>
+          <OptionController key={item.id} type={item.valueType}>
             {(isVisible, onToggle) => (
               <>
                 <Stack spacing="xs">
@@ -120,23 +120,16 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                       }}
                     </FormTypeWatcher>
 
-                    <OptionWatcher
+                    <OptionToggle
+                      isVisible={isVisible}
+                      onToggle={onToggle}
                       name={{
                         valueType: `${name}.${index}.valueType`,
                         stringDummyType: `${name}.${index}.stringDummyType`,
                         numberDummyType: `${name}.${index}.numberDummyType`,
                       }}
                       control={control}
-                    >
-                      {(isOptionVisible) => {
-                        if (!isOptionVisible) return <Space w={28} />;
-                        return (
-                          <ActionIcon mt={26} component="button" onClick={onToggle}>
-                            {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
-                          </ActionIcon>
-                        );
-                      }}
-                    </OptionWatcher>
+                    />
 
                     <Tooltip label={deleteTooltipLabel} position="top-start">
                       <ActionIcon mt={26} component="button" onClick={() => onRemove(index)}>
@@ -188,7 +181,7 @@ export const ObjectFormField: FC<Props> = ({ name, control, register, border = t
                 <Divider />
               </>
             )}
-          </OptionVisibleWatcher>
+          </OptionController>
         );
       })}
 
