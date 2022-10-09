@@ -1,6 +1,6 @@
 import { Group, Stack } from "@mantine/core";
 import type { FC } from "react";
-import type { Control, FieldPath, UseFormRegister } from "react-hook-form";
+import type { FieldPath } from "react-hook-form";
 
 import { OptionToggleButton } from "~/components/feature/form/button/OptionToggleButton";
 import { FormTypeField } from "~/components/feature/form/field/FormTypeField";
@@ -19,15 +19,13 @@ import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
 type SecondNestArrayOptionFieldProps = {
-  control: Control<ICreateJson>;
-  register: UseFormRegister<ICreateJson>;
   name: {
     length: FilterFieldPath<FieldPath<ICreateJson>, "length">;
     item: `json.${number}.object.${number}.item`;
   };
 };
 
-export const SecondNestArrayOptionField: FC<SecondNestArrayOptionFieldProps> = ({ control, register, name }) => {
+export const SecondNestArrayOptionField: FC<SecondNestArrayOptionFieldProps> = ({ name }) => {
   const { classes } = useObjectFieldStyle({ isBorder: true });
 
   return (
@@ -35,22 +33,22 @@ export const SecondNestArrayOptionField: FC<SecondNestArrayOptionFieldProps> = (
       {(isVisible, onToggle) => (
         <Stack spacing="xs" className={classes.root}>
           <Group spacing="xs" align="flex-start">
-            <ArrayLengthField control={control} name={`${name.length}`} />
+            <ArrayLengthField name={`${name.length}`} />
 
-            <FormTypeField data={arrayValueTypeOption.slice(0, 3)} control={control} name={`${name.item}`} />
+            <FormTypeField data={arrayValueTypeOption.slice(0, 3)} name={`${name.item}`} />
 
-            <FormTypeWatcher control={control} name={`${name.item}.valueType`}>
+            <FormTypeWatcher name={`${name.item}.valueType`}>
               {(value) => {
                 if (value === "string") {
-                  return <StringTypeField control={control} name={`${name.item}.stringDummyType`} />;
+                  return <StringTypeField name={`${name.item}.stringDummyType`} />;
                 }
 
                 if (value === "number") {
-                  return <NumberTypeField control={control} name={`${name.item}.numberDummyType`} />;
+                  return <NumberTypeField name={`${name.item}.numberDummyType`} />;
                 }
 
                 if (value === "boolean") {
-                  return <BooleanTypeField control={control} name={`${name.item}.booleanDummyType`} />;
+                  return <BooleanTypeField name={`${name.item}.booleanDummyType`} />;
                 }
               }}
             </FormTypeWatcher>
@@ -63,18 +61,15 @@ export const SecondNestArrayOptionField: FC<SecondNestArrayOptionFieldProps> = (
                 stringDummyType: `${name.item}.stringDummyType`,
                 numberDummyType: `${name.item}.numberDummyType`,
               }}
-              control={control}
             />
           </Group>
 
           {isVisible ? (
-            <ArrayTypeWatcher control={control} name={`${name.item}.valueType`}>
+            <ArrayTypeWatcher name={`${name.item}.valueType`}>
               {(value) => {
                 if (value === "string") {
                   return (
                     <StringOptionField
-                      control={control}
-                      register={register}
                       name={{
                         stringDummyType: `${name.item}.stringDummyType`,
                         options: `${name.item}.stringOptions`,
@@ -86,7 +81,6 @@ export const SecondNestArrayOptionField: FC<SecondNestArrayOptionFieldProps> = (
                 if (value === "number") {
                   return (
                     <NumberOptionField
-                      control={control}
                       name={{
                         numberDummyType: `${name.item}.numberDummyType`,
                         options: `${name.item}.numberOptions`,

@@ -1,6 +1,4 @@
 import { Group, Stack } from "@mantine/core";
-import type { FC } from "react";
-import type { Control, UseFormRegister } from "react-hook-form";
 
 import { AddKeyButton } from "~/components/feature/form/button/AddKeyButton";
 import { DeleteButton } from "~/components/feature/form/button/DeleteButton";
@@ -20,16 +18,10 @@ import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatch
 import { OptionController } from "~/components/feature/form/watcher/OptionController";
 import { Divider } from "~/components/shared/Divider";
 import { objectValueTypeOption } from "~/constants/form/selectOption";
-import type { ICreateJson } from "~/interfaces/useCase/json";
 
-type ObjectFieldProps = {
-  control: Control<ICreateJson>;
-  register: UseFormRegister<ICreateJson>;
-};
-
-export const ObjectField: FC<ObjectFieldProps> = ({ control, register }) => {
+export const ObjectField = () => {
   const { classes } = useObjectFieldStyle({ isBorder: false });
-  const { fields, onAppend, onRemove } = useObjectField("json", control);
+  const { fields, onAppend, onRemove } = useObjectField("json");
 
   return (
     <Stack spacing="xs" className={classes.root}>
@@ -40,22 +32,22 @@ export const ObjectField: FC<ObjectFieldProps> = ({ control, register }) => {
               <>
                 <Stack spacing="xs">
                   <Group spacing="xs" align="flex-start">
-                    <KeyNameField control={control} register={register} name={`json.${index}.keyName`} />
+                    <KeyNameField name={`json.${index}.keyName`} />
 
-                    <FormTypeField data={objectValueTypeOption} control={control} name={`json.${index}`} />
+                    <FormTypeField data={objectValueTypeOption} name={`json.${index}`} />
 
-                    <FormTypeWatcher control={control} name={`json.${index}.valueType`}>
+                    <FormTypeWatcher name={`json.${index}.valueType`}>
                       {(value) => {
                         if (value === "string") {
-                          return <StringTypeField control={control} name={`json.${index}.stringDummyType`} />;
+                          return <StringTypeField name={`json.${index}.stringDummyType`} />;
                         }
 
                         if (value === "number") {
-                          return <NumberTypeField control={control} name={`json.${index}.numberDummyType`} />;
+                          return <NumberTypeField name={`json.${index}.numberDummyType`} />;
                         }
 
                         if (value === "boolean") {
-                          return <BooleanTypeField control={control} name={`json.${index}.booleanDummyType`} />;
+                          return <BooleanTypeField name={`json.${index}.booleanDummyType`} />;
                         }
                       }}
                     </FormTypeWatcher>
@@ -63,7 +55,6 @@ export const ObjectField: FC<ObjectFieldProps> = ({ control, register }) => {
                     <OptionToggleButton
                       isVisible={isVisible}
                       onToggle={onToggle}
-                      control={control}
                       name={{
                         valueType: `json.${index}.valueType`,
                         stringDummyType: `json.${index}.stringDummyType`,
@@ -75,13 +66,11 @@ export const ObjectField: FC<ObjectFieldProps> = ({ control, register }) => {
                   </Group>
 
                   {isVisible ? (
-                    <FormTypeWatcher control={control} name={`json.${index}.valueType`}>
+                    <FormTypeWatcher name={`json.${index}.valueType`}>
                       {(value) => {
                         if (value === "string") {
                           return (
                             <StringOptionField
-                              control={control}
-                              register={register}
                               name={{
                                 stringDummyType: `json.${index}.stringDummyType`,
                                 options: `json.${index}.stringOptions`,
@@ -93,7 +82,6 @@ export const ObjectField: FC<ObjectFieldProps> = ({ control, register }) => {
                         if (value === "number") {
                           return (
                             <NumberOptionField
-                              control={control}
                               name={{
                                 numberDummyType: `json.${index}.numberDummyType`,
                                 options: `json.${index}.numberOptions`,
@@ -105,8 +93,6 @@ export const ObjectField: FC<ObjectFieldProps> = ({ control, register }) => {
                         if (value === "array") {
                           return (
                             <FirstNestArrayOptionField
-                              control={control}
-                              register={register}
                               name={{
                                 length: `json.${index}.length`,
                                 item: `json.${index}.item`,
@@ -116,9 +102,7 @@ export const ObjectField: FC<ObjectFieldProps> = ({ control, register }) => {
                         }
 
                         if (value === "object") {
-                          return (
-                            <FirstNestObjectField register={register} control={control} name={`json.${index}.object`} />
-                          );
+                          return <FirstNestObjectField name={`json.${index}.object`} />;
                         }
                       }}
                     </FormTypeWatcher>

@@ -1,14 +1,14 @@
 import { createStyles } from "@mantine/core";
 import { Prism } from "@mantine/prism";
 import { useMemo } from "react";
-import { useFormContext, useWatch } from "react-hook-form";
+import { useWatch } from "react-hook-form";
 
-import type { ICreateJson } from "~/interfaces/useCase/json";
+import { useCreateJsonFormContext } from "~/components/page/public/Root/Root.page";
 import { jsonGenerator } from "~/utils/jsonGenerator";
 
 export const OutputLayout = () => {
   const { classes } = useStyle();
-  const { control } = useFormContext<ICreateJson>();
+  const { control } = useCreateJsonFormContext();
   const value = useWatch({ name: "json", control });
 
   const object = useMemo(() => {

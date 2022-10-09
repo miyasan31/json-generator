@@ -1,21 +1,22 @@
 import { Group, NumberInput } from "@mantine/core";
 import type { FC } from "react";
-import type { Control, FieldPath } from "react-hook-form";
+import type { FieldPath } from "react-hook-form";
 import { useWatch } from "react-hook-form";
 import { Controller } from "react-hook-form";
 
+import { useCreateJsonFormContext } from "~/components/page/public/Root/Root.page";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
 type NumberOptionFieldProps = {
-  control: Control<ICreateJson>;
   name: {
     numberDummyType: FilterFieldPath<FieldPath<ICreateJson>, "numberDummyType">;
     options: FilterFieldPath<FieldPath<ICreateJson>, "numberOptions">;
   };
 };
 
-export const NumberOptionField: FC<NumberOptionFieldProps> = ({ control, name }) => {
+export const NumberOptionField: FC<NumberOptionFieldProps> = ({ name }) => {
+  const { control } = useCreateJsonFormContext();
   const numberDummyType = useWatch({ name: name.numberDummyType, control });
 
   if (["random", "age", "height", "weight", "price"].includes(numberDummyType)) {

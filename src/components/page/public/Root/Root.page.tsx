@@ -1,7 +1,7 @@
 import { Button, createStyles, Group, Select, Stack } from "@mantine/core";
 import { showNotification, updateNotification } from "@mantine/notifications";
 import { useCallback, useState } from "react";
-import { Controller, FormProvider } from "react-hook-form";
+import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
 import { JsonGenerateModal } from "~/components/feature/modal/JsonGenerateModal";
 import { JsonInputModal } from "~/components/feature/modal/JsonInputModal";
@@ -18,6 +18,8 @@ import { supabaseService } from "~/services/supabase.service";
 import { onEnterKeySubmitBlock } from "~/utils/onEnterKeySubmitBlock";
 
 const { useCreateJson } = supabaseService;
+
+export const useCreateJsonFormContext = useFormContext<ICreateJson>;
 
 export const Root = () => {
   const {

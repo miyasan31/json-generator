@@ -1,6 +1,5 @@
 import { Group, Stack } from "@mantine/core";
 import type { FC } from "react";
-import type { Control, UseFormRegister } from "react-hook-form";
 
 import { AddKeyButton } from "~/components/feature/form/button/AddKeyButton";
 import { DeleteButton } from "~/components/feature/form/button/DeleteButton";
@@ -18,17 +17,14 @@ import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatch
 import { OptionController } from "~/components/feature/form/watcher/OptionController";
 import { Divider } from "~/components/shared/Divider";
 import { objectValueTypeOption } from "~/constants/form/selectOption";
-import type { ICreateJson } from "~/interfaces/useCase/json";
 
 type SecondNestObjectFieldProps = {
   name: `json.${number}.item.object` | `json.${number}.object.${number}.object`;
-  control: Control<ICreateJson>;
-  register: UseFormRegister<ICreateJson>;
 };
 
-export const SecondNestObjectField: FC<SecondNestObjectFieldProps> = ({ name, control, register }) => {
+export const SecondNestObjectField: FC<SecondNestObjectFieldProps> = ({ name }) => {
   const { classes } = useObjectFieldStyle({ isBorder: true });
-  const { fields, onAppend, onRemove } = useObjectField(name, control);
+  const { fields, onAppend, onRemove } = useObjectField(name);
 
   return (
     <Stack spacing="xs" className={classes.root}>
@@ -39,26 +35,22 @@ export const SecondNestObjectField: FC<SecondNestObjectFieldProps> = ({ name, co
               <>
                 <Stack spacing="xs">
                   <Group spacing="xs" align="flex-start">
-                    <KeyNameField register={register} name={`${name}.${index}.keyName`} />
+                    <KeyNameField name={`${name}.${index}.keyName`} />
 
-                    <FormTypeField
-                      data={objectValueTypeOption.slice(0, 3)}
-                      control={control}
-                      name={`${name}.${index}`}
-                    />
+                    <FormTypeField data={objectValueTypeOption.slice(0, 3)} name={`${name}.${index}`} />
 
-                    <FormTypeWatcher control={control} name={`${name}.${index}.valueType`}>
+                    <FormTypeWatcher name={`${name}.${index}.valueType`}>
                       {(value) => {
                         if (value === "string") {
-                          return <StringTypeField control={control} name={`${name}.${index}.stringDummyType`} />;
+                          return <StringTypeField name={`${name}.${index}.stringDummyType`} />;
                         }
 
                         if (value === "number") {
-                          return <NumberTypeField control={control} name={`${name}.${index}.numberDummyType`} />;
+                          return <NumberTypeField name={`${name}.${index}.numberDummyType`} />;
                         }
 
                         if (value === "boolean") {
-                          return <BooleanTypeField control={control} name={`${name}.${index}.booleanDummyType`} />;
+                          return <BooleanTypeField name={`${name}.${index}.booleanDummyType`} />;
                         }
                       }}
                     </FormTypeWatcher>
@@ -66,7 +58,6 @@ export const SecondNestObjectField: FC<SecondNestObjectFieldProps> = ({ name, co
                     <OptionToggleButton
                       isVisible={isVisible}
                       onToggle={onToggle}
-                      control={control}
                       name={{
                         valueType: `${name}.${index}.valueType`,
                         stringDummyType: `${name}.${index}.stringDummyType`,
@@ -78,13 +69,11 @@ export const SecondNestObjectField: FC<SecondNestObjectFieldProps> = ({ name, co
                   </Group>
 
                   {isVisible ? (
-                    <FormTypeWatcher control={control} name={`${name}.${index}.valueType`}>
+                    <FormTypeWatcher name={`${name}.${index}.valueType`}>
                       {(value) => {
                         if (value === "string") {
                           return (
                             <StringOptionField
-                              control={control}
-                              register={register}
                               name={{
                                 stringDummyType: `${name}.${index}.stringDummyType`,
                                 options: `${name}.${index}.stringOptions`,
@@ -96,7 +85,6 @@ export const SecondNestObjectField: FC<SecondNestObjectFieldProps> = ({ name, co
                         if (value === "number") {
                           return (
                             <NumberOptionField
-                              control={control}
                               name={{
                                 numberDummyType: `${name}.${index}.numberDummyType`,
                                 options: `${name}.${index}.numberOptions`,

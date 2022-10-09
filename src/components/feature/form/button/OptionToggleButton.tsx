@@ -1,9 +1,10 @@
 import { ActionIcon, Space } from "@mantine/core";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons";
 import type { FC } from "react";
-import type { Control, FieldPath } from "react-hook-form";
+import type { FieldPath } from "react-hook-form";
 import { useWatch } from "react-hook-form";
 
+import { useCreateJsonFormContext } from "~/components/page/public/Root/Root.page";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
@@ -15,10 +16,10 @@ type OptionToggleButtonProps = {
     stringDummyType: FilterFieldPath<FieldPath<ICreateJson>, "stringDummyType">;
     numberDummyType: FilterFieldPath<FieldPath<ICreateJson>, "numberDummyType">;
   };
-  control: Control<ICreateJson>;
 };
 
-export const OptionToggleButton: FC<OptionToggleButtonProps> = ({ name, control, onToggle, isVisible }) => {
+export const OptionToggleButton: FC<OptionToggleButtonProps> = ({ name, onToggle, isVisible }) => {
+  const { control } = useCreateJsonFormContext();
   const type = useWatch({ name: name.valueType, control });
   const stringDummyType = useWatch({ name: name.stringDummyType, control });
   const numberDummyType = useWatch({ name: name.numberDummyType, control });
