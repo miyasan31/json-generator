@@ -26,9 +26,7 @@ export const NumberOptionField: FC<NumberOptionFieldProps> = ({ control, name })
           name={`${name.options}.min`}
           control={control}
           render={({ field: { onChange, value } }) => {
-            return (
-              <NumberInput defaultValue={0} min={0} size="xs" label={minLabel} value={value} onChange={onChange} />
-            );
+            return <NumberInput min={0} size="xs" label={minLabel} value={value} onChange={onChange} />;
           }}
         />
 
@@ -36,16 +34,7 @@ export const NumberOptionField: FC<NumberOptionFieldProps> = ({ control, name })
           control={control}
           name={`${name.options}.max`}
           render={({ field: { onChange, value } }) => {
-            return (
-              <NumberInput
-                defaultValue={10000}
-                max={10000}
-                size="xs"
-                label={maxLabel}
-                value={value}
-                onChange={onChange}
-              />
-            );
+            return <NumberInput max={10000} size="xs" label={maxLabel} value={value} onChange={onChange} />;
           }}
         />
       </Group>
@@ -58,17 +47,7 @@ export const NumberOptionField: FC<NumberOptionFieldProps> = ({ control, name })
         control={control}
         name={`${name.options}.numberAnyValue`}
         render={({ field: { onChange, value } }) => {
-          return (
-            <NumberInput
-              defaultValue={5}
-              min={1}
-              max={100}
-              size="xs"
-              label={anyLabel}
-              value={value}
-              onChange={onChange}
-            />
-          );
+          return <NumberInput size="xs" label={anyLabel} value={value} onChange={onChange} />;
         }}
       />
     );

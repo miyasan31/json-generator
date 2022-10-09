@@ -31,14 +31,19 @@ export const Root = () => {
   } = useStyle();
   const { openKey, onClose, onJsonGenerateOpen, onJsonInputOpen } = useModal();
   const isMediumScreen = useMediaQuery("md");
-  const { mutate } = useCreateJson();
+  const { mutate, isLoading } = useCreateJson();
   const [json, setJson] = useState("");
 
   const methods = useRHForm<ICreateJson>({
     mode: "onBlur",
     defaultValues,
   });
-  const { handleSubmit: onSubmit, control, reset } = methods;
+  const {
+    handleSubmit: onSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = methods;
 
   const onCreateJson = useCallback((data: ICreateJson) => {
     showNotification(createJsonNotification["loading"]);
@@ -91,7 +96,9 @@ export const Root = () => {
                     );
                   }}
                 />
-                <Button type="submit">{generateButtonLabel}</Button>
+                <Button type="submit" loading={isLoading} disabled={!!errors.json} loaderProps={{ color: "yellow" }}>
+                  {generateButtonLabel}
+                </Button>
               </Group>
             </Group>
 
