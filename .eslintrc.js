@@ -95,7 +95,7 @@ module.exports = {
       },
     },
     {
-      files: ["**/{interfaces,interface*}/**.{ts,tsx}"],
+      files: ["**/{interface,interfaces,service,services,repositories,repository}/**.{ts,tsx}"],
       rules: {
         "@typescript-eslint/naming-convention": [
           "error",

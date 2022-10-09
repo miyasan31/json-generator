@@ -3,7 +3,6 @@ import type { FC } from "react";
 import type { FieldPath, UseFormRegister } from "react-hook-form";
 
 import { formRules } from "~/constants/form/formRules";
-import { keyNameLabel } from "~/constants/form/label";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
@@ -19,7 +18,7 @@ export const KeyNameField: FC<KeyNameFieldProps> = ({ register, name, error }) =
       sx={{ flex: 2 }}
       size="xs"
       required
-      label={keyNameLabel}
+      label="キー名"
       {...register(name, formRules.keyName)}
       error={error}
     />

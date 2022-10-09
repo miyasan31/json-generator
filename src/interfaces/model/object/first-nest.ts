@@ -1,5 +1,7 @@
 import type { SecondNestArrayItemType, SecondNestObjectPropertyType } from "~/interfaces/model/object/second-nest";
-import type { BooleanValue, NumberValue, StringValue } from "~/interfaces/model/primitive";
+import type { BooleanValue } from "~/interfaces/model/primitive/boolean";
+import type { NumberValue } from "~/interfaces/model/primitive/number";
+import type { StringValue } from "~/interfaces/model/primitive/string";
 
 interface FirstNestArrayValue {
   keyName: string;

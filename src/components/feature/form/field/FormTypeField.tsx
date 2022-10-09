@@ -4,7 +4,6 @@ import type { Control } from "react-hook-form";
 import { Controller } from "react-hook-form";
 
 import { appendValue } from "~/constants/form/appendValue";
-import { valueTypeLabel } from "~/constants/form/label";
 import type { ArrayValueTypeOption, ObjectValueType, ObjectValueTypeOption } from "~/interfaces/model/object";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 
@@ -38,7 +37,7 @@ export const FormTypeField: FC<FormTypeFieldProps> = ({ data, control, name }) =
             sx={{ flex: 1 }}
             size="xs"
             searchable
-            label={valueTypeLabel}
+            label="型"
             value={value.valueType}
             onChange={onChangeValue}
             data={data}

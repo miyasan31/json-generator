@@ -1,9 +1,7 @@
 import type { ArrayValueTypeOption, ObjectValueTypeOption } from "~/interfaces/model/object";
-import type {
-  BooleanDummyTypeOption,
-  NumberDummyTypeOption,
-  StringDummyTypeOption,
-} from "~/interfaces/model/primitive";
+import type { BooleanDummyTypeOption } from "~/interfaces/model/primitive/boolean";
+import type { NumberDummyTypeOption } from "~/interfaces/model/primitive/number";
+import type { StringDummyTypeOption } from "~/interfaces/model/primitive/string";
 
 export const jsonLengthOption = [
   { value: "1", label: "1" },

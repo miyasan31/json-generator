@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-import type { NumberDummyType } from "~/interfaces/model/primitive";
+import type { NumberDummyType } from "~/interfaces/model/primitive/number";
 
 export const numberGenerator = (
   dummyType: NumberDummyType,

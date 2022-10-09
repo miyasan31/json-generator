@@ -3,7 +3,6 @@ import type { FC } from "react";
 import type { Control, FieldPath } from "react-hook-form";
 import { Controller } from "react-hook-form";
 
-import { dummyTypeLabel } from "~/constants/form/label";
 import { stringDummyTypeOption } from "~/constants/form/selectOption";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
@@ -24,7 +23,7 @@ export const StringTypeField: FC<StringTypeFieldProps> = ({ control, name }) => 
             sx={{ flex: 1 }}
             size="xs"
             searchable
-            label={dummyTypeLabel}
+            label="ダミーデータ"
             value={value}
             onChange={onChange}
             data={stringDummyTypeOption}

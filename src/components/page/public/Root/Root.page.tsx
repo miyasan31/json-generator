@@ -9,12 +9,6 @@ import { useModal } from "~/components/feature/modal/useModal";
 import { InputLayout } from "~/components/layout/JsonEditorLayout/InputLayout";
 import { OutputLayout } from "~/components/layout/JsonEditorLayout/OutputLayout";
 import { defaultValues } from "~/constants/form/defaultValue";
-import {
-  generateButtonLabel,
-  generateLengthLabel,
-  importButtonLabel,
-  // saveButtonLabel
-} from "~/constants/form/label";
 import { jsonLengthOption } from "~/constants/form/selectOption";
 import { createJsonNotification } from "~/constants/notification/createJson";
 import type { ICreateJson } from "~/interfaces/useCase/json";
@@ -75,9 +69,9 @@ export const Root = () => {
             <Group spacing="sm" position="apart" align="end">
               <Group spacing="sm">
                 <Button type="button" onClick={onJsonInputOpen}>
-                  {importButtonLabel}
+                  JSONを入力
                 </Button>
-                {/* <Button type="button">{saveButtonLabel}</Button> */}
+                {/* <Button type="button">保存する</Button> */}
               </Group>
 
               <Group spacing="sm">
@@ -87,7 +81,7 @@ export const Root = () => {
                   render={({ field: { onChange, value } }) => {
                     return (
                       <Select
-                        label={generateLengthLabel}
+                        label="生成数"
                         value={String(value)}
                         onChange={onChange}
                         data={jsonLengthOption}
@@ -97,7 +91,7 @@ export const Root = () => {
                   }}
                 />
                 <Button type="submit" loading={isLoading} disabled={!!errors.json} loaderProps={{ color: "yellow" }}>
-                  {generateButtonLabel}
+                  生成する
                 </Button>
               </Group>
             </Group>

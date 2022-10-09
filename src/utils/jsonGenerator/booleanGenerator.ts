@@ -1,4 +1,4 @@
-import type { BooleanDummyType } from "~/interfaces/model/primitive";
+import type { BooleanDummyType } from "~/interfaces/model/primitive/boolean";
 
 export const booleanGenerator = (booleanDummyType: BooleanDummyType): boolean => {
   switch (booleanDummyType) {

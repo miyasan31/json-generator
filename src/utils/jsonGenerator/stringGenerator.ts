@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-import type { StringDummyType } from "~/interfaces/model/primitive";
+import type { StringDummyType } from "~/interfaces/model/primitive/string";
 
 export const stringGenerator = (
   dummyType: StringDummyType,

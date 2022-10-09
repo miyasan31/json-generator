@@ -4,7 +4,6 @@ import type { Control, FieldPath } from "react-hook-form";
 import { useWatch } from "react-hook-form";
 import { Controller } from "react-hook-form";
 
-import { anyLabel, maxLabel, minLabel } from "~/constants/form/label";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
@@ -26,7 +25,7 @@ export const NumberOptionField: FC<NumberOptionFieldProps> = ({ control, name })
           name={`${name.options}.min`}
           control={control}
           render={({ field: { onChange, value } }) => {
-            return <NumberInput min={0} size="xs" label={minLabel} value={value} onChange={onChange} />;
+            return <NumberInput min={0} size="xs" label="最小値" value={value} onChange={onChange} />;
           }}
         />
 
@@ -34,7 +33,7 @@ export const NumberOptionField: FC<NumberOptionFieldProps> = ({ control, name })
           control={control}
           name={`${name.options}.max`}
           render={({ field: { onChange, value } }) => {
-            return <NumberInput max={10000} size="xs" label={maxLabel} value={value} onChange={onChange} />;
+            return <NumberInput max={10000} size="xs" label="最大値" value={value} onChange={onChange} />;
           }}
         />
       </Group>
@@ -47,7 +46,7 @@ export const NumberOptionField: FC<NumberOptionFieldProps> = ({ control, name })
         control={control}
         name={`${name.options}.numberAnyValue`}
         render={({ field: { onChange, value } }) => {
-          return <NumberInput size="xs" label={anyLabel} value={value} onChange={onChange} />;
+          return <NumberInput size="xs" label="任意" value={value} onChange={onChange} />;
         }}
       />
     );

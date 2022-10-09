@@ -4,7 +4,6 @@ import { useCallback } from "react";
 import { useState } from "react";
 
 import { Modal } from "~/components/shared/Modal";
-import { cancelButtonLabel, importExecutionButtonLabel } from "~/constants/form/label";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import { jsonConvert } from "~/utils/jsonConvert";
 
@@ -40,11 +39,11 @@ export const JsonInputModal: FC<JsonInputModalProps> = ({ isOpen, onClose, onCha
 
         <Group spacing="sm" position="right">
           <Button type="button" variant="default" onClick={onClose}>
-            {cancelButtonLabel}
+            キャンセル
           </Button>
 
           <Button type="button" onClick={onSubmit}>
-            {importExecutionButtonLabel}
+            確定
           </Button>
         </Group>
       </Stack>
