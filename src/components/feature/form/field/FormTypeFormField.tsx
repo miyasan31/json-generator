@@ -35,15 +35,13 @@ export const FormTypeFormField: FC<FormTypeFormFieldProps> = ({ data, control, n
         };
         return (
           <Select
+            sx={{ flex: 1 }}
             size="xs"
             searchable
             label={valueTypeLabel}
             value={value.valueType}
             onChange={onChangeValue}
             data={data}
-            sx={{
-              flex: 1,
-            }}
           />
         );
       }}

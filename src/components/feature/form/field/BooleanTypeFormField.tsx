@@ -21,6 +21,7 @@ export const BooleanTypeFormField: FC<BooleanTypeFormFieldProps> = ({ control, n
       render={({ field: { onChange, value } }) => {
         return (
           <Select
+            sx={{ flex: 1 }}
             size="xs"
             searchable
             label={dummyTypeLabel}
@@ -28,9 +29,6 @@ export const BooleanTypeFormField: FC<BooleanTypeFormFieldProps> = ({ control, n
             onChange={onChange}
             data={booleanDummyTypeOption}
             filter={(value, item) => item.value.toLowerCase().includes(value.toLowerCase().trim())}
-            sx={{
-              flex: 1,
-            }}
           />
         );
       }}

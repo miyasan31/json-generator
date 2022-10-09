@@ -1,4 +1,4 @@
-import { Button, Group, JsonInput, Stack } from "@mantine/core";
+import { Button, createStyles, Group, JsonInput, Stack } from "@mantine/core";
 import type { FC } from "react";
 import { useCallback } from "react";
 import { useState } from "react";
@@ -15,6 +15,8 @@ type JsonInputModalProps = {
 };
 
 export const JsonInputModal: FC<JsonInputModalProps> = ({ isOpen, onClose, onChange }) => {
+  const { classes } = useStyle();
+
   const [value, onSetValue] = useState("");
 
   const onSubmit = useCallback(() => {
@@ -33,15 +35,7 @@ export const JsonInputModal: FC<JsonInputModalProps> = ({ isOpen, onClose, onCha
           formatOnBlur
           minRows={10}
           autosize={false}
-          styles={(theme) => ({
-            wrapper: {
-              height: "500px",
-            },
-            input: {
-              height: "100%",
-              backgroundColor: theme.colorScheme === "light" ? "white" : theme.colors.dark[7],
-            },
-          })}
+          classNames={classes}
         />
 
         <Group spacing="sm" position="right">
@@ -57,3 +51,15 @@ export const JsonInputModal: FC<JsonInputModalProps> = ({ isOpen, onClose, onCha
     </Modal>
   );
 };
+
+const useStyle = createStyles<"wrapper" | "input">((theme) => {
+  return {
+    wrapper: {
+      height: "500px",
+    },
+    input: {
+      height: "100%",
+      backgroundColor: theme.colorScheme === "light" ? "white" : theme.colors.dark[7],
+    },
+  };
+});

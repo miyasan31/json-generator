@@ -1,4 +1,4 @@
-import { Button, Group, Select, Stack } from "@mantine/core";
+import { Button, createStyles, Group, Select, Stack } from "@mantine/core";
 import { showNotification, updateNotification } from "@mantine/notifications";
 import { useCallback, useState } from "react";
 import { Controller, FormProvider } from "react-hook-form";
@@ -26,6 +26,9 @@ import { onEnterKeySubmitBlock } from "~/utils/onEnterKeySubmitBlock";
 const { useCreateJson } = supabaseService;
 
 export const Root = () => {
+  const {
+    classes: { layout: classesLayout, ...classesSelect },
+  } = useStyle();
   const { openKey, onClose, onJsonGenerateOpen, onJsonInputOpen } = useModal();
   const isMediumScreen = useMediaQuery("md");
   const { mutate } = useCreateJson();
@@ -83,11 +86,7 @@ export const Root = () => {
                         value={String(value)}
                         onChange={onChange}
                         data={jsonLengthOption}
-                        styles={{
-                          root: { display: "flex", alignItems: "center", width: "fit-content", gap: "0.5rem" },
-                          label: { flex: "auto", minWidth: "fit-content" },
-                          input: { flex: "auto", width: "100px" },
-                        }}
+                        classNames={classesSelect}
                       />
                     );
                   }}
@@ -96,7 +95,7 @@ export const Root = () => {
               </Group>
             </Group>
 
-            <Group spacing="sm" align="start" sx={{ height: "calc(100vh - 140px)" }}>
+            <Group spacing="sm" align="start" className={classesLayout}>
               <InputLayout />
               {isMediumScreen ? <OutputLayout /> : null}
             </Group>
@@ -106,3 +105,26 @@ export const Root = () => {
     </>
   );
 };
+
+const useStyle = createStyles<"layout" | "root" | "label" | "input">(() => {
+  return {
+    layout: {
+      height: "calc(100vh - 140px)",
+    },
+    // select
+    root: {
+      display: "flex",
+      alignItems: "center",
+      width: "fit-content",
+      gap: "0.5rem",
+    },
+    label: {
+      flex: "auto",
+      minWidth: "fit-content",
+    },
+    input: {
+      flex: "auto",
+      width: "100px",
+    },
+  };
+});

@@ -21,6 +21,7 @@ export const NumberTypeFormField: FC<NumberTypeFormFieldProps> = ({ control, nam
       render={({ field: { onChange, value } }) => {
         return (
           <Select
+            sx={{ flex: 1 }}
             size="xs"
             searchable
             label={dummyTypeLabel}
@@ -28,9 +29,6 @@ export const NumberTypeFormField: FC<NumberTypeFormFieldProps> = ({ control, nam
             onChange={onChange}
             data={numberDummyTypeOption}
             filter={(value, item) => item.value.toLowerCase().includes(value.toLowerCase().trim())}
-            sx={{
-              flex: 1,
-            }}
           />
         );
       }}

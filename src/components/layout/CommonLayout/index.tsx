@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mantine/core";
+import { Box, createStyles, Stack } from "@mantine/core";
 
 import { Header } from "~/components/layout/CommonLayout/Header";
 import { Outlet } from "~/components/lib/react-router/Outlet";
@@ -7,17 +7,13 @@ import { useMediaQuery } from "~/libs/mantine/useMediaQuery";
 
 export const CommonLayout = () => {
   const isMediumScreen = useMediaQuery("md");
+  const { classes } = useStyle({ isMediumScreen });
 
   return (
-    <Stack spacing="sm" sx={{ height: "100vh" }}>
+    <Stack spacing="sm" className={classes.root}>
       <Header />
 
-      <Box
-        style={{
-          width: isMediumScreen ? "90%" : "95%",
-          margin: "0 auto",
-        }}
-      >
+      <Box className={classes.layout}>
         <Suspense>
           <Outlet />
         </Suspense>
@@ -25,3 +21,17 @@ export const CommonLayout = () => {
     </Stack>
   );
 };
+
+const useStyle = createStyles<"root" | "layout", { isMediumScreen: boolean }>((_, params) => {
+  const { isMediumScreen } = params;
+
+  return {
+    root: {
+      height: "100vh",
+    },
+    layout: {
+      width: isMediumScreen ? "90%" : "95%",
+      margin: "0 auto",
+    },
+  };
+});

@@ -11,6 +11,7 @@ import { StringOptionFormField } from "~/components/feature/form/field/StringOpt
 import { StringTypeFormField } from "~/components/feature/form/field/StringTypeFormField";
 import { OptionController } from "~/components/feature/form/OptionController";
 import { OptionToggleButton } from "~/components/feature/form/OptionToggleButton";
+import { useFormFieldStyle } from "~/components/feature/form/useFormFieldStyle";
 import { ArrayTypeWatcher } from "~/components/feature/form/watcher/ArrayTypeWatcher";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { arrayValueTypeOption } from "~/constants/form/selectOption";
@@ -27,19 +28,12 @@ type FirstNestArrayOptionFormFieldProps = {
 };
 
 export const FirstNestArrayOptionFormField: FC<FirstNestArrayOptionFormFieldProps> = ({ control, register, name }) => {
+  const { classes } = useFormFieldStyle({ isBorder: true });
+
   return (
     <OptionController type="array">
       {(isVisible, onToggle) => (
-        <Stack
-          spacing="xs"
-          sx={(theme) => ({
-            borderRadius: theme.radius.sm,
-            padding: theme.spacing.lg,
-            marginTop: theme.spacing.xs,
-            backgroundColor: theme.colorScheme === "light" ? theme.colors.gray[0] : theme.colors.dark[7],
-            border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[5]}`,
-          })}
-        >
+        <Stack spacing="xs" className={classes.root}>
           <Group spacing="xs" align="flex-start">
             <ArrayLengthFormField control={control} name={`${name.length}`} />
 

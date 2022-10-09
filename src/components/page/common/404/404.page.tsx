@@ -1,11 +1,13 @@
-import { Button, Stack, Text } from "@mantine/core";
+import { Button, createStyles, Stack, Text } from "@mantine/core";
 
 import { Link } from "~/components/lib/react-router/Link";
 
 export const NotFound = () => {
+  const { classes } = useStyle();
+
   return (
-    <Stack spacing="lg" align="center" justify="center" sx={{ minHeight: "100vh", width: "100%" }}>
-      <Text component="h1" sx={{ margin: 0, textAlign: "center", fontSize: "2.5rem" }}>
+    <Stack spacing="lg" align="center" justify="center" className={classes.root}>
+      <Text component="h1" className={classes.title}>
         404 NotFound
       </Text>
 
@@ -15,3 +17,17 @@ export const NotFound = () => {
     </Stack>
   );
 };
+
+const useStyle = createStyles<"root" | "title">(() => {
+  return {
+    root: {
+      minHeight: "100vh",
+      width: "100%",
+    },
+    title: {
+      margin: 0,
+      textAlign: "center",
+      fontSize: "2.5rem",
+    },
+  };
+});

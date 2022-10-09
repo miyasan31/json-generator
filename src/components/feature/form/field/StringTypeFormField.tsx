@@ -21,6 +21,7 @@ export const StringTypeFormField: FC<StringTypeFormFieldProps> = ({ control, nam
       render={({ field: { onChange, value } }) => {
         return (
           <Select
+            sx={{ flex: 1 }}
             size="xs"
             searchable
             label={dummyTypeLabel}
@@ -28,9 +29,6 @@ export const StringTypeFormField: FC<StringTypeFormFieldProps> = ({ control, nam
             onChange={onChange}
             data={stringDummyTypeOption}
             filter={(value, item) => item.value.toLowerCase().includes(value.toLowerCase().trim())}
-            sx={{
-              flex: 1,
-            }}
           />
         );
       }}

@@ -16,9 +16,7 @@ type KeyNameFormFieldProps = {
 export const KeyNameFormField: FC<KeyNameFormFieldProps> = ({ register, name, error }) => {
   return (
     <TextInput
-      sx={{
-        flex: 2,
-      }}
+      sx={{ flex: 2 }}
       size="xs"
       required
       label={keyNameLabel}

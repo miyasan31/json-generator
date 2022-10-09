@@ -1,4 +1,4 @@
-import { Modal as MantineModal, useMantineTheme } from "@mantine/core";
+import { createStyles, Modal as MantineModal, useMantineTheme } from "@mantine/core";
 import type { FC, ReactNode } from "react";
 
 import { useMediaQuery } from "~/libs/mantine/useMediaQuery";
@@ -24,6 +24,7 @@ export const Modal: FC<ModalProps> = ({
   onClose,
   isOpen,
 }) => {
+  const { classes } = useStyle({ isBorder });
   const isMediumScreen = useMediaQuery("md");
   const { colorScheme, colors } = useMantineTheme();
 
@@ -40,20 +41,26 @@ export const Modal: FC<ModalProps> = ({
       closeOnClickOutside={false}
       overflow="inside"
       fullScreen={!isMediumScreen}
-      styles={(theme) => ({
-        title: {
-          fontSize: "1.2rem",
-          fontWeight: "bold",
-        },
-        body: isBorder
-          ? {
-              borderRadius: theme.radius.sm,
-              border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[4] : theme.colors.dark[4]}`,
-            }
-          : {},
-      })}
+      classNames={classes}
     >
       {children}
     </MantineModal>
   );
 };
+
+const useStyle = createStyles<"title" | "body", { isBorder: boolean }>((theme, params) => {
+  const { isBorder } = params;
+
+  return {
+    title: {
+      fontSize: "1.2rem",
+      fontWeight: "bold",
+    },
+    body: isBorder
+      ? {
+          borderRadius: theme.radius.sm,
+          border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[4] : theme.colors.dark[4]}`,
+        }
+      : {},
+  };
+});

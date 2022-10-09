@@ -20,15 +20,13 @@ export const ArrayLengthFormField: FC<ArrayLengthFormFieldProps> = ({ control, n
       render={({ field: { onChange, value } }) => {
         return (
           <NumberInput
+            sx={{ flex: 1 }}
             min={1}
             max={20}
             size="xs"
             label={generateLengthLabel}
             value={value}
             onChange={onChange}
-            sx={{
-              flex: 1,
-            }}
           />
         );
       }}

@@ -14,6 +14,7 @@ import { StringOptionFormField } from "~/components/feature/form/field/StringOpt
 import { StringTypeFormField } from "~/components/feature/form/field/StringTypeFormField";
 import { OptionController } from "~/components/feature/form/OptionController";
 import { OptionToggleButton } from "~/components/feature/form/OptionToggleButton";
+import { useFormFieldStyle } from "~/components/feature/form/useFormFieldStyle";
 import { useObjectFormField } from "~/components/feature/form/useObjectFormField";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { Divider } from "~/components/shared/Divider";
@@ -24,24 +25,14 @@ type Props = {
   name: `json.${number}.object`;
   control: Control<ICreateJson>;
   register: UseFormRegister<ICreateJson>;
-  border?: boolean;
 };
 
-export const ObjectFormField: FC<Props> = ({ name, control, register, border = true }) => {
+export const ObjectFormField: FC<Props> = ({ name, control, register }) => {
+  const { classes } = useFormFieldStyle({ isBorder: true });
   const { fields, onAppend, onRemove } = useObjectFormField(name, control);
 
   return (
-    <Stack
-      spacing="xs"
-      sx={(theme) => ({
-        borderRadius: theme.radius.sm,
-        padding: theme.spacing.lg,
-        marginTop: theme.spacing.xs,
-        border: border
-          ? `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[3] : theme.colors.dark[5]}`
-          : "",
-      })}
-    >
+    <Stack spacing="xs" className={classes.root}>
       {fields.map((item, index) => {
         return (
           <OptionController key={item.id} type={item.valueType}>
