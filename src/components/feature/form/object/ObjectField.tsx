@@ -1,7 +1,6 @@
 import { Group, Stack } from "@mantine/core";
 import type { FC } from "react";
 import type { Control, UseFormRegister } from "react-hook-form";
-import { useFormState } from "react-hook-form";
 
 import { AddKeyButton } from "~/components/feature/form/button/AddKeyButton";
 import { DeleteButton } from "~/components/feature/form/button/DeleteButton";
@@ -32,10 +31,6 @@ export const ObjectField: FC<ObjectFieldProps> = ({ control, register }) => {
   const { classes } = useObjectFieldStyle({ isBorder: false });
   const { fields, onAppend, onRemove } = useObjectField("json", control);
 
-  const {
-    errors: { json },
-  } = useFormState({ control });
-
   return (
     <Stack spacing="xs" className={classes.root}>
       {fields.map((item, index) => {
@@ -45,11 +40,7 @@ export const ObjectField: FC<ObjectFieldProps> = ({ control, register }) => {
               <>
                 <Stack spacing="xs">
                   <Group spacing="xs" align="flex-start">
-                    <KeyNameField
-                      register={register}
-                      name={`json.${index}.keyName`}
-                      error={json && json[index]?.keyName?.message}
-                    />
+                    <KeyNameField control={control} register={register} name={`json.${index}.keyName`} />
 
                     <FormTypeField data={objectValueTypeOption} control={control} name={`json.${index}`} />
 
@@ -58,9 +49,11 @@ export const ObjectField: FC<ObjectFieldProps> = ({ control, register }) => {
                         if (value === "string") {
                           return <StringTypeField control={control} name={`json.${index}.stringDummyType`} />;
                         }
+
                         if (value === "number") {
                           return <NumberTypeField control={control} name={`json.${index}.numberDummyType`} />;
                         }
+
                         if (value === "boolean") {
                           return <BooleanTypeField control={control} name={`json.${index}.booleanDummyType`} />;
                         }
