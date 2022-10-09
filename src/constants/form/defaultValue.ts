@@ -42,8 +42,8 @@ export const defaultValues: ICreateJson = {
             valueType: "number",
             numberDummyType: "random",
             numberOptions: {
-              min: 1,
-              max: 10,
+              min: 0,
+              max: 1000,
             },
           },
           {

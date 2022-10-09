@@ -52,7 +52,6 @@ export const numberDummyTypeOption: NumberDummyTypeOption[] = [
   { value: "age", label: "年齢" },
   { value: "height", label: "身長" },
   { value: "weight", label: "体重" },
-  { value: "price", label: "価格" },
   // { value: "amount", label: "amount" },
   // { value: "volume", label: "volume" },
   // { value: "priority", label: "priority" },

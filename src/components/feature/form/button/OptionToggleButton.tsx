@@ -28,7 +28,7 @@ export const OptionToggleButton: FC<OptionToggleButtonProps> = ({ name, onToggle
     type === "string"
       ? ["autoIncrement", "fullName", "firstName", "lastName", "email", "any"].includes(stringDummyType)
       : type === "number"
-      ? ["random", "age", "height", "weight", "price", "any"].includes(numberDummyType)
+      ? numberDummyType === "random"
       : ["array", "object"].includes(type);
 
   if (!isOptionVisible) return <Space w={28} />;

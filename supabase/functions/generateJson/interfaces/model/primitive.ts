@@ -73,7 +73,6 @@ export type NumberDummyType =
   | "age"
   | "height"
   | "weight"
-  | "price"
   // | "amount"
   // | "volume"
   // | "priority"
@@ -98,7 +97,7 @@ export type AnyNumberOption = {
 };
 
 export type RangeNumberOption = {
-  numberDummyType: StrictExtract<NumberDummyType, "random" | "price">;
+  numberDummyType: StrictExtract<NumberDummyType, "random">;
   numberOptions: {
     min: number;
     max: number;

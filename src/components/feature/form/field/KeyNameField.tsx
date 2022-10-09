@@ -16,16 +16,7 @@ export const KeyNameField: FC<KeyNameFieldProps> = ({ name }) => {
   const { control, register } = useCreateJsonFormContext();
   const {
     fieldState: { error },
-  } = useController({ name, control });
+  } = useController({ name, control, rules: formRules.keyName });
 
-  return (
-    <TextInput
-      sx={{ flex: 2 }}
-      size="xs"
-      required
-      label="キー名"
-      {...register(name, formRules.keyName)}
-      error={error?.message}
-    />
-  );
+  return <TextInput sx={{ flex: 2 }} size="xs" required label="キー名" {...register(name)} error={error?.message} />;
 };

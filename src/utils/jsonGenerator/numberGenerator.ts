@@ -1,5 +1,3 @@
-import { faker } from "@faker-js/faker";
-
 import type { NumberDummyType } from "~/interfaces/model/primitive/number";
 
 export const numberGenerator = (
@@ -7,16 +5,10 @@ export const numberGenerator = (
   options: { min?: number; max?: number; numberAnyValue?: number } | null,
   index: number,
 ): number => {
-  if (["random", "price"].includes(dummyType)) {
+  if (dummyType === "random") {
     const min = options?.min ?? 0;
-    const max = options?.max ?? 10000;
-
-    switch (dummyType) {
-      case "random":
-        return Math.floor(Math.random() * (max - min)) - min;
-      case "price":
-        return Number(faker.commerce.price(min, max, 0));
-    }
+    const max = options?.max ?? 1000;
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 
   if (dummyType === "any") {
