@@ -4,16 +4,16 @@ import type { Control, FieldPath } from "react-hook-form";
 import { Controller } from "react-hook-form";
 
 import { dummyTypeLabel } from "~/constants/form/label";
-import { numberDummyTypeOption } from "~/constants/form/selectOption";
+import { booleanDummyTypeOption } from "~/constants/form/selectOption";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
-type NumberTypeFormFieldProps = {
+type BooleanTypeFieldProps = {
   control: Control<ICreateJson>;
-  name: FilterFieldPath<FieldPath<ICreateJson>, "numberDummyType">;
+  name: FilterFieldPath<FieldPath<ICreateJson>, "booleanDummyType">;
 };
 
-export const NumberTypeFormField: FC<NumberTypeFormFieldProps> = ({ control, name }) => {
+export const BooleanTypeField: FC<BooleanTypeFieldProps> = ({ control, name }) => {
   return (
     <Controller
       control={control}
@@ -27,7 +27,7 @@ export const NumberTypeFormField: FC<NumberTypeFormFieldProps> = ({ control, nam
             label={dummyTypeLabel}
             value={value}
             onChange={onChange}
-            data={numberDummyTypeOption}
+            data={booleanDummyTypeOption}
             filter={(value, item) => item.value.toLowerCase().includes(value.toLowerCase().trim())}
           />
         );

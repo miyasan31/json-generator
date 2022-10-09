@@ -8,7 +8,7 @@ import { anyLabel, maxLabel, minLabel } from "~/constants/form/label";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
-type NumberOptionFormFieldProps = {
+type NumberOptionFieldProps = {
   control: Control<ICreateJson>;
   name: {
     numberDummyType: FilterFieldPath<FieldPath<ICreateJson>, "numberDummyType">;
@@ -16,7 +16,7 @@ type NumberOptionFormFieldProps = {
   };
 };
 
-export const NumberOptionFormField: FC<NumberOptionFormFieldProps> = ({ control, name }) => {
+export const NumberOptionField: FC<NumberOptionFieldProps> = ({ control, name }) => {
   const numberDummyType = useWatch({ name: name.numberDummyType, control });
 
   if (["random", "age", "height", "weight", "price"].includes(numberDummyType)) {

@@ -1,7 +1,7 @@
 import { createStyles, ScrollArea } from "@mantine/core";
 import { useFormContext } from "react-hook-form";
 
-import { JsonGeneratorForm } from "~/components/feature/form/JsonGeneratorForm";
+import { JsonGeneratorForm } from "~/components/feature/form";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 
 export const InputLayout = () => {

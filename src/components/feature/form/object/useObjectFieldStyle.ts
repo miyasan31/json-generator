@@ -1,6 +1,6 @@
 import { createStyles } from "@mantine/core";
 
-export const useFormFieldStyle = createStyles<"root", { isBorder: boolean }>((theme, params) => {
+export const useObjectFieldStyle = createStyles<"root", { isBorder: boolean }>((theme, params) => {
   const { isBorder } = params;
 
   return {

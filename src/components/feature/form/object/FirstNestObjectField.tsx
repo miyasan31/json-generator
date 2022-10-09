@@ -2,33 +2,34 @@ import { Group, Stack } from "@mantine/core";
 import type { FC } from "react";
 import type { Control, UseFormRegister } from "react-hook-form";
 
-import { AddKeyButton } from "~/components/feature/form/AddKeyButton";
-import { DeleteButton } from "~/components/feature/form/DeleteButton";
-import { BooleanTypeFormField } from "~/components/feature/form/field/BooleanTypeFormField";
-import { FormTypeFormField } from "~/components/feature/form/field/FormTypeFormField";
-import { KeyNameFormField } from "~/components/feature/form/field/KeyNameFormField";
-import { NumberOptionFormField } from "~/components/feature/form/field/NumberOptionFormField";
-import { NumberTypeFormField } from "~/components/feature/form/field/NumberTypeFormField";
-import { StringOptionFormField } from "~/components/feature/form/field/StringOptionFormField";
-import { StringTypeFormField } from "~/components/feature/form/field/StringTypeFormField";
-import { OptionController } from "~/components/feature/form/OptionController";
-import { OptionToggleButton } from "~/components/feature/form/OptionToggleButton";
-import { useFormFieldStyle } from "~/components/feature/form/useFormFieldStyle";
-import { useObjectFormField } from "~/components/feature/form/useObjectFormField";
+import { AddKeyButton } from "~/components/feature/form/button/AddKeyButton";
+import { DeleteButton } from "~/components/feature/form/button/DeleteButton";
+import { OptionToggleButton } from "~/components/feature/form/button/OptionToggleButton";
+import { FormTypeField } from "~/components/feature/form/field/FormTypeField";
+import { KeyNameField } from "~/components/feature/form/field/KeyNameField";
+import { SecondNestArrayOptionField } from "~/components/feature/form/object/SecondNestArrayOptionField";
+import { useObjectField } from "~/components/feature/form/object/useObjectField";
+import { useObjectFieldStyle } from "~/components/feature/form/object/useObjectFieldStyle";
+import { BooleanTypeField } from "~/components/feature/form/primitive/BooleanTypeField";
+import { NumberOptionField } from "~/components/feature/form/primitive/NumberOptionField";
+import { NumberTypeField } from "~/components/feature/form/primitive/NumberTypeField";
+import { StringOptionField } from "~/components/feature/form/primitive/StringOptionField";
+import { StringTypeField } from "~/components/feature/form/primitive/StringTypeField";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
+import { OptionController } from "~/components/feature/form/watcher/OptionController";
 import { Divider } from "~/components/shared/Divider";
 import { objectValueTypeOption } from "~/constants/form/selectOption";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 
-type FirstNestObjectFormFieldProps = {
-  name: `json.${number}.item.object` | `json.${number}.object.${number}.object`;
+type FirstNestObjectFieldProps = {
+  name: `json.${number}.object`;
   control: Control<ICreateJson>;
   register: UseFormRegister<ICreateJson>;
 };
 
-export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({ name, control, register }) => {
-  const { classes } = useFormFieldStyle({ isBorder: true });
-  const { fields, onAppend, onRemove } = useObjectFormField(name, control);
+export const FirstNestObjectField: FC<FirstNestObjectFieldProps> = ({ name, control, register }) => {
+  const { classes } = useObjectFieldStyle({ isBorder: true });
+  const { fields, onAppend, onRemove } = useObjectField(name, control);
 
   return (
     <Stack spacing="xs" className={classes.root}>
@@ -39,10 +40,10 @@ export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({ na
               <>
                 <Stack spacing="xs">
                   <Group spacing="xs" align="flex-start">
-                    <KeyNameFormField register={register} name={`${name}.${index}.keyName`} />
+                    <KeyNameField register={register} name={`${name}.${index}.keyName`} />
 
-                    <FormTypeFormField
-                      data={objectValueTypeOption.slice(0, 3)}
+                    <FormTypeField
+                      data={objectValueTypeOption.slice(0, 4)}
                       control={control}
                       name={`${name}.${index}`}
                     />
@@ -50,15 +51,15 @@ export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({ na
                     <FormTypeWatcher control={control} name={`${name}.${index}.valueType`}>
                       {(value) => {
                         if (value === "string") {
-                          return <StringTypeFormField control={control} name={`${name}.${index}.stringDummyType`} />;
+                          return <StringTypeField control={control} name={`json.${index}.stringDummyType`} />;
                         }
 
                         if (value === "number") {
-                          return <NumberTypeFormField control={control} name={`${name}.${index}.numberDummyType`} />;
+                          return <NumberTypeField control={control} name={`json.${index}.numberDummyType`} />;
                         }
 
                         if (value === "boolean") {
-                          return <BooleanTypeFormField control={control} name={`${name}.${index}.booleanDummyType`} />;
+                          return <BooleanTypeField control={control} name={`json.${index}.booleanDummyType`} />;
                         }
                       }}
                     </FormTypeWatcher>
@@ -82,7 +83,7 @@ export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({ na
                       {(value) => {
                         if (value === "string") {
                           return (
-                            <StringOptionFormField
+                            <StringOptionField
                               control={control}
                               register={register}
                               name={{
@@ -95,11 +96,24 @@ export const FirstNestObjectFormField: FC<FirstNestObjectFormFieldProps> = ({ na
 
                         if (value === "number") {
                           return (
-                            <NumberOptionFormField
+                            <NumberOptionField
                               control={control}
                               name={{
                                 numberDummyType: `${name}.${index}.numberDummyType`,
                                 options: `${name}.${index}.numberOptions`,
+                              }}
+                            />
+                          );
+                        }
+
+                        if (value === "array") {
+                          return (
+                            <SecondNestArrayOptionField
+                              control={control}
+                              register={register}
+                              name={{
+                                length: `${name}.${index}.length`,
+                                item: `${name}.${index}.item`,
                               }}
                             />
                           );

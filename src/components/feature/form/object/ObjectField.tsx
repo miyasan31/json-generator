@@ -3,34 +3,34 @@ import type { FC } from "react";
 import type { Control, UseFormRegister } from "react-hook-form";
 import { useFormState } from "react-hook-form";
 
-import { AddKeyButton } from "~/components/feature/form/AddKeyButton";
-import { DeleteButton } from "~/components/feature/form/DeleteButton";
-import { ArrayOptionFormField } from "~/components/feature/form/field/ArrayOptionFormField";
-import { BooleanTypeFormField } from "~/components/feature/form/field/BooleanTypeFormField";
-import { FormTypeFormField } from "~/components/feature/form/field/FormTypeFormField";
-import { KeyNameFormField } from "~/components/feature/form/field/KeyNameFormField";
-import { NumberOptionFormField } from "~/components/feature/form/field/NumberOptionFormField";
-import { NumberTypeFormField } from "~/components/feature/form/field/NumberTypeFormField";
-import { ObjectFormField } from "~/components/feature/form/field/ObjectFormField";
-import { StringOptionFormField } from "~/components/feature/form/field/StringOptionFormField";
-import { StringTypeFormField } from "~/components/feature/form/field/StringTypeFormField";
-import { OptionController } from "~/components/feature/form/OptionController";
-import { OptionToggleButton } from "~/components/feature/form/OptionToggleButton";
-import { useFormFieldStyle } from "~/components/feature/form/useFormFieldStyle";
-import { useObjectFormField } from "~/components/feature/form/useObjectFormField";
+import { AddKeyButton } from "~/components/feature/form/button/AddKeyButton";
+import { DeleteButton } from "~/components/feature/form/button/DeleteButton";
+import { OptionToggleButton } from "~/components/feature/form/button/OptionToggleButton";
+import { FormTypeField } from "~/components/feature/form/field/FormTypeField";
+import { KeyNameField } from "~/components/feature/form/field/KeyNameField";
+import { FirstNestArrayOptionField } from "~/components/feature/form/object/FirstNestArrayOptionField";
+import { FirstNestObjectField } from "~/components/feature/form/object/FirstNestObjectField";
+import { useObjectField } from "~/components/feature/form/object/useObjectField";
+import { useObjectFieldStyle } from "~/components/feature/form/object/useObjectFieldStyle";
+import { BooleanTypeField } from "~/components/feature/form/primitive/BooleanTypeField";
+import { NumberOptionField } from "~/components/feature/form/primitive/NumberOptionField";
+import { NumberTypeField } from "~/components/feature/form/primitive/NumberTypeField";
+import { StringOptionField } from "~/components/feature/form/primitive/StringOptionField";
+import { StringTypeField } from "~/components/feature/form/primitive/StringTypeField";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
+import { OptionController } from "~/components/feature/form/watcher/OptionController";
 import { Divider } from "~/components/shared/Divider";
 import { objectValueTypeOption } from "~/constants/form/selectOption";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 
-type JsonGeneratorFormProps = {
+type ObjectFieldProps = {
   control: Control<ICreateJson>;
   register: UseFormRegister<ICreateJson>;
 };
 
-export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, register }) => {
-  const { classes } = useFormFieldStyle({ isBorder: false });
-  const { fields, onAppend, onRemove } = useObjectFormField("json", control);
+export const ObjectField: FC<ObjectFieldProps> = ({ control, register }) => {
+  const { classes } = useObjectFieldStyle({ isBorder: false });
+  const { fields, onAppend, onRemove } = useObjectField("json", control);
 
   const {
     errors: { json },
@@ -45,24 +45,24 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
               <>
                 <Stack spacing="xs">
                   <Group spacing="xs" align="flex-start">
-                    <KeyNameFormField
+                    <KeyNameField
                       register={register}
                       name={`json.${index}.keyName`}
                       error={json && json[index]?.keyName?.message}
                     />
 
-                    <FormTypeFormField data={objectValueTypeOption} control={control} name={`json.${index}`} />
+                    <FormTypeField data={objectValueTypeOption} control={control} name={`json.${index}`} />
 
                     <FormTypeWatcher control={control} name={`json.${index}.valueType`}>
                       {(value) => {
                         if (value === "string") {
-                          return <StringTypeFormField control={control} name={`json.${index}.stringDummyType`} />;
+                          return <StringTypeField control={control} name={`json.${index}.stringDummyType`} />;
                         }
                         if (value === "number") {
-                          return <NumberTypeFormField control={control} name={`json.${index}.numberDummyType`} />;
+                          return <NumberTypeField control={control} name={`json.${index}.numberDummyType`} />;
                         }
                         if (value === "boolean") {
-                          return <BooleanTypeFormField control={control} name={`json.${index}.booleanDummyType`} />;
+                          return <BooleanTypeField control={control} name={`json.${index}.booleanDummyType`} />;
                         }
                       }}
                     </FormTypeWatcher>
@@ -86,7 +86,7 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
                       {(value) => {
                         if (value === "string") {
                           return (
-                            <StringOptionFormField
+                            <StringOptionField
                               control={control}
                               register={register}
                               name={{
@@ -99,7 +99,7 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
 
                         if (value === "number") {
                           return (
-                            <NumberOptionFormField
+                            <NumberOptionField
                               control={control}
                               name={{
                                 numberDummyType: `json.${index}.numberDummyType`,
@@ -111,7 +111,7 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
 
                         if (value === "array") {
                           return (
-                            <ArrayOptionFormField
+                            <FirstNestArrayOptionField
                               control={control}
                               register={register}
                               name={{
@@ -124,7 +124,7 @@ export const JsonGeneratorForm: FC<JsonGeneratorFormProps> = ({ control, registe
 
                         if (value === "object") {
                           return (
-                            <ObjectFormField register={register} control={control} name={`json.${index}.object`} />
+                            <FirstNestObjectField register={register} control={control} name={`json.${index}.object`} />
                           );
                         }
                       }}

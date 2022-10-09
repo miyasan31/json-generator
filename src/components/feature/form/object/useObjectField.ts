@@ -10,7 +10,7 @@ type NameType =
   | `json.${number}.item.object`
   | `json.${number}.object.${number}.object`;
 
-type UseObjectFormFieldType = (
+type UseObjectFieldType = (
   name: NameType,
   control: Control<ICreateJson>,
 ) => {
@@ -19,7 +19,7 @@ type UseObjectFormFieldType = (
   onRemove: (index: number) => void;
 };
 
-export const useObjectFormField: UseObjectFormFieldType = (name, control) => {
+export const useObjectField: UseObjectFieldType = (name, control) => {
   const { fields, remove, append } = useFieldArray({
     control,
     name,

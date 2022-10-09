@@ -7,13 +7,13 @@ import { keyNameLabel } from "~/constants/form/label";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
-type KeyNameFormFieldProps = {
+type KeyNameFieldProps = {
   register: UseFormRegister<ICreateJson>;
   name: FilterFieldPath<FieldPath<ICreateJson>, "keyName">;
   error?: string;
 };
 
-export const KeyNameFormField: FC<KeyNameFormFieldProps> = ({ register, name, error }) => {
+export const KeyNameField: FC<KeyNameFieldProps> = ({ register, name, error }) => {
   return (
     <TextInput
       sx={{ flex: 2 }}

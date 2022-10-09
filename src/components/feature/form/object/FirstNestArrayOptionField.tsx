@@ -2,24 +2,24 @@ import { Group, Stack } from "@mantine/core";
 import type { FC } from "react";
 import type { Control, FieldPath, UseFormRegister } from "react-hook-form";
 
-import { ArrayLengthFormField } from "~/components/feature/form/field/ArrayLengthFormField";
-import { BooleanTypeFormField } from "~/components/feature/form/field/BooleanTypeFormField";
-import { FirstNestObjectFormField } from "~/components/feature/form/field/FirstNestObjectFormField";
-import { FormTypeFormField } from "~/components/feature/form/field/FormTypeFormField";
-import { NumberOptionFormField } from "~/components/feature/form/field/NumberOptionFormField";
-import { NumberTypeFormField } from "~/components/feature/form/field/NumberTypeFormField";
-import { StringOptionFormField } from "~/components/feature/form/field/StringOptionFormField";
-import { StringTypeFormField } from "~/components/feature/form/field/StringTypeFormField";
-import { OptionController } from "~/components/feature/form/OptionController";
-import { OptionToggleButton } from "~/components/feature/form/OptionToggleButton";
-import { useFormFieldStyle } from "~/components/feature/form/useFormFieldStyle";
+import { OptionToggleButton } from "~/components/feature/form/button/OptionToggleButton";
+import { FormTypeField } from "~/components/feature/form/field/FormTypeField";
+import { ArrayLengthField } from "~/components/feature/form/object/ArrayLengthField";
+import { SecondNestObjectField } from "~/components/feature/form/object/SecondNestObjectField";
+import { useObjectFieldStyle } from "~/components/feature/form/object/useObjectFieldStyle";
+import { BooleanTypeField } from "~/components/feature/form/primitive/BooleanTypeField";
+import { NumberOptionField } from "~/components/feature/form/primitive/NumberOptionField";
+import { NumberTypeField } from "~/components/feature/form/primitive/NumberTypeField";
+import { StringOptionField } from "~/components/feature/form/primitive/StringOptionField";
+import { StringTypeField } from "~/components/feature/form/primitive/StringTypeField";
 import { ArrayTypeWatcher } from "~/components/feature/form/watcher/ArrayTypeWatcher";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
+import { OptionController } from "~/components/feature/form/watcher/OptionController";
 import { arrayValueTypeOption } from "~/constants/form/selectOption";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
-type ArrayOptionFormFieldProps = {
+type FirstNestArrayOptionFieldProps = {
   control: Control<ICreateJson>;
   register: UseFormRegister<ICreateJson>;
   name: {
@@ -28,30 +28,30 @@ type ArrayOptionFormFieldProps = {
   };
 };
 
-export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ control, register, name }) => {
-  const { classes } = useFormFieldStyle({ isBorder: true });
+export const FirstNestArrayOptionField: FC<FirstNestArrayOptionFieldProps> = ({ control, register, name }) => {
+  const { classes } = useObjectFieldStyle({ isBorder: true });
 
   return (
     <OptionController type="array">
       {(isVisible, onToggle) => (
         <Stack spacing="xs" className={classes.root}>
           <Group spacing="xs" align="flex-start">
-            <ArrayLengthFormField control={control} name={`${name.length}`} />
+            <ArrayLengthField control={control} name={`${name.length}`} />
 
-            <FormTypeFormField data={arrayValueTypeOption} control={control} name={`${name.item}`} />
+            <FormTypeField data={arrayValueTypeOption} control={control} name={`${name.item}`} />
 
             <FormTypeWatcher control={control} name={`${name.item}.valueType`}>
               {(value) => {
                 if (value === "string") {
-                  return <StringTypeFormField control={control} name={`${name.item}.stringDummyType`} />;
+                  return <StringTypeField control={control} name={`${name.item}.stringDummyType`} />;
                 }
 
                 if (value === "number") {
-                  return <NumberTypeFormField control={control} name={`${name.item}.numberDummyType`} />;
+                  return <NumberTypeField control={control} name={`${name.item}.numberDummyType`} />;
                 }
 
                 if (value === "boolean") {
-                  return <BooleanTypeFormField control={control} name={`${name.item}.booleanDummyType`} />;
+                  return <BooleanTypeField control={control} name={`${name.item}.booleanDummyType`} />;
                 }
               }}
             </FormTypeWatcher>
@@ -73,7 +73,7 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ control, r
               {(value) => {
                 if (value === "string") {
                   return (
-                    <StringOptionFormField
+                    <StringOptionField
                       control={control}
                       register={register}
                       name={{
@@ -86,7 +86,7 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ control, r
 
                 if (value === "number") {
                   return (
-                    <NumberOptionFormField
+                    <NumberOptionField
                       control={control}
                       name={{
                         numberDummyType: `${name.item}.numberDummyType`,
@@ -97,9 +97,7 @@ export const ArrayOptionFormField: FC<ArrayOptionFormFieldProps> = ({ control, r
                 }
 
                 if (value === "object") {
-                  return (
-                    <FirstNestObjectFormField register={register} control={control} name={`${name.item}.object`} />
-                  );
+                  return <SecondNestObjectField register={register} control={control} name={`${name.item}.object`} />;
                 }
               }}
             </ArrayTypeWatcher>

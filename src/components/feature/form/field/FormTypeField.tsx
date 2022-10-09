@@ -8,7 +8,7 @@ import { valueTypeLabel } from "~/constants/form/label";
 import type { ArrayValueTypeOption, ObjectValueType, ObjectValueTypeOption } from "~/interfaces/model/object";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 
-type FormTypeFormFieldProps = {
+type FormTypeFieldProps = {
   control: Control<ICreateJson>;
   name:
     | `json.${number}`
@@ -20,7 +20,7 @@ type FormTypeFormFieldProps = {
   data: ObjectValueTypeOption[] | ArrayValueTypeOption[];
 };
 
-export const FormTypeFormField: FC<FormTypeFormFieldProps> = ({ data, control, name }) => {
+export const FormTypeField: FC<FormTypeFieldProps> = ({ data, control, name }) => {
   return (
     <Controller
       control={control}

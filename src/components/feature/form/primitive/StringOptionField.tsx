@@ -7,7 +7,7 @@ import { anyLabel, prefixLabel, suffixLabel } from "~/constants/form/label";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
-type StringOptionFormFieldProps = {
+type StringOptionFieldProps = {
   control: Control<ICreateJson>;
   register: UseFormRegister<ICreateJson>;
   name: {
@@ -16,7 +16,7 @@ type StringOptionFormFieldProps = {
   };
 };
 
-export const StringOptionFormField: FC<StringOptionFormFieldProps> = ({ control, register, name }) => {
+export const StringOptionField: FC<StringOptionFieldProps> = ({ control, register, name }) => {
   const stringDummyType = useWatch({ name: name.stringDummyType, control });
 
   if (["autoIncrement", "fullName", "firstName", "lastName", "email"].includes(stringDummyType)) {

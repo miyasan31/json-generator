@@ -7,12 +7,12 @@ import { generateLengthLabel } from "~/constants/form/label";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
-type ArrayLengthFormFieldProps = {
+type ArrayLengthFieldProps = {
   control: Control<ICreateJson>;
   name: FilterFieldPath<FieldPath<ICreateJson>, "length">;
 };
 
-export const ArrayLengthFormField: FC<ArrayLengthFormFieldProps> = ({ control, name }) => {
+export const ArrayLengthField: FC<ArrayLengthFieldProps> = ({ control, name }) => {
   return (
     <Controller
       control={control}
