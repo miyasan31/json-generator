@@ -4,7 +4,7 @@ import type { FieldPath } from "react-hook-form";
 import { Controller } from "react-hook-form";
 import { useWatch } from "react-hook-form";
 
-import { NumberRangeOptionField } from "~/components/feature/form/primitive/NumberRangeOptionField";
+import { NumberRangeOptionField } from "~/components/feature/form/field/shared/number/NumberRangeOptionField";
 import { useCreateJsonFormContext } from "~/components/page/public/Root/Root.page";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";

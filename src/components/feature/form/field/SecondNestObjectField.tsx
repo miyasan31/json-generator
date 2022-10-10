@@ -4,22 +4,22 @@ import type { FC } from "react";
 import { AddKeyButton } from "~/components/feature/form/button/AddKeyButton";
 import { DeleteButton } from "~/components/feature/form/button/DeleteButton";
 import { OptionToggleButton } from "~/components/feature/form/button/OptionToggleButton";
-import { FormTypeField } from "~/components/feature/form/field/FormTypeField";
-import { KeyNameField } from "~/components/feature/form/field/KeyNameField";
-import { useObjectField } from "~/components/feature/form/object/useObjectField";
-import { useObjectFieldStyle } from "~/components/feature/form/object/useObjectFieldStyle";
-import { BooleanTypeField } from "~/components/feature/form/primitive/BooleanTypeField";
-import { NumberOptionField } from "~/components/feature/form/primitive/NumberOptionField";
-import { NumberTypeField } from "~/components/feature/form/primitive/NumberTypeField";
-import { StringOptionField } from "~/components/feature/form/primitive/StringOptionField";
-import { StringTypeField } from "~/components/feature/form/primitive/StringTypeField";
+import { BooleanTypeField } from "~/components/feature/form/field/shared/boolean/BooleanTypeField";
+import { NumberOptionField } from "~/components/feature/form/field/shared/number/NumberOptionField";
+import { NumberTypeField } from "~/components/feature/form/field/shared/number/NumberTypeField";
+import { KeyNameField } from "~/components/feature/form/field/shared/object/KeyNameField";
+import { StringOptionField } from "~/components/feature/form/field/shared/string/StringOptionField";
+import { StringTypeField } from "~/components/feature/form/field/shared/string/StringTypeField";
+import { ValueTypeField } from "~/components/feature/form/field/shared/ValueTypeField";
+import { useObjectField } from "~/components/feature/form/useObjectField";
+import { useObjectFieldStyle } from "~/components/feature/form/useObjectFieldStyle";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { OptionController } from "~/components/feature/form/watcher/OptionController";
 import { Divider } from "~/components/shared/Divider";
 import { objectValueTypeOption } from "~/constants/form/selectOption";
 
 type SecondNestObjectFieldProps = {
-  name: `json.${number}.item.object` | `json.${number}.object.${number}.object`;
+  name: `json.${number}.item.object`;
 };
 
 export const SecondNestObjectField: FC<SecondNestObjectFieldProps> = ({ name }) => {
@@ -37,7 +37,7 @@ export const SecondNestObjectField: FC<SecondNestObjectFieldProps> = ({ name }) 
                   <Group spacing="xs" align="flex-start">
                     <KeyNameField name={`${name}.${index}.keyName`} />
 
-                    <FormTypeField data={objectValueTypeOption.slice(0, 3)} name={`${name}.${index}`} />
+                    <ValueTypeField data={objectValueTypeOption.slice(0, 3)} name={`${name}.${index}`} />
 
                     <FormTypeWatcher name={`${name}.${index}.valueType`}>
                       {(value) => {

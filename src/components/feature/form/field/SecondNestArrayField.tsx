@@ -3,14 +3,14 @@ import type { FC } from "react";
 import type { FieldPath } from "react-hook-form";
 
 import { OptionToggleButton } from "~/components/feature/form/button/OptionToggleButton";
-import { FormTypeField } from "~/components/feature/form/field/FormTypeField";
-import { ArrayLengthField } from "~/components/feature/form/object/ArrayLengthField";
-import { useObjectFieldStyle } from "~/components/feature/form/object/useObjectFieldStyle";
-import { BooleanTypeField } from "~/components/feature/form/primitive/BooleanTypeField";
-import { NumberOptionField } from "~/components/feature/form/primitive/NumberOptionField";
-import { NumberTypeField } from "~/components/feature/form/primitive/NumberTypeField";
-import { StringOptionField } from "~/components/feature/form/primitive/StringOptionField";
-import { StringTypeField } from "~/components/feature/form/primitive/StringTypeField";
+import { ArrayLengthField } from "~/components/feature/form/field/shared/array/ArrayLengthField";
+import { BooleanTypeField } from "~/components/feature/form/field/shared/boolean/BooleanTypeField";
+import { NumberOptionField } from "~/components/feature/form/field/shared/number/NumberOptionField";
+import { NumberTypeField } from "~/components/feature/form/field/shared/number/NumberTypeField";
+import { StringOptionField } from "~/components/feature/form/field/shared/string/StringOptionField";
+import { StringTypeField } from "~/components/feature/form/field/shared/string/StringTypeField";
+import { ValueTypeField } from "~/components/feature/form/field/shared/ValueTypeField";
+import { useObjectFieldStyle } from "~/components/feature/form/useObjectFieldStyle";
 import { ArrayTypeWatcher } from "~/components/feature/form/watcher/ArrayTypeWatcher";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { OptionController } from "~/components/feature/form/watcher/OptionController";
@@ -18,14 +18,14 @@ import { arrayValueTypeOption } from "~/constants/form/selectOption";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
-type SecondNestArrayOptionFieldProps = {
+type SecondNestArrayFieldProps = {
   name: {
     length: FilterFieldPath<FieldPath<ICreateJson>, "length">;
     item: `json.${number}.object.${number}.item`;
   };
 };
 
-export const SecondNestArrayOptionField: FC<SecondNestArrayOptionFieldProps> = ({ name }) => {
+export const SecondNestArrayField: FC<SecondNestArrayFieldProps> = ({ name }) => {
   const { classes } = useObjectFieldStyle({ isBorder: true });
 
   return (
@@ -35,7 +35,7 @@ export const SecondNestArrayOptionField: FC<SecondNestArrayOptionFieldProps> = (
           <Group spacing="xs" align="flex-start">
             <ArrayLengthField name={`${name.length}`} />
 
-            <FormTypeField data={arrayValueTypeOption.slice(0, 3)} name={`${name.item}`} />
+            <ValueTypeField data={arrayValueTypeOption.slice(0, 3)} name={`${name.item}`} />
 
             <FormTypeWatcher name={`${name.item}.valueType`}>
               {(value) => {

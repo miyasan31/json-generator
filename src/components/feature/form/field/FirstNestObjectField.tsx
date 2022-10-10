@@ -1,27 +1,31 @@
 import { Group, Stack } from "@mantine/core";
+import type { FC } from "react";
 
 import { AddKeyButton } from "~/components/feature/form/button/AddKeyButton";
 import { DeleteButton } from "~/components/feature/form/button/DeleteButton";
 import { OptionToggleButton } from "~/components/feature/form/button/OptionToggleButton";
-import { FormTypeField } from "~/components/feature/form/field/FormTypeField";
-import { KeyNameField } from "~/components/feature/form/field/KeyNameField";
-import { FirstNestArrayOptionField } from "~/components/feature/form/object/FirstNestArrayOptionField";
-import { FirstNestObjectField } from "~/components/feature/form/object/FirstNestObjectField";
-import { useObjectField } from "~/components/feature/form/object/useObjectField";
-import { useObjectFieldStyle } from "~/components/feature/form/object/useObjectFieldStyle";
-import { BooleanTypeField } from "~/components/feature/form/primitive/BooleanTypeField";
-import { NumberOptionField } from "~/components/feature/form/primitive/NumberOptionField";
-import { NumberTypeField } from "~/components/feature/form/primitive/NumberTypeField";
-import { StringOptionField } from "~/components/feature/form/primitive/StringOptionField";
-import { StringTypeField } from "~/components/feature/form/primitive/StringTypeField";
+import { SecondNestArrayField } from "~/components/feature/form/field/SecondNestArrayField";
+import { BooleanTypeField } from "~/components/feature/form/field/shared/boolean/BooleanTypeField";
+import { NumberOptionField } from "~/components/feature/form/field/shared/number/NumberOptionField";
+import { NumberTypeField } from "~/components/feature/form/field/shared/number/NumberTypeField";
+import { KeyNameField } from "~/components/feature/form/field/shared/object/KeyNameField";
+import { StringOptionField } from "~/components/feature/form/field/shared/string/StringOptionField";
+import { StringTypeField } from "~/components/feature/form/field/shared/string/StringTypeField";
+import { ValueTypeField } from "~/components/feature/form/field/shared/ValueTypeField";
+import { useObjectField } from "~/components/feature/form/useObjectField";
+import { useObjectFieldStyle } from "~/components/feature/form/useObjectFieldStyle";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { OptionController } from "~/components/feature/form/watcher/OptionController";
 import { Divider } from "~/components/shared/Divider";
 import { objectValueTypeOption } from "~/constants/form/selectOption";
 
-export const ObjectField = () => {
-  const { classes } = useObjectFieldStyle({ isBorder: false });
-  const { fields, onAppend, onRemove } = useObjectField("json");
+type FirstNestObjectFieldProps = {
+  name: `json.${number}.object`;
+};
+
+export const FirstNestObjectField: FC<FirstNestObjectFieldProps> = ({ name }) => {
+  const { classes } = useObjectFieldStyle({ isBorder: true });
+  const { fields, onAppend, onRemove } = useObjectField(name);
 
   return (
     <Stack spacing="xs" className={classes.root}>
@@ -32,11 +36,11 @@ export const ObjectField = () => {
               <>
                 <Stack spacing="xs">
                   <Group spacing="xs" align="flex-start">
-                    <KeyNameField name={`json.${index}.keyName`} />
+                    <KeyNameField name={`${name}.${index}.keyName`} />
 
-                    <FormTypeField data={objectValueTypeOption} name={`json.${index}`} />
+                    <ValueTypeField data={objectValueTypeOption.slice(0, 4)} name={`${name}.${index}`} />
 
-                    <FormTypeWatcher name={`json.${index}.valueType`}>
+                    <FormTypeWatcher name={`${name}.${index}.valueType`}>
                       {(value) => {
                         if (value === "string") {
                           return <StringTypeField name={`json.${index}.stringDummyType`} />;
@@ -56,9 +60,9 @@ export const ObjectField = () => {
                       isVisible={isVisible}
                       onToggle={onToggle}
                       name={{
-                        valueType: `json.${index}.valueType`,
-                        stringDummyType: `json.${index}.stringDummyType`,
-                        numberDummyType: `json.${index}.numberDummyType`,
+                        valueType: `${name}.${index}.valueType`,
+                        stringDummyType: `${name}.${index}.stringDummyType`,
+                        numberDummyType: `${name}.${index}.numberDummyType`,
                       }}
                     />
 
@@ -66,14 +70,14 @@ export const ObjectField = () => {
                   </Group>
 
                   {isVisible ? (
-                    <FormTypeWatcher name={`json.${index}.valueType`}>
+                    <FormTypeWatcher name={`${name}.${index}.valueType`}>
                       {(value) => {
                         if (value === "string") {
                           return (
                             <StringOptionField
                               name={{
-                                stringDummyType: `json.${index}.stringDummyType`,
-                                options: `json.${index}.stringOptions`,
+                                stringDummyType: `${name}.${index}.stringDummyType`,
+                                options: `${name}.${index}.stringOptions`,
                               }}
                             />
                           );
@@ -83,8 +87,8 @@ export const ObjectField = () => {
                           return (
                             <NumberOptionField
                               name={{
-                                numberDummyType: `json.${index}.numberDummyType`,
-                                options: `json.${index}.numberOptions`,
+                                numberDummyType: `${name}.${index}.numberDummyType`,
+                                options: `${name}.${index}.numberOptions`,
                               }}
                             />
                           );
@@ -92,17 +96,13 @@ export const ObjectField = () => {
 
                         if (value === "array") {
                           return (
-                            <FirstNestArrayOptionField
+                            <SecondNestArrayField
                               name={{
-                                length: `json.${index}.length`,
-                                item: `json.${index}.item`,
+                                length: `${name}.${index}.length`,
+                                item: `${name}.${index}.item`,
                               }}
                             />
                           );
-                        }
-
-                        if (value === "object") {
-                          return <FirstNestObjectField name={`json.${index}.object`} />;
                         }
                       }}
                     </FormTypeWatcher>

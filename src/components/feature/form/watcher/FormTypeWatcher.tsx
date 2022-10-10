@@ -9,7 +9,6 @@ import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
 type FormTypeWatcherProps = {
   name: FilterFieldPath<FieldPath<ICreateJson>, "valueType">;
-
   children: (value: ObjectValueType) => ReactNode;
 };
 
