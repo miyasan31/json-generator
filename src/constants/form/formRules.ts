@@ -1,6 +1,6 @@
 import type { RegisterOptions } from "react-hook-form";
 
-export const formRules: Record<string, RegisterOptions> = {
+const rules: Record<string, RegisterOptions> = {
   keyName: {
     required: {
       value: true,
@@ -11,10 +11,16 @@ export const formRules: Record<string, RegisterOptions> = {
       message: "半角英数字で入力してください",
     },
   },
-  min: {
-    min: {
-      value: 10,
+  arrayLength: {
+    required: {
+      value: true,
+      message: "必須入力項目です",
+    },
+    max: {
+      value: 20,
       message: "エラー",
     },
   },
 };
+
+export const formRules: Record<keyof typeof rules, RegisterOptions> = rules;
