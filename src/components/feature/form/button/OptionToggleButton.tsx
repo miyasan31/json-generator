@@ -5,6 +5,7 @@ import type { FieldPath } from "react-hook-form";
 import { useWatch } from "react-hook-form";
 
 import { useCreateJsonFormContext } from "~/components/page/public/Root/Root.page";
+import { ICON_SIZE } from "~/constants/form/iconSize";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
@@ -35,7 +36,7 @@ export const OptionToggleButton: FC<OptionToggleButtonProps> = ({ name, onToggle
 
   return (
     <ActionIcon mt={26} component="button" onClick={onToggle}>
-      {isVisible ? <IconChevronUp size={16} /> : <IconChevronDown size={16} />}
+      {isVisible ? <IconChevronUp size={ICON_SIZE} /> : <IconChevronDown size={ICON_SIZE} />}
     </ActionIcon>
   );
 };

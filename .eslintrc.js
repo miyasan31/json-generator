@@ -95,7 +95,7 @@ module.exports = {
       },
     },
     {
-      files: ["**/{interface,interfaces,service,services,repositories,repository}/**.{ts,tsx}"],
+      files: ["**/{interface,interfaces,service,services,repositories,repository}/**/**.{ts,tsx}"],
       rules: {
         "@typescript-eslint/naming-convention": [
           "error",
@@ -106,6 +106,19 @@ module.exports = {
               regex: "^I[A-Z]",
               match: true,
             },
+          },
+        ],
+      },
+    },
+    {
+      files: ["**/{constant,constants}/**/**.{ts,tsx}"],
+      rules: {
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            selector: ["variable"],
+            types: ["boolean", "string", "number", "array"],
+            format: ["UPPER_CASE"],
           },
         ],
       },

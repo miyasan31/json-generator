@@ -61,7 +61,7 @@ export type StringValue = (NoStringOption | AnyStringOption | CustomStringOption
   valueType: "string";
 };
 
-export type StringDummyTypeOption = {
+export type STRING_DUMMY_TYPE_OPTIONS = {
   value: StringDummyType;
   label: string;
 };

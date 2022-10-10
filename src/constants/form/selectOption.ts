@@ -3,7 +3,8 @@ import type { BooleanDummyTypeOption } from "~/interfaces/model/primitive/boolea
 import type { NumberDummyTypeOption } from "~/interfaces/model/primitive/number";
 import type { StringDummyTypeOption } from "~/interfaces/model/primitive/string";
 
-export const jsonLengthOption = [
+/** JSON生成数のセレクトオプション */
+export const JSON_LENGTH_OPTIONS = [
   { value: "1", label: "1" },
   { value: "5", label: "5" },
   { value: "10", label: "10" },
@@ -12,7 +13,8 @@ export const jsonLengthOption = [
   { value: "100", label: "100" },
 ];
 
-export const stringDummyTypeOption: StringDummyTypeOption[] = [
+/** String型ダミーデータのセレクトオプション */
+export const STRING_DUMMY_TYPE_OPTIONS: StringDummyTypeOption[] = [
   { value: "any", label: "任意" },
   { value: "autoIncrement", label: "連番" },
   { value: "fullName", label: "姓 + 名" },
@@ -45,7 +47,8 @@ export const stringDummyTypeOption: StringDummyTypeOption[] = [
   // { value: "tech", label: "tech" },
 ];
 
-export const numberDummyTypeOption: NumberDummyTypeOption[] = [
+/** Number型ダミーデータのセレクトオプション */
+export const NUMBER_DUMMY_TYPE_OPTIONS: NumberDummyTypeOption[] = [
   { value: "any", label: "任意" },
   { value: "random", label: "ランダム" },
   { value: "autoIncrement", label: "連番" },
@@ -58,20 +61,23 @@ export const numberDummyTypeOption: NumberDummyTypeOption[] = [
   // { value: "permission", label: "permission" },
 ];
 
-export const booleanDummyTypeOption: BooleanDummyTypeOption[] = [
+/** Boolean型ダミーデータのセレクトオプション */
+export const BOOLEAN_DUMMY_TYPE_OPTIONS: BooleanDummyTypeOption[] = [
   { value: "true", label: "true" },
   { value: "false", label: "false" },
   { value: "random", label: "ランダム" },
 ];
 
-export const arrayValueTypeOption: ArrayValueTypeOption[] = [
+/** Array型のデータ型のセレクトオプション */
+export const ARRAY_VALUE_TYPE_OPTIONS: ArrayValueTypeOption[] = [
   { value: "string", label: "String" },
   { value: "number", label: "Number" },
   { value: "boolean", label: "Boolean" },
   { value: "object", label: "Object" },
 ];
 
-export const objectValueTypeOption: ObjectValueTypeOption[] = [
+/** Object型のデータ型のセレクトオプション */
+export const OBJECT_VALUE_TYPE_OPTIONS: ObjectValueTypeOption[] = [
   { value: "string", label: "String" },
   { value: "number", label: "Number" },
   { value: "boolean", label: "Boolean" },

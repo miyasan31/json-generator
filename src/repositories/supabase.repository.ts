@@ -1,3 +1,4 @@
+import { JSON_SPACE_WIDTH } from "~/constants/form/jsonSpaceWidth";
 import type { ICreateJson, ICreateJsonResponse } from "~/interfaces/useCase/json";
 import { supabaseClient } from "~/libs/supabase/supabaseClient";
 
@@ -15,7 +16,7 @@ export const supabaseRepository: ISupabaseRepository = {
         if (!res.data || res.error) {
           throw new Error();
         }
-        return JSON.stringify(res.data, null, 2);
+        return JSON.stringify(res.data, null, JSON_SPACE_WIDTH);
       });
   },
 };

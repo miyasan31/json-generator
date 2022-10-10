@@ -1,15 +1,16 @@
 import type { NotificationProps } from "@mantine/notifications";
 
-const toastId = "generateJson";
+const NOTIFICATION_ID = "generateJson";
 
-export const createJsonNotification: Record<
+/** JSON生成時のNotificationのステータス */
+export const CREATE_JSON_NOTIFICATION: Record<
   "loading" | "success" | "error",
   NotificationProps & {
     id: string;
   }
 > = {
   loading: {
-    id: toastId,
+    id: NOTIFICATION_ID,
     color: "yellow",
     title: "JSONを生成しています...",
     message: "",
@@ -18,7 +19,7 @@ export const createJsonNotification: Record<
     disallowClose: true,
   },
   success: {
-    id: toastId,
+    id: NOTIFICATION_ID,
     color: "green",
     title: "JSONを生成しました",
     message: "",
@@ -26,7 +27,7 @@ export const createJsonNotification: Record<
     autoClose: 2000,
   },
   error: {
-    id: toastId,
+    id: NOTIFICATION_ID,
     color: "red",
     title: "JSONの生成に失敗しました",
     message: "時間を空けて再試行をお願いします",

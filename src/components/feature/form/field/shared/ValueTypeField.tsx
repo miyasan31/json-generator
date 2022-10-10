@@ -4,7 +4,7 @@ import type { FieldPath } from "react-hook-form";
 import { Controller } from "react-hook-form";
 
 import { useCreateJsonFormContext } from "~/components/page/public/Root/Root.page";
-import { appendValue } from "~/constants/form/appendValue";
+import { APPEND_VALUES } from "~/constants/form/appendValues";
 import type { ArrayValueTypeOption, ObjectValueType, ObjectValueTypeOption } from "~/interfaces/model/object";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
@@ -31,7 +31,7 @@ export const ValueTypeField: FC<ValueTypeFieldProps> = ({ data, name }) => {
           onChange({
             keyName: value.keyName,
             valueType: changeValue,
-            ...appendValue[changeValue],
+            ...APPEND_VALUES[changeValue],
           });
         };
         return (

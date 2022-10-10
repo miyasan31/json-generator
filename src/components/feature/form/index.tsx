@@ -17,7 +17,7 @@ import { useObjectFieldStyle } from "~/components/feature/form/useObjectFieldSty
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { OptionController } from "~/components/feature/form/watcher/OptionController";
 import { Divider } from "~/components/shared/Divider";
-import { objectValueTypeOption } from "~/constants/form/selectOption";
+import { OBJECT_VALUE_TYPE_OPTIONS } from "~/constants/form/selectOption";
 
 export const JsonGeneratorForm = () => {
   const { classes } = useObjectFieldStyle({ isBorder: false });
@@ -34,7 +34,7 @@ export const JsonGeneratorForm = () => {
                   <Group spacing="xs" align="flex-start">
                     <KeyNameField name={`json.${index}.keyName`} />
 
-                    <ValueTypeField data={objectValueTypeOption} name={`json.${index}`} />
+                    <ValueTypeField data={OBJECT_VALUE_TYPE_OPTIONS} name={`json.${index}`} />
 
                     <FormTypeWatcher name={`json.${index}.valueType`}>
                       {(value) => {

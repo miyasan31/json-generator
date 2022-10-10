@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { useWatch } from "react-hook-form";
 
 import { useCreateJsonFormContext } from "~/components/page/public/Root/Root.page";
+import { JSON_SPACE_WIDTH } from "~/constants/form/jsonSpaceWidth";
 import { jsonGenerator } from "~/utils/jsonGenerator";
 
 export const OutputLayout = () => {
@@ -15,7 +16,7 @@ export const OutputLayout = () => {
     return jsonGenerator(value, 0);
   }, [JSON.stringify(value)]);
 
-  const json = JSON.stringify(object, null, 2);
+  const json = JSON.stringify(object, null, JSON_SPACE_WIDTH);
 
   return (
     <Prism language="json" noCopy withLineNumbers classNames={classes}>

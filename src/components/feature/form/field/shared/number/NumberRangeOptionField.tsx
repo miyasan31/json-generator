@@ -5,6 +5,7 @@ import type { FieldPath } from "react-hook-form";
 import { useController } from "react-hook-form";
 
 import { useCreateJsonFormContext } from "~/components/page/public/Root/Root.page";
+import { MAX_NUMBER, MIN_NUMBER, MIN_RANGE, RANGE_SLIDER_MARKS, RANGE_STEP } from "~/constants/form/numberRange";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
@@ -37,17 +38,13 @@ export const NumberRangeOptionField: FC<NumberRangeOptionFieldProps> = ({ name }
     <RangeSlider
       my={16}
       mr={6}
-      value={[minField.field.value ?? 0, maxField.field.value ?? 1000]}
+      value={[minField.field.value ?? MIN_NUMBER, maxField.field.value ?? MAX_NUMBER]}
       onChange={onChange}
-      step={10}
-      minRange={10}
-      min={0}
-      max={1000}
-      marks={[
-        { value: 0, label: "0" },
-        { value: 500, label: "500" },
-        { value: 1000, label: "1000" },
-      ]}
+      minRange={MIN_RANGE}
+      step={RANGE_STEP}
+      min={MIN_NUMBER}
+      max={MAX_NUMBER}
+      marks={RANGE_SLIDER_MARKS}
       classNames={classes}
     />
   );

@@ -4,7 +4,7 @@ import type { FieldPath } from "react-hook-form";
 import { Controller } from "react-hook-form";
 
 import { useCreateJsonFormContext } from "~/components/page/public/Root/Root.page";
-import { numberDummyTypeOption } from "~/constants/form/selectOption";
+import { NUMBER_DUMMY_TYPE_OPTIONS } from "~/constants/form/selectOption";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
@@ -28,7 +28,7 @@ export const NumberTypeField: FC<NumberTypeFieldProps> = ({ name }) => {
             label="ダミーデータ"
             value={value}
             onChange={onChange}
-            data={numberDummyTypeOption}
+            data={NUMBER_DUMMY_TYPE_OPTIONS}
             filter={(value, item) => item.value.toLowerCase().includes(value.toLowerCase().trim())}
           />
         );

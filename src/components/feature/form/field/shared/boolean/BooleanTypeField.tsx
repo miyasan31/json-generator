@@ -4,7 +4,7 @@ import type { FieldPath } from "react-hook-form";
 import { Controller } from "react-hook-form";
 
 import { useCreateJsonFormContext } from "~/components/page/public/Root/Root.page";
-import { booleanDummyTypeOption } from "~/constants/form/selectOption";
+import { BOOLEAN_DUMMY_TYPE_OPTIONS } from "~/constants/form/selectOption";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
@@ -28,7 +28,7 @@ export const BooleanTypeField: FC<BooleanTypeFieldProps> = ({ name }) => {
             label="ダミーデータ"
             value={value}
             onChange={onChange}
-            data={booleanDummyTypeOption}
+            data={BOOLEAN_DUMMY_TYPE_OPTIONS}
             filter={(value, item) => item.value.toLowerCase().includes(value.toLowerCase().trim())}
           />
         );

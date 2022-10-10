@@ -16,7 +16,7 @@ import { useObjectFieldStyle } from "~/components/feature/form/useObjectFieldSty
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { OptionController } from "~/components/feature/form/watcher/OptionController";
 import { Divider } from "~/components/shared/Divider";
-import { objectValueTypeOption } from "~/constants/form/selectOption";
+import { OBJECT_VALUE_TYPE_OPTIONS } from "~/constants/form/selectOption";
 
 type SecondNestObjectFieldProps = {
   name: `json.${number}.item.object`;
@@ -37,7 +37,7 @@ export const SecondNestObjectField: FC<SecondNestObjectFieldProps> = ({ name }) 
                   <Group spacing="xs" align="flex-start">
                     <KeyNameField name={`${name}.${index}.keyName`} />
 
-                    <ValueTypeField data={objectValueTypeOption.slice(0, 3)} name={`${name}.${index}`} />
+                    <ValueTypeField data={OBJECT_VALUE_TYPE_OPTIONS.slice(0, 3)} name={`${name}.${index}`} />
 
                     <FormTypeWatcher name={`${name}.${index}.valueType`}>
                       {(value) => {

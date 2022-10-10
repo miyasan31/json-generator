@@ -1,6 +1,6 @@
 import type { RegisterOptions } from "react-hook-form";
 
-const rules: Record<string, RegisterOptions> = {
+const RULES: Record<string, RegisterOptions> = {
   keyName: {
     required: {
       value: true,
@@ -23,4 +23,5 @@ const rules: Record<string, RegisterOptions> = {
   },
 };
 
-export const formRules: Record<keyof typeof rules, RegisterOptions> = rules;
+/** ReactHookForm fieldレベルルール */
+export const FORM_RULES: Record<keyof typeof RULES, RegisterOptions> = RULES;

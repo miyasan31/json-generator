@@ -1,3 +1,4 @@
+import { MAX_NUMBER, MIN_NUMBER } from "~/constants/form/numberRange";
 import type { NumberDummyType } from "~/interfaces/model/primitive/number";
 
 export const numberGenerator = (
@@ -6,8 +7,8 @@ export const numberGenerator = (
   index: number,
 ): number => {
   if (dummyType === "random") {
-    const min = options?.min ?? 0;
-    const max = options?.max ?? 1000;
+    const min = options?.min ?? MIN_NUMBER;
+    const max = options?.max ?? MAX_NUMBER;
     return Math.floor(Math.random() * (max - min)) + min;
   }
 

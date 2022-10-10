@@ -1,4 +1,5 @@
-export const appendValue = {
+/** データ型変更時の初期値 */
+export const APPEND_VALUES = {
   string: {
     stringDummyType: "fullName",
     stringOptions: {

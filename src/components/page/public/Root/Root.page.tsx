@@ -8,9 +8,9 @@ import { JsonInputModal } from "~/components/feature/modal/JsonInputModal";
 import { useModal } from "~/components/feature/modal/useModal";
 import { InputLayout } from "~/components/layout/JsonEditorLayout/InputLayout";
 import { OutputLayout } from "~/components/layout/JsonEditorLayout/OutputLayout";
-import { defaultValues } from "~/constants/form/defaultValue";
-import { jsonLengthOption } from "~/constants/form/selectOption";
-import { createJsonNotification } from "~/constants/notification/createJson";
+import { DEFAULT_VALUES } from "~/constants/form/defaultValues";
+import { JSON_LENGTH_OPTIONS } from "~/constants/form/selectOption";
+import { CREATE_JSON_NOTIFICATION } from "~/constants/notification/createJson";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import { useMediaQuery } from "~/libs/mantine/useMediaQuery";
 import { useRHForm } from "~/libs/react-hook-form/useRHForm";
@@ -32,7 +32,7 @@ export const Root = () => {
 
   const methods = useRHForm<ICreateJson>({
     mode: "onBlur",
-    defaultValues,
+    defaultValues: DEFAULT_VALUES,
   });
   const {
     handleSubmit: onSubmit,
@@ -42,16 +42,16 @@ export const Root = () => {
   } = methods;
 
   const onCreateJson = useCallback((data: ICreateJson) => {
-    showNotification(createJsonNotification["loading"]);
+    showNotification(CREATE_JSON_NOTIFICATION["loading"]);
 
     mutate(data, {
       onSuccess(res) {
         setJson(res);
         onJsonGenerateOpen();
-        updateNotification(createJsonNotification["success"]);
+        updateNotification(CREATE_JSON_NOTIFICATION["success"]);
       },
       onError() {
-        updateNotification(createJsonNotification["error"]);
+        updateNotification(CREATE_JSON_NOTIFICATION["error"]);
       },
     });
   }, []);
@@ -86,7 +86,7 @@ export const Root = () => {
                         label="生成数"
                         value={String(value)}
                         onChange={onChange}
-                        data={jsonLengthOption}
+                        data={JSON_LENGTH_OPTIONS}
                         classNames={classesSelect}
                       />
                     );

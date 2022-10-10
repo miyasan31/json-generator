@@ -1,6 +1,7 @@
 import type { ICreateJson } from "~/interfaces/useCase/json";
 
-export const defaultValues: ICreateJson = {
+/** JSON作成フォームの初期値 */
+export const DEFAULT_VALUES: ICreateJson = {
   length: 1,
   json: [
     {

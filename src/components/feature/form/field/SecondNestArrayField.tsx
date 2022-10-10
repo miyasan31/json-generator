@@ -14,7 +14,7 @@ import { useObjectFieldStyle } from "~/components/feature/form/useObjectFieldSty
 import { ArrayTypeWatcher } from "~/components/feature/form/watcher/ArrayTypeWatcher";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { OptionController } from "~/components/feature/form/watcher/OptionController";
-import { arrayValueTypeOption } from "~/constants/form/selectOption";
+import { ARRAY_VALUE_TYPE_OPTIONS } from "~/constants/form/selectOption";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import type { FilterFieldPath } from "~/libs/react-hook-form/FilterFieldPath";
 
@@ -35,7 +35,7 @@ export const SecondNestArrayField: FC<SecondNestArrayFieldProps> = ({ name }) =>
           <Group spacing="xs" align="flex-start">
             <ArrayLengthField name={`${name.length}`} />
 
-            <ValueTypeField data={arrayValueTypeOption.slice(0, 3)} name={`${name.item}`} />
+            <ValueTypeField data={ARRAY_VALUE_TYPE_OPTIONS.slice(0, 3)} name={`${name.item}`} />
 
             <FormTypeWatcher name={`${name.item}.valueType`}>
               {(value) => {
