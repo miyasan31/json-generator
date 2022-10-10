@@ -1,6 +1,6 @@
 import { Button, createStyles, Stack, Text } from "@mantine/core";
 
-import { Link } from "~/components/lib/react-router/Link";
+import { Link } from "~/components/lib/router/Link";
 
 export const NotFound = () => {
   const { classes } = useStyle();

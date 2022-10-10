@@ -1,7 +1,7 @@
 import { Box, createStyles, Stack } from "@mantine/core";
 
 import { Header } from "~/components/layout/CommonLayout/Header";
-import { Outlet } from "~/components/lib/react-router/Outlet";
+import { Outlet } from "~/components/lib/router/Outlet";
 import { Suspense } from "~/components/provider/Suspense";
 import { useMediaQuery } from "~/libs/mantine/useMediaQuery";
 
