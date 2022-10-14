@@ -17,6 +17,7 @@ const useStyle = createStyles<"root">((theme) => {
     root: {
       flex: 3,
       height: "100%",
+      overflow: "scroll",
       borderRadius: theme.radius.sm,
       backgroundColor: theme.colorScheme === "light" ? theme.colors.gray[0] : theme.colors.dark[7],
       border: `1px solid ${theme.colorScheme === "light" ? theme.colors.gray[4] : theme.colors.dark[4]}`,
