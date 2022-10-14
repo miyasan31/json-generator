@@ -4,26 +4,26 @@ export type ArrayValueType = "string" | "number" | "boolean" | "object";
 export type ObjectValueType = "string" | "number" | "boolean" | "object" | "array";
 
 /** array */
-export interface ArrayValue {
+export type ArrayValue = {
   keyName: string;
   valueType: "array";
   length: number;
   item: FirstNestArrayItemType;
-}
+};
 
-export interface ArrayValueTypeOption {
+export type ArrayValueTypeOption = {
   value: ArrayValueType;
   label: string;
-}
+};
 
 /** object */
-export interface ObjectValue {
+export type ObjectValue = {
   keyName: null;
   valueType: "object";
   object: FirstNestObjectPropertyType[];
-}
+};
 
-export interface ObjectValueTypeOption {
+export type ObjectValueTypeOption = {
   value: ObjectValueType;
   label: string;
-}
+};
