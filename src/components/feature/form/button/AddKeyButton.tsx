@@ -7,7 +7,7 @@ type AddKeyButtonProps = {
 
 export const AddKeyButton: FC<AddKeyButtonProps> = ({ onAppend }) => {
   return (
-    <Button size="xs" mt="xs" type="button" color="red" variant="outline" onClick={onAppend}>
+    <Button size="xs" mt="xs" type="button" color="red" variant="outline" onClick={onAppend} sx={{ minHeight: 28 }}>
       キーを追加する
     </Button>
   );
