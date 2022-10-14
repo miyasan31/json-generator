@@ -1,4 +1,4 @@
-import type { ButtonStylesParams, MantineThemeOverride } from "@mantine/core";
+import type { ButtonStylesParams, MantineThemeOther, MantineThemeOverride } from "@mantine/core";
 
 export const breakpointsTheme = {
   xs: 576,
@@ -8,10 +8,9 @@ export const breakpointsTheme = {
   xl: 1400,
 } as const;
 
-export const otherTheme = {
+export const otherTheme: MantineThemeOther = {
   lineHeights: [1.2, 1.4, 1.6, 1.8, 1.95],
   reduceMotion: true,
-  myCustomFunction: () => {},
 };
 
 export const customTheme: MantineThemeOverride = {
