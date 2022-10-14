@@ -15,6 +15,8 @@ import { useObjectField } from "~/components/feature/form/useObjectField";
 import { useObjectFieldStyle } from "~/components/feature/form/useObjectFieldStyle";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { OptionController } from "~/components/feature/form/watcher/OptionController";
+import { AnimationController } from "~/components/lib/auto-animate/AnimationController";
+import { useListAnimation } from "~/components/lib/auto-animate/useListAnimation";
 import { Divider } from "~/components/shared/Divider";
 import { OBJECT_VALUE_TYPE_OPTIONS } from "~/constants/form/selectOption";
 
@@ -23,86 +25,93 @@ type SecondNestObjectFieldProps = {
 };
 
 export const SecondNestObjectField: FC<SecondNestObjectFieldProps> = ({ name }) => {
+  const [parent] = useListAnimation<HTMLDivElement>();
   const { classes } = useObjectFieldStyle({ isBorder: true });
   const { fields, onAppend, onRemove } = useObjectField(name);
 
   return (
-    <Stack spacing="xs" className={classes.root}>
-      {fields.map((item, index) => {
-        return (
-          <OptionController key={item.id} type={item.valueType}>
-            {(isVisible, onToggle) => (
-              <>
-                <Stack spacing="xs">
-                  <Group spacing="xs" align="flex-start">
-                    <KeyNameField name={`${name}.${index}.keyName`} />
+    <Stack spacing="xs" className={classes.root} ref={parent}>
+      {fields.map((item, index) => (
+        <OptionController key={item.id} type={item.valueType}>
+          {(isVisible, onToggle) => (
+            <AnimationController>
+              {(optionAnimationRef) => (
+                <>
+                  <Stack spacing="xs" ref={optionAnimationRef}>
+                    <AnimationController>
+                      {(fieldAnimationRef) => (
+                        <Group spacing="xs" align="flex-start" ref={fieldAnimationRef}>
+                          <KeyNameField name={`${name}.${index}.keyName`} />
 
-                    <ValueTypeField data={OBJECT_VALUE_TYPE_OPTIONS.slice(0, 3)} name={`${name}.${index}`} />
+                          <ValueTypeField data={OBJECT_VALUE_TYPE_OPTIONS.slice(0, 3)} name={`${name}.${index}`} />
 
-                    <FormTypeWatcher name={`${name}.${index}.valueType`}>
-                      {(value) => {
-                        if (value === "string") {
-                          return <StringTypeField name={`${name}.${index}.stringDummyType`} />;
-                        }
+                          <FormTypeWatcher name={`${name}.${index}.valueType`}>
+                            {(value) => {
+                              if (value === "string") {
+                                return <StringTypeField name={`${name}.${index}.stringDummyType`} />;
+                              }
 
-                        if (value === "number") {
-                          return <NumberTypeField name={`${name}.${index}.numberDummyType`} />;
-                        }
+                              if (value === "number") {
+                                return <NumberTypeField name={`${name}.${index}.numberDummyType`} />;
+                              }
 
-                        if (value === "boolean") {
-                          return <BooleanTypeField name={`${name}.${index}.booleanDummyType`} />;
-                        }
-                      }}
-                    </FormTypeWatcher>
+                              if (value === "boolean") {
+                                return <BooleanTypeField name={`${name}.${index}.booleanDummyType`} />;
+                              }
+                            }}
+                          </FormTypeWatcher>
 
-                    <OptionToggleButton
-                      isVisible={isVisible}
-                      onToggle={onToggle}
-                      name={{
-                        valueType: `${name}.${index}.valueType`,
-                        stringDummyType: `${name}.${index}.stringDummyType`,
-                        numberDummyType: `${name}.${index}.numberDummyType`,
-                      }}
-                    />
+                          <OptionToggleButton
+                            isVisible={isVisible}
+                            onToggle={onToggle}
+                            name={{
+                              valueType: `${name}.${index}.valueType`,
+                              stringDummyType: `${name}.${index}.stringDummyType`,
+                              numberDummyType: `${name}.${index}.numberDummyType`,
+                            }}
+                          />
 
-                    <DeleteButton index={index} onRemove={onRemove} />
-                  </Group>
+                          <DeleteButton index={index} onRemove={onRemove} />
+                        </Group>
+                      )}
+                    </AnimationController>
 
-                  {isVisible ? (
-                    <FormTypeWatcher name={`${name}.${index}.valueType`}>
-                      {(value) => {
-                        if (value === "string") {
-                          return (
-                            <StringOptionField
-                              name={{
-                                stringDummyType: `${name}.${index}.stringDummyType`,
-                                options: `${name}.${index}.stringOptions`,
-                              }}
-                            />
-                          );
-                        }
+                    {isVisible ? (
+                      <FormTypeWatcher name={`${name}.${index}.valueType`}>
+                        {(value) => {
+                          if (value === "string") {
+                            return (
+                              <StringOptionField
+                                name={{
+                                  stringDummyType: `${name}.${index}.stringDummyType`,
+                                  options: `${name}.${index}.stringOptions`,
+                                }}
+                              />
+                            );
+                          }
 
-                        if (value === "number") {
-                          return (
-                            <NumberOptionField
-                              name={{
-                                numberDummyType: `${name}.${index}.numberDummyType`,
-                                options: `${name}.${index}.numberOptions`,
-                              }}
-                            />
-                          );
-                        }
-                      }}
-                    </FormTypeWatcher>
-                  ) : null}
-                </Stack>
+                          if (value === "number") {
+                            return (
+                              <NumberOptionField
+                                name={{
+                                  numberDummyType: `${name}.${index}.numberDummyType`,
+                                  options: `${name}.${index}.numberOptions`,
+                                }}
+                              />
+                            );
+                          }
+                        }}
+                      </FormTypeWatcher>
+                    ) : null}
+                  </Stack>
 
-                <Divider />
-              </>
-            )}
-          </OptionController>
-        );
-      })}
+                  <Divider />
+                </>
+              )}
+            </AnimationController>
+          )}
+        </OptionController>
+      ))}
 
       <AddKeyButton onAppend={onAppend} />
     </Stack>

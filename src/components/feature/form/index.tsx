@@ -16,105 +16,114 @@ import { useObjectField } from "~/components/feature/form/useObjectField";
 import { useObjectFieldStyle } from "~/components/feature/form/useObjectFieldStyle";
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { OptionController } from "~/components/feature/form/watcher/OptionController";
+import { AnimationController } from "~/components/lib/auto-animate/AnimationController";
+import { useListAnimation } from "~/components/lib/auto-animate/useListAnimation";
 import { Divider } from "~/components/shared/Divider";
 import { OBJECT_VALUE_TYPE_OPTIONS } from "~/constants/form/selectOption";
 
 export const JsonGeneratorForm = () => {
+  const [parent] = useListAnimation<HTMLDivElement>();
   const { classes } = useObjectFieldStyle({ isBorder: false });
   const { fields, onAppend, onRemove } = useObjectField("json");
 
   return (
-    <Stack spacing="xs" className={classes.root}>
-      {fields.map((item, index) => {
-        return (
-          <OptionController key={item.id} type={item.valueType}>
-            {(isVisible, onToggle) => (
-              <>
-                <Stack spacing="xs">
-                  <Group spacing="xs" align="flex-start">
-                    <KeyNameField name={`json.${index}.keyName`} />
+    <Stack spacing="xs" className={classes.root} ref={parent} sx={{ marginBottom: 500 }}>
+      {fields.map((item, index) => (
+        <OptionController key={item.id} type={item.valueType}>
+          {(isVisible, onToggle) => (
+            <AnimationController>
+              {(optionAnimationRef) => (
+                <>
+                  <Stack spacing="xs" ref={optionAnimationRef}>
+                    <AnimationController>
+                      {(fieldAnimationRef) => (
+                        <Group spacing="xs" align="flex-start" ref={fieldAnimationRef}>
+                          <KeyNameField name={`json.${index}.keyName`} />
 
-                    <ValueTypeField data={OBJECT_VALUE_TYPE_OPTIONS} name={`json.${index}`} />
+                          <ValueTypeField data={OBJECT_VALUE_TYPE_OPTIONS} name={`json.${index}`} />
 
-                    <FormTypeWatcher name={`json.${index}.valueType`}>
-                      {(value) => {
-                        if (value === "string") {
-                          return <StringTypeField name={`json.${index}.stringDummyType`} />;
-                        }
+                          <FormTypeWatcher name={`json.${index}.valueType`}>
+                            {(value) => {
+                              if (value === "string") {
+                                return <StringTypeField name={`json.${index}.stringDummyType`} />;
+                              }
 
-                        if (value === "number") {
-                          return <NumberTypeField name={`json.${index}.numberDummyType`} />;
-                        }
+                              if (value === "number") {
+                                return <NumberTypeField name={`json.${index}.numberDummyType`} />;
+                              }
 
-                        if (value === "boolean") {
-                          return <BooleanTypeField name={`json.${index}.booleanDummyType`} />;
-                        }
-                      }}
-                    </FormTypeWatcher>
+                              if (value === "boolean") {
+                                return <BooleanTypeField name={`json.${index}.booleanDummyType`} />;
+                              }
+                            }}
+                          </FormTypeWatcher>
 
-                    <OptionToggleButton
-                      isVisible={isVisible}
-                      onToggle={onToggle}
-                      name={{
-                        valueType: `json.${index}.valueType`,
-                        stringDummyType: `json.${index}.stringDummyType`,
-                        numberDummyType: `json.${index}.numberDummyType`,
-                      }}
-                    />
+                          <OptionToggleButton
+                            isVisible={isVisible}
+                            onToggle={onToggle}
+                            name={{
+                              valueType: `json.${index}.valueType`,
+                              stringDummyType: `json.${index}.stringDummyType`,
+                              numberDummyType: `json.${index}.numberDummyType`,
+                            }}
+                          />
 
-                    <DeleteButton index={index} onRemove={onRemove} />
-                  </Group>
+                          <DeleteButton index={index} onRemove={onRemove} />
+                        </Group>
+                      )}
+                    </AnimationController>
 
-                  {isVisible ? (
-                    <FormTypeWatcher name={`json.${index}.valueType`}>
-                      {(value) => {
-                        if (value === "string") {
-                          return (
-                            <StringOptionField
-                              name={{
-                                stringDummyType: `json.${index}.stringDummyType`,
-                                options: `json.${index}.stringOptions`,
-                              }}
-                            />
-                          );
-                        }
+                    {isVisible ? (
+                      <FormTypeWatcher name={`json.${index}.valueType`}>
+                        {(value) => {
+                          if (value === "string") {
+                            return (
+                              <StringOptionField
+                                name={{
+                                  stringDummyType: `json.${index}.stringDummyType`,
+                                  options: `json.${index}.stringOptions`,
+                                }}
+                              />
+                            );
+                          }
 
-                        if (value === "number") {
-                          return (
-                            <NumberOptionField
-                              name={{
-                                numberDummyType: `json.${index}.numberDummyType`,
-                                options: `json.${index}.numberOptions`,
-                              }}
-                            />
-                          );
-                        }
+                          if (value === "number") {
+                            return (
+                              <NumberOptionField
+                                name={{
+                                  numberDummyType: `json.${index}.numberDummyType`,
+                                  options: `json.${index}.numberOptions`,
+                                }}
+                              />
+                            );
+                          }
 
-                        if (value === "array") {
-                          return (
-                            <FirstNestArrayField
-                              name={{
-                                length: `json.${index}.length`,
-                                item: `json.${index}.item`,
-                              }}
-                            />
-                          );
-                        }
+                          if (value === "array") {
+                            return (
+                              <FirstNestArrayField
+                                name={{
+                                  length: `json.${index}.length`,
+                                  item: `json.${index}.item`,
+                                }}
+                              />
+                            );
+                          }
 
-                        if (value === "object") {
-                          return <FirstNestObjectField name={`json.${index}.object`} />;
-                        }
-                      }}
-                    </FormTypeWatcher>
-                  ) : null}
-                </Stack>
+                          if (value === "object") {
+                            return <FirstNestObjectField name={`json.${index}.object`} />;
+                          }
+                        }}
+                      </FormTypeWatcher>
+                    ) : null}
+                  </Stack>
 
-                <Divider />
-              </>
-            )}
-          </OptionController>
-        );
-      })}
+                  <Divider />
+                </>
+              )}
+            </AnimationController>
+          )}
+        </OptionController>
+      ))}
 
       <AddKeyButton onAppend={onAppend} />
     </Stack>
