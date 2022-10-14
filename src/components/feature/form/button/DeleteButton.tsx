@@ -1,4 +1,4 @@
-import { ActionIcon, Tooltip } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 import { IconX } from "@tabler/icons";
 import type { FC } from "react";
 
@@ -11,10 +11,8 @@ type DeleteButtonProps = {
 
 export const DeleteButton: FC<DeleteButtonProps> = ({ index, onRemove }) => {
   return (
-    <Tooltip label="削除する" position="top-start">
-      <ActionIcon mt={26} component="button" onClick={() => onRemove(index)}>
-        <IconX size={ICON_SIZE} color="red" />
-      </ActionIcon>
-    </Tooltip>
+    <ActionIcon mt={26} component="button" onClick={() => onRemove(index)}>
+      <IconX size={ICON_SIZE} color="red" />
+    </ActionIcon>
   );
 };
