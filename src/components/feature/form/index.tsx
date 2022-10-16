@@ -17,12 +17,12 @@ import { useObjectFieldStyle } from "~/components/feature/form/useObjectFieldSty
 import { FormTypeWatcher } from "~/components/feature/form/watcher/FormTypeWatcher";
 import { OptionController } from "~/components/feature/form/watcher/OptionController";
 import { AnimationController } from "~/components/lib/auto-animate/AnimationController";
-import { useListAnimation } from "~/components/lib/auto-animate/useListAnimation";
+import { useAnimation } from "~/components/lib/auto-animate/useAnimation";
 import { Divider } from "~/components/shared/Divider";
 import { OBJECT_VALUE_TYPE_OPTIONS } from "~/constants/form/selectOption";
 
 export const JsonGeneratorForm = () => {
-  const [parent] = useListAnimation<HTMLDivElement>();
+  const [parent] = useAnimation<HTMLDivElement>();
   const { classes } = useObjectFieldStyle({ isBorder: false });
   const { fields, onAppend, onRemove } = useObjectField("json");
 

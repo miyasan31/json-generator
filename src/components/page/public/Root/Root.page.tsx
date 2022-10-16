@@ -8,6 +8,8 @@ import { JsonInputModal } from "~/components/feature/modal/JsonInputModal";
 import { useModal } from "~/components/feature/modal/useModal";
 import { InputLayout } from "~/components/layout/JsonEditorLayout/InputLayout";
 import { OutputLayout } from "~/components/layout/JsonEditorLayout/OutputLayout";
+import { AnimationController } from "~/components/lib/auto-animate/AnimationController";
+import { ANIMATION_CONFIG } from "~/constants/animation/autoAnimate";
 import { DEFAULT_VALUES } from "~/constants/form/defaultValues";
 import { JSON_LENGTH_OPTIONS } from "~/constants/form/selectOption";
 import { CREATE_JSON_NOTIFICATION } from "~/constants/notification/createJson";
@@ -98,10 +100,14 @@ export const Root = () => {
               </Group>
             </Group>
 
-            <Group spacing="sm" align="start" className={classesLayout}>
-              <InputLayout />
-              {isMediumScreen ? <OutputLayout /> : null}
-            </Group>
+            <AnimationController options={ANIMATION_CONFIG.responsive}>
+              {(fieldAnimationRef) => (
+                <Group ref={fieldAnimationRef} spacing="sm" align="start" className={classesLayout}>
+                  <InputLayout />
+                  {isMediumScreen ? <OutputLayout /> : null}
+                </Group>
+              )}
+            </AnimationController>
           </Stack>
         </form>
       </FormProvider>

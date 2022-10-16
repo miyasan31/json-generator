@@ -29,7 +29,6 @@ const useStyle = createStyles<"root" | "scrollArea" | "code" | "line" | "lineCon
   return {
     root: {
       flex: 2,
-      width: "100%",
       height: "100%",
       borderRadius: theme.radius.sm,
       backgroundColor: theme.colorScheme === "light" ? "white" : theme.colors.dark[7],
