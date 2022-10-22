@@ -13,7 +13,6 @@ import { ANIMATION_CONFIG } from "~/constants/animation/autoAnimate";
 import { DEFAULT_VALUES } from "~/constants/form/defaultValues";
 import { CREATE_JSON_NOTIFICATION } from "~/constants/notification/createJson";
 import type { ICreateJson } from "~/interfaces/useCase/json";
-import { useMediaQuery } from "~/libs/mantine/useMediaQuery";
 import { useRHForm } from "~/libs/react-hook-form/useRHForm";
 import { supabaseService } from "~/services/supabase.service";
 import { onEnterKeySubmitBlock } from "~/utils/onEnterKeySubmitBlock";
@@ -25,7 +24,7 @@ export const useCreateJsonFormContext = useFormContext<ICreateJson>;
 export const Root = () => {
   const { classes } = useStyle();
   const { openKey, onClose, onJsonGenerateOpen } = useModal();
-  const isMediumScreen = useMediaQuery("md");
+  // const isMediumScreen = useMediaQuery("md");
   const { mutate, isLoading } = useCreateJson();
   const [json, setJson] = useState("");
 
@@ -65,7 +64,8 @@ export const Root = () => {
             {(fieldAnimationRef) => (
               <Group ref={fieldAnimationRef} spacing="sm" align="start" className={classes.layout}>
                 <InputLayout />
-                {isMediumScreen ? <OutputLayout isLoading={isLoading} /> : null}
+                <OutputLayout isLoading={isLoading} />
+                {/* {isMediumScreen ? <OutputLayout isLoading={isLoading} /> : null} */}
               </Group>
             )}
           </AnimationController>
