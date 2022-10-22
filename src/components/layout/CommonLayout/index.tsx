@@ -23,11 +23,12 @@ export const CommonLayout = () => {
 const useStyle = createStyles<"root" | "layout">(() => {
   return {
     root: {
+      position: "relative",
       height: "100vh",
     },
     layout: {
       width: "95%",
-      margin: "0 auto",
+      margin: "68px auto",
     },
   };
 });

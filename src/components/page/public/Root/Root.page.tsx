@@ -1,7 +1,7 @@
-import { Button, createStyles, Group, Select, Stack } from "@mantine/core";
+import { createStyles, Group } from "@mantine/core";
 import { showNotification, updateNotification } from "@mantine/notifications";
 import { useCallback, useState } from "react";
-import { Controller, FormProvider, useFormContext } from "react-hook-form";
+import { FormProvider, useFormContext } from "react-hook-form";
 
 import { JsonGenerateModal } from "~/components/feature/modal/JsonGenerateModal";
 import { JsonInputModal } from "~/components/feature/modal/JsonInputModal";
@@ -11,7 +11,6 @@ import { OutputLayout } from "~/components/layout/JsonEditorLayout/OutputLayout"
 import { AnimationController } from "~/components/lib/auto-animate/AnimationController";
 import { ANIMATION_CONFIG } from "~/constants/animation/autoAnimate";
 import { DEFAULT_VALUES } from "~/constants/form/defaultValues";
-import { JSON_LENGTH_OPTIONS } from "~/constants/form/selectOption";
 import { CREATE_JSON_NOTIFICATION } from "~/constants/notification/createJson";
 import type { ICreateJson } from "~/interfaces/useCase/json";
 import { useMediaQuery } from "~/libs/mantine/useMediaQuery";
@@ -24,10 +23,8 @@ const { useCreateJson } = supabaseService;
 export const useCreateJsonFormContext = useFormContext<ICreateJson>;
 
 export const Root = () => {
-  const {
-    classes: { layout: classesLayout, ...classesSelect },
-  } = useStyle();
-  const { openKey, onClose, onJsonGenerateOpen, onJsonInputOpen } = useModal();
+  const { classes } = useStyle();
+  const { openKey, onClose, onJsonGenerateOpen } = useModal();
   const isMediumScreen = useMediaQuery("md");
   const { mutate, isLoading } = useCreateJson();
   const [json, setJson] = useState("");
@@ -36,12 +33,7 @@ export const Root = () => {
     mode: "onBlur",
     defaultValues: DEFAULT_VALUES,
   });
-  const {
-    handleSubmit: onSubmit,
-    control,
-    reset,
-    formState: { errors },
-  } = methods;
+  const { handleSubmit: onSubmit, reset } = methods;
 
   const onCreateJson = useCallback((data: ICreateJson) => {
     showNotification(CREATE_JSON_NOTIFICATION["loading"]);
@@ -69,71 +61,25 @@ export const Root = () => {
 
       <FormProvider {...methods}>
         <form onSubmit={onSubmit(onCreateJson)} onKeyDown={onEnterKeySubmitBlock}>
-          <Stack spacing="sm">
-            <Group spacing="sm" position="apart" align="end">
-              <Group spacing="sm">
-                <Button type="button" onClick={onJsonInputOpen}>
-                  JSONを入力
-                </Button>
-                {/* <Button type="button">保存する</Button> */}
+          <AnimationController options={ANIMATION_CONFIG.responsive}>
+            {(fieldAnimationRef) => (
+              <Group ref={fieldAnimationRef} spacing="sm" align="start" className={classes.layout}>
+                <InputLayout />
+                {isMediumScreen ? <OutputLayout isLoading={isLoading} /> : null}
               </Group>
-
-              <Group spacing="sm">
-                <Controller
-                  control={control}
-                  name="length"
-                  render={({ field: { onChange, value } }) => {
-                    return (
-                      <Select
-                        label="生成数"
-                        value={String(value)}
-                        onChange={onChange}
-                        data={JSON_LENGTH_OPTIONS}
-                        classNames={classesSelect}
-                      />
-                    );
-                  }}
-                />
-                <Button type="submit" loading={isLoading} disabled={!!errors.json} loaderProps={{ color: "yellow" }}>
-                  生成する
-                </Button>
-              </Group>
-            </Group>
-
-            <AnimationController options={ANIMATION_CONFIG.responsive}>
-              {(fieldAnimationRef) => (
-                <Group ref={fieldAnimationRef} spacing="sm" align="start" className={classesLayout}>
-                  <InputLayout />
-                  {isMediumScreen ? <OutputLayout /> : null}
-                </Group>
-              )}
-            </AnimationController>
-          </Stack>
+            )}
+          </AnimationController>
         </form>
       </FormProvider>
     </>
   );
 };
 
-const useStyle = createStyles<"layout" | "root" | "label" | "input">(() => {
+const useStyle = createStyles<"layout">(() => {
   return {
     layout: {
-      height: "calc(100vh - 140px)",
-    },
-    // select
-    root: {
-      display: "flex",
-      alignItems: "center",
-      width: "fit-content",
-      gap: "0.5rem",
-    },
-    label: {
-      flex: "auto",
-      minWidth: "fit-content",
-    },
-    input: {
-      flex: "auto",
-      width: "100px",
+      // height: "calc(100vh - 140px)",
+      position: "relative",
     },
   };
 });

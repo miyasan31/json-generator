@@ -27,7 +27,7 @@ export const JsonGeneratorForm = () => {
   const { fields, onAppend, onRemove } = useObjectField("json");
 
   return (
-    <Stack spacing="xs" className={classes.root} ref={parent} sx={{ marginBottom: 500 }}>
+    <Stack spacing="xs" className={classes.root} ref={parent} sx={{ marginBottom: 320 }}>
       {fields.map((item, index) => (
         <OptionController key={item.id} type={item.valueType}>
           {(isVisible, onToggle) => (

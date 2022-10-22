@@ -15,6 +15,9 @@ export const Header = () => {
 const useStyle = createStyles<"root" | "title">((theme) => {
   return {
     root: {
+      position: "fixed",
+      zIndex: 100,
+      width: "100%",
       height: "56px",
       padding: theme.spacing.sm,
       backgroundColor: theme.colorScheme === "light" ? theme.colors.gray[0] : theme.colors.dark[6],
